@@ -1,0 +1,1382 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="bjx">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="ROS 安装操作系统 使用 Ubuntu 系统 虚拟机安装 简单 硬件支持一般 初学者   硬盘安装 复杂 硬件支持好 有一定经验的开发者     系统版本匹配 系统版本匹配参考：cn&#x2F;ROS&#x2F;Installation - ROS Wiki 采用版本：ROS Noetic Ninjemys + Ubuntu 20.04 建议在安装完操作系统后，制作一个快照，方便后期恢复初始系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ROS基础入门">
+<meta property="og:url" content="https://strive-c.github.io/2023/10/21/ROS%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="strive-C blog">
+<meta property="og:description" content="ROS 安装操作系统 使用 Ubuntu 系统 虚拟机安装 简单 硬件支持一般 初学者   硬盘安装 复杂 硬件支持好 有一定经验的开发者     系统版本匹配 系统版本匹配参考：cn&#x2F;ROS&#x2F;Installation - ROS Wiki 采用版本：ROS Noetic Ninjemys + Ubuntu 20.04 建议在安装完操作系统后，制作一个快照，方便后期恢复初始系统">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-10-21T07:20:27.000Z">
+<meta property="article:modified_time" content="2024-03-19T11:54:15.536Z">
+<meta property="article:author" content="bjx">
+<meta property="article:tag" content="ROS">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>ROS基础入门 - strive-C blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"strive-c.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="ROS基础入门"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-10-21 15:20" pubdate>
+          2023年10月21日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          68 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">ROS基础入门</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="ROS-安装"><a href="#ROS-安装" class="headerlink" title="ROS 安装"></a>ROS 安装</h1><h2 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h2><ul>
+<li>使用 Ubuntu 系统<ul>
+<li>虚拟机安装<ul>
+<li>简单</li>
+<li>硬件支持一般</li>
+<li>初学者</li>
+</ul>
+</li>
+<li>硬盘安装<ul>
+<li>复杂</li>
+<li>硬件支持好</li>
+<li>有一定经验的开发者</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>系统版本匹配<ul>
+<li>系统版本匹配参考：<a target="_blank" rel="noopener" href="http://wiki.ros.org/cn/ROS/Installation">cn&#x2F;ROS&#x2F;Installation - ROS Wiki</a></li>
+<li>采用版本：ROS Noetic Ninjemys + Ubuntu 20.04</li>
+<li>建议在安装完操作系统后，制作一个快照，方便后期恢复初始系统</li>
+</ul>
+</li>
+</ul>
+<h2 id="编程语言"><a href="#编程语言" class="headerlink" title="编程语言"></a>编程语言</h2><ul>
+<li>在 Ros 中，采用 Python 和 C++ 两种语言进行开发，对 Python 的支持可能不是特别完善。</li>
+</ul>
+<h3 id="安装-C-编译器和-Python-解释器"><a href="#安装-C-编译器和-Python-解释器" class="headerlink" title="安装 C++ 编译器和 Python 解释器"></a>安装 C++ 编译器和 Python 解释器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install g++<br>sudo apt-get install python<br></code></pre></td></tr></table></figure>
+
+<h2 id="安装ROS"><a href="#安装ROS" class="headerlink" title="安装ROS"></a>安装ROS</h2><ul>
+<li><p>教程：<a target="_blank" rel="noopener" href="http://wiki.ros.org/cn/noetic/Installation/Ubuntu">cn&#x2F;noetic&#x2F;Installation&#x2F;Ubuntu - ROS Wiki</a></p>
+</li>
+<li><p>安装 rosdep：<a target="_blank" rel="noopener" href="http://wiki.ros.org/rosdep">rosdep - ROS Wiki</a></p>
+</li>
+<li><p>测试安装成功，运行样例程序（以下三条命令运行在三个终端上）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">roscore<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">rosrun turtlesim turtlesim_node<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">rosrun turtlesim turtle_teleop_key<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>至此 ROS 安装成功</p>
+</li>
+</ul>
+<h1 id="ROS-介绍"><a href="#ROS-介绍" class="headerlink" title="ROS 介绍"></a>ROS 介绍</h1><ul>
+<li><p>ROS &#x3D; 通信机制 + 开发工具 + 应用功能 + 生态系统</p>
+<ul>
+<li>通信机制：松耦合分布式通信</li>
+<li>开发工具：命令行、TF 坐标变换、Gazebo、Rviz、QT 工具箱</li>
+<li>应用功能：很多</li>
+<li>生态系统：<ul>
+<li>发行版</li>
+<li>软件源</li>
+<li>ROS wiki：记录 ROS 信息文档的主要论坛</li>
+<li>邮件列表</li>
+<li>ROS Answers</li>
+<li>博客：<a target="_blank" rel="noopener" href="http://www.ros.org/news">http://www.ros.org/news</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>节点 Node 和 节点管理器 ROS Master</p>
+<ul>
+<li>节点：执行单元<ul>
+<li>执行具体任务的进行、独立运行的可执行文件</li>
+<li>不同节点可使用不同的编程语言，可分布式运行在不同主机中</li>
+<li>节点在系统中的名称必须是唯一的</li>
+</ul>
+</li>
+<li>节点管理器：控制中心<ul>
+<li>为节点提供命名和注册服务</li>
+<li>跟踪和记录 话题 &#x2F; 服务 通信，辅助结点相互查找、建立连接</li>
+<li>提供参数服务器，节点使用此服务器存储和检索运行时的参数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>话题 Topic：异步通信机制</p>
+<ul>
+<li>节点间用来传输数据的重要总线</li>
+<li>使用<code>发布/订阅</code>模式，数据由发布者传输到订阅者，同一个话题的订阅者或发布者可以不唯一</li>
+</ul>
+</li>
+<li><p>消息 Message：话题数据</p>
+<ul>
+<li>具有一定的类型和数据结构，包括 ROS 提供的标准类型和用户自定义类型</li>
+<li>使用编程语言无关的<code>.msg</code>文件定义，编译过程中生成对应的代码文件</li>
+</ul>
+</li>
+<li><p>服务 Service：同步通信机制</p>
+<ul>
+<li>使用<code>客户端/服务器</code>模式，客户端发送请求数据，服务器完成处理后返回应答数据</li>
+<li>使用编程语言无关的<code>.srv</code>文件定义请求和应答数据结构，编译过程中生成对应的代码文件</li>
+</ul>
+</li>
+<li><table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">话题</th>
+<th align="center">服务</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">同步性</td>
+<td align="center">异步</td>
+<td align="center">同步</td>
+</tr>
+<tr>
+<td align="center">通信模型</td>
+<td align="center">发布&#x2F;订阅</td>
+<td align="center">客户端&#x2F;服务器</td>
+</tr>
+<tr>
+<td align="center">底层协议</td>
+<td align="center">ROSTCP&#x2F;ROSUDP</td>
+<td align="center">ROSTCP&#x2F;ROSUDP</td>
+</tr>
+<tr>
+<td align="center">反馈机制</td>
+<td align="center">无</td>
+<td align="center">有</td>
+</tr>
+<tr>
+<td align="center">缓冲区</td>
+<td align="center">有</td>
+<td align="center">无</td>
+</tr>
+<tr>
+<td align="center">实时性</td>
+<td align="center">弱</td>
+<td align="center">强</td>
+</tr>
+<tr>
+<td align="center">节点关系</td>
+<td align="center">多对多</td>
+<td align="center">一对多</td>
+</tr>
+<tr>
+<td align="center">使用场景</td>
+<td align="center">数据传输</td>
+<td align="center">逻辑处理</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>参数 Parameter：全局共享字典</p>
+<ul>
+<li>可通过网络访问的共享、多变量字典</li>
+<li>节点使用此服务器来存储和检索运行时的参数</li>
+<li>适合存储静态、非二进制的配置参数，不适合存储动态配置的参数</li>
+</ul>
+</li>
+<li><p>功能包 Package</p>
+<ul>
+<li>ROS 软件中的基本单元，包含节点源码、配置文件、数据定义等</li>
+</ul>
+</li>
+<li><p>功能包清单 Package manifest</p>
+<ul>
+<li>记录功能包的基本信息，包含作者信息、许可信息、依赖选项、编译标志等</li>
+</ul>
+</li>
+<li><p>元功能包 Meta Packages</p>
+<ul>
+<li>组织多个用于同一目的功能包</li>
+</ul>
+</li>
+</ul>
+<h1 id="ROS-操作"><a href="#ROS-操作" class="headerlink" title="ROS 操作"></a>ROS 操作</h1><h2 id="命令行工具"><a href="#命令行工具" class="headerlink" title="命令行工具"></a>命令行工具</h2><ul>
+<li>常用命令<ul>
+<li>rostopic</li>
+<li>rosservice</li>
+<li>rosnode</li>
+<li>rosparam</li>
+<li>rosmsg</li>
+<li>rossrv</li>
+<li>rosbag</li>
+</ul>
+</li>
+</ul>
+<h2 id="创建工作空间与功能包"><a href="#创建工作空间与功能包" class="headerlink" title="创建工作空间与功能包"></a>创建工作空间与功能包</h2><ul>
+<li><p>工作空间 workspace 是一个存放工程开发相关文件的文件夹</p>
+<ul>
+<li>src：代码空间</li>
+<li>build：编译空间</li>
+<li>devel：开发空间</li>
+<li>install：安装空间</li>
+</ul>
+</li>
+<li><p>创建工作空间</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p ~/catkin_ws/src<br><span class="hljs-built_in">cd</span> ~/catkin_ws/src<br>catkin_init_workspace<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>编译工作空间</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/catkin_ws/<br>catkin_make<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>设置环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> devel/setup.bash<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>检查环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-variable">$ROS_PACKAGE_PATH</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>同一个工作空间下，不允许存在同名功能包。不同工作空间下，允许存在同名功能包。</p>
+</li>
+<li><p>创建功能包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/catkin_ws/src<br>catkin_create_pkg test_pkg std_msgs rospy roscpp<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>编译功能包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/catkin_ws<br>catkin_make<br><span class="hljs-built_in">source</span> ~/catkin_ws/devel/setup.bash<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="ROS-编程开发"><a href="#ROS-编程开发" class="headerlink" title="ROS 编程开发"></a>ROS 编程开发</h1><h2 id="发布者-Publisher"><a href="#发布者-Publisher" class="headerlink" title="发布者 Publisher"></a>发布者 Publisher</h2><h3 id="C-版本"><a href="#C-版本" class="headerlink" title="C++ 版本"></a>C++ 版本</h3><ul>
+<li><p>learning_topic&#x2F;velocity_publisher.cpp</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 该例程将发布turtle1/cmd_vel话题，消息类型geometry_msgs::Twist</span><br><span class="hljs-comment"> */</span><br> <br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ros/ros.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;geometry_msgs/Twist.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> **argv)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-comment">// ROS节点初始化</span><br>	ros::<span class="hljs-built_in">init</span>(argc, argv, <span class="hljs-string">&quot;velocity_publisher&quot;</span>);<br><br>	<span class="hljs-comment">// 创建节点句柄</span><br>	ros::NodeHandle n;<br><br>	<span class="hljs-comment">// 创建一个Publisher，发布名为/turtle1/cmd_vel的topic，消息类型为geometry_msgs::Twist，队列长度10</span><br>	ros::Publisher turtle_vel_pub = n.<span class="hljs-built_in">advertise</span>&lt;geometry_msgs::Twist&gt;(<span class="hljs-string">&quot;/turtle1/cmd_vel&quot;</span>, <span class="hljs-number">10</span>);<br><br>	<span class="hljs-comment">// 设置循环的频率</span><br>	<span class="hljs-function">ros::Rate <span class="hljs-title">loop_rate</span><span class="hljs-params">(<span class="hljs-number">10</span>)</span></span>;<br><br>	<span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span> (ros::<span class="hljs-built_in">ok</span>())<br>	&#123;<br>	    <span class="hljs-comment">// 初始化geometry_msgs::Twist类型的消息</span><br>		geometry_msgs::Twist vel_msg;<br>		vel_msg.linear.x = <span class="hljs-number">0.5</span>;<br>		vel_msg.angular.z = <span class="hljs-number">0.2</span>;<br><br>	    <span class="hljs-comment">// 发布消息</span><br>		turtle_vel_pub.<span class="hljs-built_in">publish</span>(vel_msg);<br>		<span class="hljs-built_in">ROS_INFO</span>(<span class="hljs-string">&quot;Publsh turtle velocity command[%0.2f m/s, %0.2f rad/s]&quot;</span>, <br>				vel_msg.linear.x, vel_msg.angular.z);<br><br>	    <span class="hljs-comment">// 按照循环频率延时</span><br>	    loop_rate.<span class="hljs-built_in">sleep</span>();<br>	&#125;<br><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>learning_topic&#x2F;CMakeLists.txt</p>
+<ul>
+<li><p>以下代码要放在创建的功能包中的cmakelists.txt的install上面</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">add_executable</span>(velocity_publisher src/velocity_publisher.cpp)<br><span class="hljs-keyword">target_link_libraries</span>(velocity_publisher <span class="hljs-variable">$&#123;catkin_LIBRARIES&#125;</span>)<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>第一句是将<code>src/velocity_publisher.cpp</code>程序文件，编译成<code>velocity_publisher</code>可执行文件</p>
+</li>
+<li><p>第二句是将可执行文件<code>velocity_publisher</code>与<code>ros</code>相关库进行链接</p>
+</li>
+</ul>
+</li>
+<li><p>然后进行重新编译</p>
+</li>
+<li><p>如果为了避免每次打开命令行都要输入<code>source</code>，可以将<code>source</code>命令加入到主文件夹的<code>.bashrc</code>隐藏文件下（ctrl + h 查看隐藏文件）</p>
+</li>
+</ul>
+<h3 id="Python-版本"><a href="#Python-版本" class="headerlink" title="Python 版本"></a>Python 版本</h3><ul>
+<li><p>为了跟<code>C++</code>版本进行区分，将<code>Python</code>版本代码，放到<code>/home/bjx/catkin_ws/src/learning_topic/scripts</code>文件夹中</p>
+</li>
+<li><p><code>Python</code>代码一定要有可执行权限，可以在<code>右键-属性-权限-执行</code>处进行修改，也可以通过命令行修改<code>chmod a+x hello.py</code></p>
+</li>
+<li><p><code>scripts/velocity_publisher.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><br><span class="hljs-comment">########################################################################</span><br><span class="hljs-comment">####          Copyright 2020 GuYueHome (www.guyuehome.com).          ###</span><br><span class="hljs-comment">########################################################################</span><br><br><span class="hljs-comment"># 该例程将发布turtle1/cmd_vel话题，消息类型geometry_msgs::Twist</span><br><br><span class="hljs-keyword">import</span> rospy<br><span class="hljs-keyword">from</span> geometry_msgs.msg <span class="hljs-keyword">import</span> Twist<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">velocity_publisher</span>():<br>	<span class="hljs-comment"># ROS节点初始化</span><br>    rospy.init_node(<span class="hljs-string">&#x27;velocity_publisher&#x27;</span>, anonymous=<span class="hljs-literal">True</span>)<br><br>	<span class="hljs-comment"># 创建一个Publisher，发布名为/turtle1/cmd_vel的topic，消息类型为geometry_msgs::Twist，队列长度10</span><br>    turtle_vel_pub = rospy.Publisher(<span class="hljs-string">&#x27;/turtle1/cmd_vel&#x27;</span>, Twist, queue_size=<span class="hljs-number">10</span>)<br><br>	<span class="hljs-comment">#设置循环的频率</span><br>    rate = rospy.Rate(<span class="hljs-number">10</span>) <br><br>    <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> rospy.is_shutdown():<br>		<span class="hljs-comment"># 初始化geometry_msgs::Twist类型的消息</span><br>        vel_msg = Twist()<br>        vel_msg.linear.x = <span class="hljs-number">0.5</span><br>        vel_msg.angular.z = <span class="hljs-number">0.2</span><br><br>		<span class="hljs-comment"># 发布消息</span><br>        turtle_vel_pub.publish(vel_msg)<br>    	rospy.loginfo(<span class="hljs-string">&quot;Publsh turtle velocity command[%0.2f m/s, %0.2f rad/s]&quot;</span>, <br>				vel_msg.linear.x, vel_msg.angular.z)<br><br>		<span class="hljs-comment"># 按照循环频率延时</span><br>        rate.sleep()<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-keyword">try</span>:<br>        velocity_publisher()<br>    <span class="hljs-keyword">except</span> rospy.ROSInterruptException:<br>        <span class="hljs-keyword">pass</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>#!/usr/bin/env python</code>是为了说明python文件为可执行文件，而不是脚本文件。</p>
+</li>
+<li><p><code># coding:utf-8</code>是保证编码格式。</p>
+</li>
+</ul>
+</li>
+<li><p>learning_topic&#x2F;CMakeLists.txt</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cmake">catkin_install_python(PROGRAMS<br>  scripts/velocity_publisher.py<br>  DESTINATION <span class="hljs-variable">$&#123;CATKIN_PACKAGE_BIN_DESTINATION&#125;</span><br>)<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>再重新编译</p>
+</li>
+<li><p>执行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">rosrun learning_topic velocity_publisher.py<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="订阅者-Subscriber"><a href="#订阅者-Subscriber" class="headerlink" title="订阅者 Subscriber"></a>订阅者 Subscriber</h2><h3 id="C-版本-1"><a href="#C-版本-1" class="headerlink" title="C++ 版本"></a>C++ 版本</h3><ul>
+<li><p>&#x2F;src&#x2F;pose_subscriber.cpp</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 该例程将订阅/turtle1/pose话题，消息类型turtlesim::Pose</span><br><span class="hljs-comment"> */</span><br> <br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ros/ros.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;turtlesim/Pose.h&quot;</span></span><br><br><span class="hljs-comment">// 接收到订阅的消息后，会进入消息回调函数</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">poseCallback</span><span class="hljs-params">(<span class="hljs-type">const</span> turtlesim::Pose::ConstPtr&amp; msg)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// 将接收到的消息打印出来</span><br>    <span class="hljs-built_in">ROS_INFO</span>(<span class="hljs-string">&quot;Turtle pose: x:%0.6f, y:%0.6f&quot;</span>, msg-&gt;x, msg-&gt;y);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> **argv)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// 初始化ROS节点</span><br>    ros::<span class="hljs-built_in">init</span>(argc, argv, <span class="hljs-string">&quot;pose_subscriber&quot;</span>);<br><br>    <span class="hljs-comment">// 创建节点句柄</span><br>    ros::NodeHandle n;<br><br>    <span class="hljs-comment">// 创建一个Subscriber，订阅名为/turtle1/pose的topic，注册回调函数poseCallback</span><br>    ros::Subscriber pose_sub = n.<span class="hljs-built_in">subscribe</span>(<span class="hljs-string">&quot;/turtle1/pose&quot;</span>, <span class="hljs-number">10</span>, poseCallback);<br><br>    <span class="hljs-comment">// 循环等待回调函数</span><br>    ros::<span class="hljs-built_in">spin</span>();<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>learning_topic&#x2F;CMakeLists.txt</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">add_executable</span>(pose_subscriber src/pose_subscriber.cpp)<br><span class="hljs-keyword">target_link_libraries</span>(pose_subscriber <span class="hljs-variable">$&#123;catkin_LIBRARIES&#125;</span>)<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>重新编译后，通过键盘修改小海龟位置参数，命令行也会同步出现位置的修改信息</p>
+</li>
+</ul>
+<h3 id="Python-版本-1"><a href="#Python-版本-1" class="headerlink" title="Python 版本"></a>Python 版本</h3><ul>
+<li><p>&#x2F;scripts&#x2F;pose_subscriber.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><br><span class="hljs-comment"># 该例程将订阅/turtle1/pose话题，消息类型turtlesim::Pose</span><br><br><span class="hljs-keyword">import</span> rospy<br><span class="hljs-keyword">from</span> turtlesim.msg <span class="hljs-keyword">import</span> Pose<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">poseCallback</span>(<span class="hljs-params">msg</span>):<br>    rospy.loginfo(<span class="hljs-string">&quot;Turtle pose: x:%0.6f, y:%0.6f&quot;</span>, msg.x, msg.y)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">pose_subscriber</span>():<br>	<span class="hljs-comment"># ROS节点初始化</span><br>    rospy.init_node(<span class="hljs-string">&#x27;pose_subscriber&#x27;</span>, anonymous=<span class="hljs-literal">True</span>)<br><br>	<span class="hljs-comment"># 创建一个Subscriber，订阅名为/turtle1/pose的topic，注册回调函数poseCallback</span><br>    rospy.Subscriber(<span class="hljs-string">&quot;/turtle1/pose&quot;</span>, Pose, poseCallback)<br><br>	<span class="hljs-comment"># 循环等待回调函数</span><br>    rospy.spin()<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    pose_subscriber()<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>learning_topic&#x2F;CMakeLists.txt</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cmake">catkin_install_python(PROGRAMS<br>  scripts/pose_subscriber.py<br>  DESTINATION <span class="hljs-variable">$&#123;CATKIN_PACKAGE_BIN_DESTINATION&#125;</span><br>)<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>再重新编译</p>
+</li>
+<li><p>执行命令</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">rosrun learning_topic pose_subscriber.py<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="话题消息"><a href="#话题消息" class="headerlink" title="话题消息"></a>话题消息</h2><ul>
+<li>当 ROS 提供的消息类型无法满足我们的需要的时候，我们可以自己定义一个消息类型，以满足程序传输数据的要求。</li>
+<li>此处我们以一个个人信息的消息发布为例，演示自定义话题的流程。</li>
+</ul>
+<h3 id="自定义话题消息"><a href="#自定义话题消息" class="headerlink" title="自定义话题消息"></a>自定义话题消息</h3><ul>
+<li><p>在<code>learning_topic</code>文件夹下创建文件夹<code>msg</code>用于管理所有的自定义消息类型</p>
+</li>
+<li><p>在<code>msg</code>文件夹下创建文件<code>Person.msg</code>文件，内容为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs msg">string name<br>uint8 sex<br>uint8 age<br><br>uint8 unknown = 0<br>uint8 male    = 1<br>uint8 female  = 2<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>package.xml</code>中添加功能包依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">build_depend</span>&gt;</span>message_generation<span class="hljs-tag">&lt;/<span class="hljs-name">build_depend</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">exec_depend</span>&gt;</span>message_runtime<span class="hljs-tag">&lt;/<span class="hljs-name">exec_depend</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>&lt;build_depend&gt;message_generation&lt;/build_depend&gt;</code>：这一行指定了在构建（编译）该ROS软件包时所需的依赖项。具体来说，它表示该软件包依赖于名为 <code>message_generation</code> 的软件包，用于生成ROS消息（Message）的包。在构建时，软件包将使用 <code>message_generation</code> 中的工具来处理和生成消息，以确保软件包正确地与其他ROS节点通信。</p>
+</li>
+<li><p><code>&lt;exec_depend&gt;message_runtime&lt;/exec_depend&gt;</code>：这一行指定了在运行时（当软件包被执行时）所需的依赖项。它表示该软件包在运行时依赖于名为 <code>message_runtime</code> 的软件包。<code>message_runtime</code> 包含运行时库，这些库允许软件包在运行时解析和使用ROS消息。</p>
+</li>
+<li><p>这些依赖关系的明确定义有助于ROS工具正确构建和部署软件包，以确保它们在运行时具有所需的依赖项。当构建和运行ROS软件包时，ROS工具（如<code>catkin_make</code>和<code>rosrun</code>）将自动处理这些依赖关系，以确保软件包能够正常工作。</p>
+</li>
+</ul>
+</li>
+<li><p>在功能包中的<code>CMakeLists.txt</code>中添加编译选项</p>
+<ul>
+<li><p>在<code>find_package</code>中添加功能包<code>message_generation</code></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmake">add_message_files(FILES Person.msg)<br>generate_messages(DEPENDENCIES std_msgs)<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><code>add_message_files(FILES Person.msg)</code>：这一行代码告诉ROS构建系统，要将名为 <code>Person.msg</code> 的消息文件添加到该软件包中。这是一种将自定义消息定义添加到ROS软件包的方式。<code>Person.msg</code>文件包含了消息的结构和字段定义。当你运行<code>catkin_make</code>等构建工具时，ROS构建系统会处理这些消息定义文件，并生成相应的消息代码，以便在ROS程序中使用。</p>
+</li>
+<li><p><code>generate_messages(DEPENDENCIES std_msgs)</code>：这一行代码告诉ROS构建系统在生成消息时依赖于其他消息包。在这种情况下，它依赖于<code>std_msgs</code>软件包，这是ROS中包含许多标准消息类型的软件包。这意味着，如果你的<code>Person.msg</code>消息定义中使用了<code>std_msgs</code>中定义的消息类型，你需要指定这个依赖项，以确保生成的消息代码能够正确引用 <code>std_msgs</code> 中的消息类型。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cmake">catkin_package(<br><span class="hljs-comment">#  INCLUDE_DIRS include</span><br><span class="hljs-comment">#  LIBRARIES learning_topic</span><br>   CATKIN_DEPENDS geometry_msgs roscpp rospy std_msgs turtlesim message_runtime<br><span class="hljs-comment">#  DEPENDS system_lib</span><br>)<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>重新编译，之后在<code>/home/bjx/catkin_ws/devel/include/learning_topic</code>中可以看到编译生成的一个头文件</p>
+</li>
+</ul>
+<h3 id="C-版本-2"><a href="#C-版本-2" class="headerlink" title="C++ 版本"></a>C++ 版本</h3><h4 id="发布者"><a href="#发布者" class="headerlink" title="发布者"></a>发布者</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 该例程将发布/person_info话题，自定义消息类型learning_topic::Person</span><br><span class="hljs-comment"> */</span><br> <br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ros/ros.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;learning_topic/Person.h&quot;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> **argv)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// ROS节点初始化</span><br>    ros::<span class="hljs-built_in">init</span>(argc, argv, <span class="hljs-string">&quot;person_publisher&quot;</span>);<br><br>    <span class="hljs-comment">// 创建节点句柄</span><br>    ros::NodeHandle n;<br><br>    <span class="hljs-comment">// 创建一个Publisher，发布名为/person_info的topic，消息类型为learning_topic::Person，队列长度10</span><br>    ros::Publisher person_info_pub = n.<span class="hljs-built_in">advertise</span>&lt;learning_topic::Person&gt;(<span class="hljs-string">&quot;/person_info&quot;</span>, <span class="hljs-number">10</span>);<br><br>    <span class="hljs-comment">// 设置循环的频率</span><br>    <span class="hljs-function">ros::Rate <span class="hljs-title">loop_rate</span><span class="hljs-params">(<span class="hljs-number">1</span>)</span></span>;<br><br>    <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (ros::<span class="hljs-built_in">ok</span>())<br>    &#123;<br>        <span class="hljs-comment">// 初始化learning_topic::Person类型的消息</span><br>    	learning_topic::Person person_msg;<br>		person_msg.name = <span class="hljs-string">&quot;Tom&quot;</span>;<br>		person_msg.age  = <span class="hljs-number">18</span>;<br>		person_msg.sex  = learning_topic::Person::male;<br><br>        <span class="hljs-comment">// 发布消息</span><br>		person_info_pub.<span class="hljs-built_in">publish</span>(person_msg);<br><br>       	<span class="hljs-built_in">ROS_INFO</span>(<span class="hljs-string">&quot;Publish Person Info: name:%s  age:%d  sex:%d&quot;</span>, <br>				  person_msg.name.<span class="hljs-built_in">c_str</span>(), person_msg.age, person_msg.sex);<br><br>        <span class="hljs-comment">// 按照循环频率延时</span><br>        loop_rate.<span class="hljs-built_in">sleep</span>();<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">add_executable</span>(person_publisher src/person_publisher.cpp)<br><span class="hljs-keyword">target_link_libraries</span>(person_publisher <span class="hljs-variable">$&#123;catkin_LIBRARIES&#125;</span>)<br><span class="hljs-keyword">add_dependencies</span>(person_publisher <span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span>_generate_messages_cpp)<br></code></pre></td></tr></table></figure>
+
+<h4 id="订阅者"><a href="#订阅者" class="headerlink" title="订阅者"></a>订阅者</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 该例程将订阅/person_info话题，自定义消息类型learning_topic::Person</span><br><span class="hljs-comment"> */</span><br> <br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ros/ros.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;learning_topic/Person.h&quot;</span></span><br><br><span class="hljs-comment">// 接收到订阅的消息后，会进入消息回调函数</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">personInfoCallback</span><span class="hljs-params">(<span class="hljs-type">const</span> learning_topic::Person::ConstPtr&amp; msg)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// 将接收到的消息打印出来</span><br>    <span class="hljs-built_in">ROS_INFO</span>(<span class="hljs-string">&quot;Subcribe Person Info: name:%s  age:%d  sex:%d&quot;</span>, <br>			 msg-&gt;name.<span class="hljs-built_in">c_str</span>(), msg-&gt;age, msg-&gt;sex);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> **argv)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// 初始化ROS节点</span><br>    ros::<span class="hljs-built_in">init</span>(argc, argv, <span class="hljs-string">&quot;person_subscriber&quot;</span>);<br><br>    <span class="hljs-comment">// 创建节点句柄</span><br>    ros::NodeHandle n;<br><br>    <span class="hljs-comment">// 创建一个Subscriber，订阅名为/person_info的topic，注册回调函数personInfoCallback</span><br>    ros::Subscriber person_info_sub = n.<span class="hljs-built_in">subscribe</span>(<span class="hljs-string">&quot;/person_info&quot;</span>, <span class="hljs-number">10</span>, personInfoCallback);<br><br>    <span class="hljs-comment">// 循环等待回调函数</span><br>    ros::<span class="hljs-built_in">spin</span>();<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">add_executable</span>(person_subscriber src/person_subscriber.cpp)<br><span class="hljs-keyword">target_link_libraries</span>(person_subscriber <span class="hljs-variable">$&#123;catkin_LIBRARIES&#125;</span>)<br><span class="hljs-keyword">add_dependencies</span>(person_subscriber <span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span>_generate_messages_cpp)<br></code></pre></td></tr></table></figure>
+
+<h4 id="运行程序"><a href="#运行程序" class="headerlink" title="运行程序"></a>运行程序</h4><ul>
+<li>编译</li>
+<li>运行程序，发现输出个人信息</li>
+<li>ros master是用于帮助建立连接，一旦连接成功建立，就不在需要master了。可以尝试关闭roscore，此时消息传输不会停止出错</li>
+</ul>
+<h3 id="Python-版本-2"><a href="#Python-版本-2" class="headerlink" title="Python 版本"></a>Python 版本</h3><h4 id="发布者-1"><a href="#发布者-1" class="headerlink" title="发布者"></a>发布者</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/user/bin/env python</span><br><span class="hljs-comment"># -*- coidng: utf-8 -*-</span><br><br><span class="hljs-comment"># 该例程将发布/person_info话题，自定义消息类型learning_topic::Person</span><br><br><span class="hljs-keyword">import</span> rospy<br><span class="hljs-keyword">from</span> learning_topic.msg <span class="hljs-keyword">import</span> Person<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">velocity_publihser</span>():<br>    <span class="hljs-comment"># ROS节点初始化</span><br>    rospy.init_node(<span class="hljs-string">&#x27;person_publisher&#x27;</span>, anonymous=<span class="hljs-literal">True</span>)<br><br>    <span class="hljs-comment"># 创建一个Publisher，发布名为/person_info的topic，消息类型为learning_topic::Person，队列长度10</span><br>    person_info_pub = rospy.Publisher(<span class="hljs-string">&#x27;/person_info&#x27;</span>, Person, queue_size=<span class="hljs-number">10</span>)<br><br>    <span class="hljs-comment">#设置循环的频率</span><br>    rate = rospy.Rate(<span class="hljs-number">10</span>) <br><br>    <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> rospy.is_shutdown():<br>        <span class="hljs-comment"># 初始化learning_topic::Person类型的消息</span><br>        person_msg = Person()<br>        person_msg.name = <span class="hljs-string">&quot;Tom&quot;</span><br>        person_msg.age  = <span class="hljs-number">18</span><br>        person_msg.sex  = Person.male<br><br>        <span class="hljs-comment"># 发布消息</span><br>        person_info_pub.publish(person_msg)<br>        rospy.loginfo(<span class="hljs-string">&quot;Publsh person message[%s, %d, %d]&quot;</span>,person_msg.name, person_msg.age, person_msg.sex)<br><br>        <span class="hljs-comment"># 按照循环频率延时</span><br>        rate.sleep()<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-keyword">try</span>:<br>        velocity_publihser()<br>    <span class="hljs-keyword">except</span> rospy.ROSInterruptException:<br>        <span class="hljs-keyword">pass</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>CMakeLists.txt</code>中添加配置</li>
+</ul>
+<h4 id="订阅者-1"><a href="#订阅者-1" class="headerlink" title="订阅者"></a>订阅者</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><br><span class="hljs-comment"># 该例程将订阅/person_info话题，自定义消息类型learning_topic::Person</span><br><br><span class="hljs-keyword">import</span> rospy<br><span class="hljs-keyword">from</span> learning_topic.msg <span class="hljs-keyword">import</span> Person<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">personInfoCallback</span>(<span class="hljs-params">msg</span>):<br>    rospy.loginfo(<span class="hljs-string">&quot;Subcribe Person Info: name:%s  age:%d  sex:%d&quot;</span>, <br>			 msg.name, msg.age, msg.sex)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">person_subscriber</span>():<br>	<span class="hljs-comment"># ROS节点初始化</span><br>    rospy.init_node(<span class="hljs-string">&#x27;person_subscriber&#x27;</span>, anonymous=<span class="hljs-literal">True</span>)<br><br>	<span class="hljs-comment"># 创建一个Subscriber，订阅名为/person_info的topic，注册回调函数personInfoCallback</span><br>    rospy.Subscriber(<span class="hljs-string">&quot;/person_info&quot;</span>, Person, personInfoCallback)<br><br>	<span class="hljs-comment"># 循环等待回调函数</span><br>    rospy.spin()<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    person_subscriber()<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>CMakeLists.txt</code>中添加配置</li>
+</ul>
+<h4 id="运行程序-1"><a href="#运行程序-1" class="headerlink" title="运行程序"></a>运行程序</h4><ul>
+<li>编译</li>
+<li>运行</li>
+</ul>
+<h2 id="客户端-Client"><a href="#客户端-Client" class="headerlink" title="客户端 Client"></a>客户端 Client</h2><ul>
+<li><p>从本节开始，学习服务的相关实现</p>
+</li>
+<li><p>本节用到的例子是创建一个新的小海龟</p>
+</li>
+<li><p>创建一个新的功能包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">catkin_create_pkg learning_service roscpp rospy std_msgs geometry_msgs turtlesim<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="C-版本-3"><a href="#C-版本-3" class="headerlink" title="C++ 版本"></a>C++ 版本</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 该例程将请求/spawn服务，服务数据类型turtlesim::Spawn</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ros/ros.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;turtlesim/Spawn.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>** argv)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// 初始化ROS节点</span><br>	ros::<span class="hljs-built_in">init</span>(argc, argv, <span class="hljs-string">&quot;turtle_spawn&quot;</span>);<br><br>    <span class="hljs-comment">// 创建节点句柄</span><br>	ros::NodeHandle node;<br><br>    <span class="hljs-comment">// 发现/spawn服务后，创建一个服务客户端，连接名为/spawn的service</span><br>	ros::service::<span class="hljs-built_in">waitForService</span>(<span class="hljs-string">&quot;/spawn&quot;</span>);<br>	ros::ServiceClient add_turtle = node.<span class="hljs-built_in">serviceClient</span>&lt;turtlesim::Spawn&gt;(<span class="hljs-string">&quot;/spawn&quot;</span>);<br><br>    <span class="hljs-comment">// 初始化turtlesim::Spawn的请求数据</span><br>	turtlesim::Spawn srv;<br>	srv.request.x = <span class="hljs-number">2.0</span>;<br>	srv.request.y = <span class="hljs-number">2.0</span>;<br>	srv.request.name = <span class="hljs-string">&quot;turtle2&quot;</span>;<br><br>    <span class="hljs-comment">// 请求服务调用</span><br>	<span class="hljs-built_in">ROS_INFO</span>(<span class="hljs-string">&quot;Call service to spwan turtle[x:%0.6f, y:%0.6f, name:%s]&quot;</span>, <br>			 srv.request.x, srv.request.y, srv.request.name.<span class="hljs-built_in">c_str</span>());<br><br>	add_turtle.<span class="hljs-built_in">call</span>(srv);<br><br>	<span class="hljs-comment">// 显示服务调用结果</span><br>	<span class="hljs-built_in">ROS_INFO</span>(<span class="hljs-string">&quot;Spwan turtle successfully [name:%s]&quot;</span>, srv.response.name.<span class="hljs-built_in">c_str</span>());<br><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">add_executable</span>(turtle_spawn src/turtle_spawn.cpp)<br><span class="hljs-keyword">target_link_libraries</span>(turtle_spawn <span class="hljs-variable">$&#123;catkin_LIBRARIES&#125;</span>)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">roscore<br>rosrun turtlesim turtlesim_node<br>rosrun learning_service turtle_spawn<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>编译运行后，此时会发现出现两只小海龟</li>
+</ul>
+<h3 id="Python-版本-3"><a href="#Python-版本-3" class="headerlink" title="Python 版本"></a>Python 版本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><br><span class="hljs-comment"># 该例程将请求/spawn服务，服务数据类型turtlesim::Spawn</span><br><br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> rospy<br><span class="hljs-keyword">from</span> turtlesim.srv <span class="hljs-keyword">import</span> Spawn<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">turtle_spawn</span>():<br>	<span class="hljs-comment"># ROS节点初始化</span><br>    rospy.init_node(<span class="hljs-string">&#x27;turtle_spawn&#x27;</span>)<br><br>	<span class="hljs-comment"># 发现/spawn服务后，创建一个服务客户端，连接名为/spawn的service</span><br>    rospy.wait_for_service(<span class="hljs-string">&#x27;/spawn&#x27;</span>)<br>    <span class="hljs-keyword">try</span>:<br>        add_turtle = rospy.ServiceProxy(<span class="hljs-string">&#x27;/spawn&#x27;</span>, Spawn)<br><br>		<span class="hljs-comment"># 请求服务调用，输入请求数据</span><br>        response = add_turtle(<span class="hljs-number">2.0</span>, <span class="hljs-number">2.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-string">&quot;turtle2&quot;</span>)<br>        <span class="hljs-keyword">return</span> response.name<br>    <span class="hljs-keyword">except</span> rospy.ServiceException <span class="hljs-keyword">as</span> e:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Service call failed: %s&quot;</span>%e)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>	<span class="hljs-comment">#服务调用并显示调用结果</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Spwan turtle successfully [name:%s]&quot;</span> %(turtle_spawn())) <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cmake">catkin_install_python(PROGRAMS<br> 	scripts/turtle_spawn.py<br>	DESTINATION <span class="hljs-variable">$&#123;CATKIN_PACKAGE_BIN_DESTINATION&#125;</span><br>)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>编译运行后，此时会发现出现两只小海龟</li>
+</ul>
+<h2 id="服务器端-Server"><a href="#服务器端-Server" class="headerlink" title="服务器端 Server"></a>服务器端 Server</h2><ul>
+<li>步骤<ol>
+<li>初始化ROS结点</li>
+<li>创建Server实例</li>
+<li>循环等待服务请求，进入回调函数</li>
+<li>在回调函数中完成服务功能的处理，并反馈应答数据</li>
+</ol>
+</li>
+</ul>
+<h3 id="C-版本-4"><a href="#C-版本-4" class="headerlink" title="C++ 版本"></a>C++ 版本</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 该例程将执行/turtle_command服务，服务数据类型std_srvs/Trigger</span><br><span class="hljs-comment"> */</span><br> <br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ros/ros.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;geometry_msgs/Twist.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;std_srvs/Trigger.h&gt;</span></span><br><br>ros::Publisher turtle_vel_pub;<br><span class="hljs-type">bool</span> pubCommand = <span class="hljs-literal">false</span>;<br><br><span class="hljs-comment">// service回调函数，输入参数req，输出参数res</span><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">commandCallback</span><span class="hljs-params">(std_srvs::Trigger::Request  &amp;req,</span></span><br><span class="hljs-params"><span class="hljs-function">         			std_srvs::Trigger::Response &amp;res)</span></span><br><span class="hljs-function"></span>&#123;<br>	pubCommand = !pubCommand;<br><br>    <span class="hljs-comment">// 显示请求数据</span><br>    <span class="hljs-built_in">ROS_INFO</span>(<span class="hljs-string">&quot;Publish turtle velocity command [%s]&quot;</span>, pubCommand==<span class="hljs-literal">true</span>?<span class="hljs-string">&quot;Yes&quot;</span>:<span class="hljs-string">&quot;No&quot;</span>);<br><br>	<span class="hljs-comment">// 设置反馈数据</span><br>	res.success = <span class="hljs-literal">true</span>;<br>	res.message = <span class="hljs-string">&quot;Change turtle command state!&quot;</span>;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> **argv)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// ROS节点初始化</span><br>    ros::<span class="hljs-built_in">init</span>(argc, argv, <span class="hljs-string">&quot;turtle_command_server&quot;</span>);<br><br>    <span class="hljs-comment">// 创建节点句柄</span><br>    ros::NodeHandle n;<br><br>    <span class="hljs-comment">// 创建一个名为/turtle_command的server，注册回调函数commandCallback</span><br>    ros::ServiceServer command_service = n.<span class="hljs-built_in">advertiseService</span>(<span class="hljs-string">&quot;/turtle_command&quot;</span>, commandCallback);<br><br>	<span class="hljs-comment">// 创建一个Publisher，发布名为/turtle1/cmd_vel的topic，消息类型为geometry_msgs::Twist，队列长度10</span><br>	turtle_vel_pub = n.<span class="hljs-built_in">advertise</span>&lt;geometry_msgs::Twist&gt;(<span class="hljs-string">&quot;/turtle1/cmd_vel&quot;</span>, <span class="hljs-number">10</span>);<br><br>    <span class="hljs-comment">// 循环等待回调函数</span><br>    <span class="hljs-built_in">ROS_INFO</span>(<span class="hljs-string">&quot;Ready to receive turtle command.&quot;</span>);<br><br>	<span class="hljs-comment">// 设置循环的频率</span><br>	<span class="hljs-function">ros::Rate <span class="hljs-title">loop_rate</span><span class="hljs-params">(<span class="hljs-number">10</span>)</span></span>;<br><br>	<span class="hljs-keyword">while</span>(ros::<span class="hljs-built_in">ok</span>())<br>	&#123;<br>		<span class="hljs-comment">// 查看一次回调函数队列</span><br>    	ros::<span class="hljs-built_in">spinOnce</span>();<br>		<br>		<span class="hljs-comment">// 如果标志为true，则发布速度指令</span><br>		<span class="hljs-keyword">if</span>(pubCommand)<br>		&#123;<br>			geometry_msgs::Twist vel_msg;<br>			vel_msg.linear.x = <span class="hljs-number">0.5</span>;<br>			vel_msg.angular.z = <span class="hljs-number">0.2</span>;<br>			turtle_vel_pub.<span class="hljs-built_in">publish</span>(vel_msg);<br>		&#125;<br><br>		<span class="hljs-comment">//按照循环频率延时</span><br>	    loop_rate.<span class="hljs-built_in">sleep</span>();<br>	&#125;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">add_executable</span>(turtle_command_server src/turtle_command_server.cpp)<br><span class="hljs-keyword">target_link_libraries</span>(turtle_command_server <span class="hljs-variable">$&#123;catkin_LIBRARIES&#125;</span>)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">roscore<br>rosrun turtlesim turtlesim_node<br>rosrun learning_service turtle_command_server<br>rosservice call /turtle_command <span class="hljs-string">&quot;&#123;&#125;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Python-版本-4"><a href="#Python-版本-4" class="headerlink" title="Python 版本"></a>Python 版本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><br><span class="hljs-comment"># 该例程将执行/turtle_command服务，服务数据类型std_srvs/Trigger</span><br><br><span class="hljs-keyword">import</span> rospy<br><span class="hljs-keyword">import</span> thread, time<br><span class="hljs-keyword">from</span> geometry_msgs.msg <span class="hljs-keyword">import</span> Twist<br><span class="hljs-keyword">from</span> std_srvs.srv <span class="hljs-keyword">import</span> Trigger, TriggerResponse<br><br>pubCommand = <span class="hljs-literal">False</span><br>turtle_vel_pub = rospy.Publisher(<span class="hljs-string">&#x27;/turtle1/cmd_vel&#x27;</span>, Twist, queue_size=<span class="hljs-number">10</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">command_thread</span>():	<br>	<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>		<span class="hljs-keyword">if</span> pubCommand:<br>			vel_msg = Twist()<br>			vel_msg.linear.x = <span class="hljs-number">0.5</span><br>			vel_msg.angular.z = <span class="hljs-number">0.2</span><br>			turtle_vel_pub.publish(vel_msg)<br>			<br>		time.sleep(<span class="hljs-number">0.1</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">commandCallback</span>(<span class="hljs-params">req</span>):<br>	<span class="hljs-keyword">global</span> pubCommand<br>	pubCommand = <span class="hljs-built_in">bool</span>(<span class="hljs-number">1</span>-pubCommand)<br><br>	<span class="hljs-comment"># 显示请求数据</span><br>	rospy.loginfo(<span class="hljs-string">&quot;Publish turtle velocity command![%d]&quot;</span>, pubCommand)<br><br>	<span class="hljs-comment"># 反馈数据</span><br>	<span class="hljs-keyword">return</span> TriggerResponse(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;Change turtle command state!&quot;</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">turtle_command_server</span>():<br>	<span class="hljs-comment"># ROS节点初始化</span><br>    rospy.init_node(<span class="hljs-string">&#x27;turtle_command_server&#x27;</span>)<br><br>	<span class="hljs-comment"># 创建一个名为/turtle_command的server，注册回调函数commandCallback</span><br>    s = rospy.Service(<span class="hljs-string">&#x27;/turtle_command&#x27;</span>, Trigger, commandCallback)<br><br>	<span class="hljs-comment"># 循环等待回调函数</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Ready to receive turtle command.&quot;</span>) <br><br>    thread.start_new_thread(command_thread, ())<br>    rospy.spin()<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    turtle_command_server()<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>C++</code>中的<code>ros::spinOnce()</code>在<code>Python</code>中是没有实现的，只有<code>rospy.spin()</code>。所以要通过多线程机制，来实现<code>ros::spinOnce()</code>同样的功能。</li>
+<li>如果使用的是<code>Python3</code>，需要将<code>thread</code>改成<code>_thread</code></li>
+</ul>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cmake">catkin_install_python(PROGRAMS<br> 	scripts/turtle_spawn.py scripts/turtle_command_server.py<br>	DESTINATION <span class="hljs-variable">$&#123;CATKIN_PACKAGE_BIN_DESTINATION&#125;</span><br>)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>上面脚本在后面跟着写即可</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">roscore<br>rosrun turtlesim turtlesim_node<br>rosrun learning_service turtle_command_server<br>rosservice call /turtle_command <span class="hljs-string">&quot;&#123;&#125;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="服务数据"><a href="#服务数据" class="headerlink" title="服务数据"></a>服务数据</h2><h3 id="自定义服务数据"><a href="#自定义服务数据" class="headerlink" title="自定义服务数据"></a>自定义服务数据</h3><ul>
+<li><p>在<code>learning_service</code>文件夹下创建创建文件夹<code>srv</code>来管理所有自定义服务数据</p>
+</li>
+<li><p>在<code>srv</code>文件夹下创建文件<code>Person.srv</code>，内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs srv">string name<br>uint8  age<br>uint8  sex<br><br>uint8 unknown = 0<br>uint8 male    = 1<br>uint8 female  = 2<br>---<br>string result<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>---</code>上面是请求的格式，下面是应答的格式</li>
+</ul>
+</li>
+<li><p>在<code>package.xml</code>中添加功能包依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">build_depend</span>&gt;</span>message_generation<span class="hljs-tag">&lt;/<span class="hljs-name">build_depend</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">exec_depend</span>&gt;</span>message_runtime<span class="hljs-tag">&lt;/<span class="hljs-name">exec_depend</span>&gt;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>在功能包中的<code>CMakeLists.txt</code>中添加编译选项</p>
+<ul>
+<li><p>在<code>find_package</code>中添加功能包<code>message_generation</code></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmake">add_service_files(FILES Person.srv)<br>generate_messages(DEPENDENCIES std_msgs)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cmake">catkin_package(<br><span class="hljs-comment">#  INCLUDE_DIRS include</span><br><span class="hljs-comment">#  LIBRARIES learning_topic</span><br>   CATKIN_DEPENDS geometry_msgs roscpp rospy std_msgs turtlesim message_runtime<br><span class="hljs-comment">#  DEPENDS system_lib</span><br>)<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>重新编译，之后在<code>/home/bjx/catkin_ws/devel/include/learning_service</code>中可以看到编译生成的三个头文件</p>
+</li>
+</ul>
+<h3 id="C-版本-5"><a href="#C-版本-5" class="headerlink" title="C++ 版本"></a>C++ 版本</h3><h4 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 该例程将请求/show_person服务，服务数据类型learning_service::Person</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ros/ros.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;learning_service/Person.h&quot;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>** argv)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// 初始化ROS节点</span><br>	ros::<span class="hljs-built_in">init</span>(argc, argv, <span class="hljs-string">&quot;person_client&quot;</span>);<br><br>    <span class="hljs-comment">// 创建节点句柄</span><br>	ros::NodeHandle node;<br><br>    <span class="hljs-comment">// 发现/spawn服务后，创建一个服务客户端，连接名为/spawn的service</span><br>	ros::service::<span class="hljs-built_in">waitForService</span>(<span class="hljs-string">&quot;/show_person&quot;</span>);<br>	ros::ServiceClient person_client = node.<span class="hljs-built_in">serviceClient</span>&lt;learning_service::Person&gt;(<span class="hljs-string">&quot;/show_person&quot;</span>);<br><br>    <span class="hljs-comment">// 初始化learning_service::Person的请求数据</span><br>	learning_service::Person srv;<br>	srv.request.name = <span class="hljs-string">&quot;Tom&quot;</span>;<br>	srv.request.age  = <span class="hljs-number">20</span>;<br>	srv.request.sex  = learning_service::Person::Request::male;<br><br>    <span class="hljs-comment">// 请求服务调用</span><br>	<span class="hljs-built_in">ROS_INFO</span>(<span class="hljs-string">&quot;Call service to show person[name:%s, age:%d, sex:%d]&quot;</span>, <br>			 srv.request.name.<span class="hljs-built_in">c_str</span>(), srv.request.age, srv.request.sex);<br><br>	person_client.<span class="hljs-built_in">call</span>(srv);<br><br>	<span class="hljs-comment">// 显示服务调用结果</span><br>	<span class="hljs-built_in">ROS_INFO</span>(<span class="hljs-string">&quot;Show person result : %s&quot;</span>, srv.response.result.<span class="hljs-built_in">c_str</span>());<br><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">add_executable</span>(person_client src/person_client.cpp)<br><span class="hljs-keyword">target_link_libraries</span>(person_client <span class="hljs-variable">$&#123;catkin_LIBRARIES&#125;</span>)<br><span class="hljs-keyword">add_dependencies</span>(person_client <span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span>_gencpp)<br></code></pre></td></tr></table></figure>
+
+<h4 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 该例程将执行/show_person服务，服务数据类型learning_service::Person</span><br><span class="hljs-comment"> */</span><br> <br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ros/ros.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;learning_service/Person.h&quot;</span></span><br><br><span class="hljs-comment">// service回调函数，输入参数req，输出参数res</span><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">personCallback</span><span class="hljs-params">(learning_service::Person::Request  &amp;req,</span></span><br><span class="hljs-params"><span class="hljs-function">         			learning_service::Person::Response &amp;res)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// 显示请求数据</span><br>    <span class="hljs-built_in">ROS_INFO</span>(<span class="hljs-string">&quot;Person: name:%s  age:%d  sex:%d&quot;</span>, req.name.<span class="hljs-built_in">c_str</span>(), req.age, req.sex);<br><br>	<span class="hljs-comment">// 设置反馈数据</span><br>	res.result = <span class="hljs-string">&quot;OK&quot;</span>;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> **argv)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// ROS节点初始化</span><br>    ros::<span class="hljs-built_in">init</span>(argc, argv, <span class="hljs-string">&quot;person_server&quot;</span>);<br><br>    <span class="hljs-comment">// 创建节点句柄</span><br>    ros::NodeHandle n;<br><br>    <span class="hljs-comment">// 创建一个名为/show_person的server，注册回调函数personCallback</span><br>    ros::ServiceServer person_service = n.<span class="hljs-built_in">advertiseService</span>(<span class="hljs-string">&quot;/show_person&quot;</span>, personCallback);<br><br>    <span class="hljs-comment">// 循环等待回调函数</span><br>    <span class="hljs-built_in">ROS_INFO</span>(<span class="hljs-string">&quot;Ready to show person informtion.&quot;</span>);<br>    ros::<span class="hljs-built_in">spin</span>();<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">add_executable</span>(person_server src/person_server.cpp)<br><span class="hljs-keyword">target_link_libraries</span>(person_server <span class="hljs-variable">$&#123;catkin_LIBRARIES&#125;</span>)<br><span class="hljs-keyword">add_dependencies</span>(person_server <span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span>_gencpp)<br></code></pre></td></tr></table></figure>
+
+<h3 id="Python-版本-5"><a href="#Python-版本-5" class="headerlink" title="Python 版本"></a>Python 版本</h3><h4 id="客户端-1"><a href="#客户端-1" class="headerlink" title="客户端"></a>客户端</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><br><span class="hljs-comment"># 该例程将请求/show_person服务，服务数据类型learning_service::Person</span><br><br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> rospy<br><span class="hljs-keyword">from</span> learning_service.srv <span class="hljs-keyword">import</span> Person, PersonRequest<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">person_client</span>():<br>	<span class="hljs-comment"># ROS节点初始化</span><br>    rospy.init_node(<span class="hljs-string">&#x27;person_client&#x27;</span>)<br><br>	<span class="hljs-comment"># 发现/spawn服务后，创建一个服务客户端，连接名为/spawn的service</span><br>    rospy.wait_for_service(<span class="hljs-string">&#x27;/show_person&#x27;</span>)<br>    <span class="hljs-keyword">try</span>:<br>        person_client = rospy.ServiceProxy(<span class="hljs-string">&#x27;/show_person&#x27;</span>, Person)<br><br>		<span class="hljs-comment"># 请求服务调用，输入请求数据</span><br>        response = person_client(<span class="hljs-string">&quot;Tom&quot;</span>, <span class="hljs-number">20</span>, PersonRequest.male)<br>        <span class="hljs-keyword">return</span> response.result<br>    <span class="hljs-keyword">except</span> rospy.ServiceException <span class="hljs-keyword">as</span> e:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Service call failed: %s&quot;</span>%e) <br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>	<span class="hljs-comment">#服务调用并显示调用结果</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Show person result : %s&quot;</span> %(person_client()))<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>在<code>catkin_install_python</code>中加入该文件</li>
+</ul>
+<h4 id="服务端-1"><a href="#服务端-1" class="headerlink" title="服务端"></a>服务端</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><br><span class="hljs-comment"># 该例程将执行/show_person服务，服务数据类型learning_service::Person</span><br><br><span class="hljs-keyword">import</span> rospy<br><span class="hljs-keyword">from</span> learning_service.srv <span class="hljs-keyword">import</span> Person, PersonResponse<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">personCallback</span>(<span class="hljs-params">req</span>):<br>	<span class="hljs-comment"># 显示请求数据</span><br>    rospy.loginfo(<span class="hljs-string">&quot;Person: name:%s  age:%d  sex:%d&quot;</span>, req.name, req.age, req.sex)<br><br>	<span class="hljs-comment"># 反馈数据</span><br>    <span class="hljs-keyword">return</span> PersonResponse(<span class="hljs-string">&quot;OK&quot;</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">person_server</span>():<br>	<span class="hljs-comment"># ROS节点初始化</span><br>    rospy.init_node(<span class="hljs-string">&#x27;person_server&#x27;</span>)<br><br>	<span class="hljs-comment"># 创建一个名为/show_person的server，注册回调函数personCallback</span><br>    s = rospy.Service(<span class="hljs-string">&#x27;/show_person&#x27;</span>, Person, personCallback)<br><br>	<span class="hljs-comment"># 循环等待回调函数</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Ready to show person informtion.&quot;</span>) <br>    rospy.spin()<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    person_server()<br></code></pre></td></tr></table></figure>
+
+<p>在<code>catkin_install_python</code>中加入该文件</p>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><ul>
+<li><p>在 ROS Master 中有一个参数服务器 Parameter Server，是一个全局字典，用于保存各个节点之间的配置参数。</p>
+</li>
+<li><p>创建功能包<code>learning_parameter</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/catkin_ws/src<br>catkin_create_pkg learning_parameter roscpp rospy std_srvs<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="参数命令行使用"><a href="#参数命令行使用" class="headerlink" title="参数命令行使用"></a>参数命令行使用</h3><ul>
+<li><p>列出当前所有参数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">rosparam list<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>显示某个参数值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">rosparam get param_key<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>设置某个参数值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">rosparam <span class="hljs-built_in">set</span> param_key param_value<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>在设置小海龟的背景颜色案例中，设置完颜色，还有请求一下服务，运行命令<code>rosservice call /clear &#39;&#123;&#125;&#39;</code>，背景颜色方才改变。</li>
+</ul>
+</li>
+<li><p>保存参数到文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">rosparam dump file_name<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>从文件读取参数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">rosparam load file_name<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>删除参数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">rosparam delete param_key<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>在 ROS 中，如果参数比较多，会用到 YAML 参数文件，格式如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">rosdistro:</span> <span class="hljs-string">&#x27;noetic</span><br><span class="hljs-string"></span><br><span class="hljs-string">  &#x27;</span><br><span class="hljs-attr">roslaunch:</span><br>  <span class="hljs-attr">uris:</span><br>    <span class="hljs-attr">host_bjx__44977:</span> <span class="hljs-string">http://bjx:44977/</span><br><span class="hljs-attr">rosversion:</span> <span class="hljs-string">&#x27;1.16.0</span><br><span class="hljs-string"></span><br><span class="hljs-string">  &#x27;</span><br><span class="hljs-attr">run_id:</span> <span class="hljs-string">c713a7d4-753e-11ee-84ae-234d4d1e8e05</span><br><span class="hljs-attr">turtlesim:</span><br>  <span class="hljs-attr">background_b:</span> <span class="hljs-number">100</span><br>  <span class="hljs-attr">background_g:</span> <span class="hljs-number">86</span><br>  <span class="hljs-attr">background_r:</span> <span class="hljs-number">69</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="编程方法"><a href="#编程方法" class="headerlink" title="编程方法"></a>编程方法</h3><h4 id="C-版本-6"><a href="#C-版本-6" class="headerlink" title="C++ 版本"></a>C++ 版本</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 该例程设置/读取海龟例程中的参数</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ros/ros.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;std_srvs/Empty.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> **argv)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">int</span> red, green, blue;<br><br>    <span class="hljs-comment">// ROS节点初始化</span><br>    ros::<span class="hljs-built_in">init</span>(argc, argv, <span class="hljs-string">&quot;parameter_config&quot;</span>);<br><br>    <span class="hljs-comment">// 创建节点句柄</span><br>    ros::NodeHandle node;<br><br>    <span class="hljs-comment">// 读取背景颜色参数</span><br>	ros::param::<span class="hljs-built_in">get</span>(<span class="hljs-string">&quot;/turtlesim/background_r&quot;</span>, red);<br>	ros::param::<span class="hljs-built_in">get</span>(<span class="hljs-string">&quot;/turtlesim/background_g&quot;</span>, green);<br>	ros::param::<span class="hljs-built_in">get</span>(<span class="hljs-string">&quot;/turtlesim/background_b&quot;</span>, blue);<br><br>	<span class="hljs-built_in">ROS_INFO</span>(<span class="hljs-string">&quot;Get Backgroud Color[%d, %d, %d]&quot;</span>, red, green, blue);<br><br>	<span class="hljs-comment">// 设置背景颜色参数</span><br>	ros::param::<span class="hljs-built_in">set</span>(<span class="hljs-string">&quot;/turtlesim/background_r&quot;</span>, <span class="hljs-number">255</span>);<br>	ros::param::<span class="hljs-built_in">set</span>(<span class="hljs-string">&quot;/turtlesim/background_g&quot;</span>, <span class="hljs-number">255</span>);<br>	ros::param::<span class="hljs-built_in">set</span>(<span class="hljs-string">&quot;/turtlesim/background_b&quot;</span>, <span class="hljs-number">255</span>);<br><br>	<span class="hljs-built_in">ROS_INFO</span>(<span class="hljs-string">&quot;Set Backgroud Color[255, 255, 255]&quot;</span>);<br><br>    <span class="hljs-comment">// 读取背景颜色参数</span><br>	ros::param::<span class="hljs-built_in">get</span>(<span class="hljs-string">&quot;/turtlesim/background_r&quot;</span>, red);<br>	ros::param::<span class="hljs-built_in">get</span>(<span class="hljs-string">&quot;/turtlesim/background_g&quot;</span>, green);<br>	ros::param::<span class="hljs-built_in">get</span>(<span class="hljs-string">&quot;/turtlesim/background_b&quot;</span>, blue);<br><br>	<span class="hljs-built_in">ROS_INFO</span>(<span class="hljs-string">&quot;Re-get Backgroud Color[%d, %d, %d]&quot;</span>, red, green, blue);<br><br>	<span class="hljs-comment">// 调用服务，刷新背景颜色</span><br>	ros::service::<span class="hljs-built_in">waitForService</span>(<span class="hljs-string">&quot;/clear&quot;</span>);<br>	ros::ServiceClient clear_background = node.<span class="hljs-built_in">serviceClient</span>&lt;std_srvs::Empty&gt;(<span class="hljs-string">&quot;/clear&quot;</span>);<br>	std_srvs::Empty srv;<br>	clear_background.<span class="hljs-built_in">call</span>(srv);<br>	<br>	<span class="hljs-built_in">sleep</span>(<span class="hljs-number">1</span>);<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">add_executable</span>(parameter_config src/parameter_config.cpp)<br><span class="hljs-keyword">target_link_libraries</span>(parameter_config <span class="hljs-variable">$&#123;catkin_LIBRARIES&#125;</span>)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>一定要注意参数名是否正确</li>
+<li>上面的get和set并不是唯一的获取参数的值的方法，还有其他方法，具体参考[<a target="_blank" rel="noopener" href="http://wiki.ros.org/Parameter">http://wiki.ros.org/Parameter</a> Server](<a target="_blank" rel="noopener" href="http://wiki.ros.org/Parameter">http://wiki.ros.org/Parameter</a> Server)</li>
+</ul>
+<h4 id="Python-版本-6"><a href="#Python-版本-6" class="headerlink" title="Python 版本"></a>Python 版本</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><br><span class="hljs-comment"># 该例程设置/读取海龟例程中的参数</span><br><br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> rospy<br><span class="hljs-keyword">from</span> std_srvs.srv <span class="hljs-keyword">import</span> Empty<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">parameter_config</span>():<br>	<span class="hljs-comment"># ROS节点初始化</span><br>    rospy.init_node(<span class="hljs-string">&#x27;parameter_config&#x27;</span>, anonymous=<span class="hljs-literal">True</span>)<br><br>	<span class="hljs-comment"># 读取背景颜色参数</span><br>    red   = rospy.get_param(<span class="hljs-string">&#x27;/turtlesim/background_r&#x27;</span>)<br>    green = rospy.get_param(<span class="hljs-string">&#x27;/turtlesim/background_g&#x27;</span>)<br>    blue  = rospy.get_param(<span class="hljs-string">&#x27;/turtlesim/background_b&#x27;</span>)<br><br>    rospy.loginfo(<span class="hljs-string">&quot;Get Backgroud Color[%d, %d, %d]&quot;</span>, red, green, blue)<br><br>	<span class="hljs-comment"># 设置背景颜色参数</span><br>    rospy.set_param(<span class="hljs-string">&quot;/turtlesim/background_r&quot;</span>, <span class="hljs-number">255</span>)<br>    rospy.set_param(<span class="hljs-string">&quot;/turtlesim/background_g&quot;</span>, <span class="hljs-number">255</span>)<br>    rospy.set_param(<span class="hljs-string">&quot;/turtlesim/background_b&quot;</span>, <span class="hljs-number">255</span>)<br><br>    rospy.loginfo(<span class="hljs-string">&quot;Set Backgroud Color[255, 255, 255]&quot;</span>)<br><br>	<span class="hljs-comment"># 读取背景颜色参数</span><br>    red   = rospy.get_param(<span class="hljs-string">&#x27;/turtlesim/background_r&#x27;</span>)<br>    green = rospy.get_param(<span class="hljs-string">&#x27;/turtlesim/background_g&#x27;</span>)<br>    blue  = rospy.get_param(<span class="hljs-string">&#x27;/turtlesim/background_b&#x27;</span>)<br><br>    rospy.loginfo(<span class="hljs-string">&quot;Get Backgroud Color[%d, %d, %d]&quot;</span>, red, green, blue)<br><br>	<span class="hljs-comment"># 发现/spawn服务后，创建一个服务客户端，连接名为/spawn的service</span><br>    rospy.wait_for_service(<span class="hljs-string">&#x27;/clear&#x27;</span>)<br>    <span class="hljs-keyword">try</span>:<br>        clear_background = rospy.ServiceProxy(<span class="hljs-string">&#x27;/clear&#x27;</span>, Empty)<br><br>		<span class="hljs-comment"># 请求服务调用，输入请求数据</span><br>        response = clear_background()<br>        <span class="hljs-keyword">return</span> response<br>    <span class="hljs-keyword">except</span> rospy.ServiceException <span class="hljs-keyword">as</span> e:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Service call failed: %s&quot;</span>%e) <br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    parameter_config()<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cmake">catkin_install_python(PROGRAMS<br>	scripts/parameter_config.py<br>	DESTINATION <span class="hljs-variable">$&#123;CATKIN_PACKAGE_BIN_DESTINATION&#125;</span><br>)<br></code></pre></td></tr></table></figure>
+
+<h2 id="坐标系管理"><a href="#坐标系管理" class="headerlink" title="坐标系管理"></a>坐标系管理</h2><ul>
+<li>ROS 中的坐标系管理系统 TF (TransForm)</li>
+<li>任意两个三维坐标的坐标变换，都可以通过一个四阶矩阵来表示</li>
+<li>TF 默认记录10秒钟之内所有坐标系之间的位置关系</li>
+<li>TF 坐标变换的实现<ul>
+<li>广播 TF 变换</li>
+<li>监听 TF 变换</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><ul>
+<li><p>下载小海龟的 tf 包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install ros-noetic-turtle-tf<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>运行 launch 文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">roslaunch turtle_tf turtle_tf_demo.launch<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>运行键盘控制程序</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">rosrun turtlesim turtle_teleop_key<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>view_frames 是一个图形化的调试工具，并且可以输出当前的tf关系到 pdf 中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">rosrun tf view_frames<br></code></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>【问题解决】：</p>
+<ol>
+<li>如果在运行launch的过程中，出现rospkg的报错，很有可能是由于系统中存在多个Python，解决方案：<a target="_blank" rel="noopener" href="http://t.csdnimg.cn/iRmvW">http://t.csdnimg.cn/iRmvW</a></li>
+<li>如果在运行tf的过程中，报错，需要修改代码，解决方案：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/QMark/p/15098334.html">https://www.cnblogs.com/QMark/p/15098334.html</a></li>
+</ol>
+</blockquote>
+<ul>
+<li><p>把特定坐标系之间的平移旋转关系打印到终端控制台上</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">rosrun tf tf_echo turtle1 turtle2<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>以上命令可以直观的将 turtle2 坐标系到 turtle1 坐标系的坐标变换矩阵展示出来</p>
+</li>
+<li><p>输出结果为：</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs subunit">At time 1698634776.960<br>- Translation: [0.000, 0.000, 0.000]<br>- Rotation: in Quaternion [<span class="hljs-string">-0</span>.000, <span class="hljs-string">-0</span>.000, 0.640, 0.769]<br>            in RPY (radian) [<span class="hljs-string">-0</span>.000, <span class="hljs-string">-0</span>.000, 1.388]<br>            in RPY (degree) [<span class="hljs-string">-0</span>.000, <span class="hljs-string">-0</span>.000, 79.536]<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>更加可视化的工具 rviz</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">rosrun rviz rviz -d <span class="hljs-string">&#x27;rospack find turtle_tf&#x27;</span> /rviz/turtle_rviz.rviz<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="坐标系广播和监听的编程实现"><a href="#坐标系广播和监听的编程实现" class="headerlink" title="坐标系广播和监听的编程实现"></a>坐标系广播和监听的编程实现</h3><ul>
+<li><p>创建功能包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/catkin_ws/src<br>catkin_create_pkg learning_tf roscpp rospy tf turtlesim<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="C-版本-7"><a href="#C-版本-7" class="headerlink" title="C++ 版本"></a>C++ 版本</h4><h5 id="tf-广播器代码"><a href="#tf-广播器代码" class="headerlink" title="tf 广播器代码"></a>tf 广播器代码</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 该例程监听tf数据，并计算、发布turtle2的速度指令</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ros/ros.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;tf/transform_listener.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;geometry_msgs/Twist.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;turtlesim/Spawn.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>** argv)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-comment">// 初始化ROS节点</span><br>	ros::<span class="hljs-built_in">init</span>(argc, argv, <span class="hljs-string">&quot;my_tf_listener&quot;</span>);<br><br>    <span class="hljs-comment">// 创建节点句柄</span><br>	ros::NodeHandle node;<br><br>	<span class="hljs-comment">// 请求产生turtle2</span><br>	ros::service::<span class="hljs-built_in">waitForService</span>(<span class="hljs-string">&quot;/spawn&quot;</span>);<br>	ros::ServiceClient add_turtle = node.<span class="hljs-built_in">serviceClient</span>&lt;turtlesim::Spawn&gt;(<span class="hljs-string">&quot;/spawn&quot;</span>);<br>	turtlesim::Spawn srv;<br>	add_turtle.<span class="hljs-built_in">call</span>(srv);<br><br>	<span class="hljs-comment">// 创建发布turtle2速度控制指令的发布者</span><br>	ros::Publisher turtle_vel = node.<span class="hljs-built_in">advertise</span>&lt;geometry_msgs::Twist&gt;(<span class="hljs-string">&quot;/turtle2/cmd_vel&quot;</span>, <span class="hljs-number">10</span>);<br><br>	<span class="hljs-comment">// 创建tf的监听器</span><br>	tf::TransformListener listener;<br><br>	<span class="hljs-function">ros::Rate <span class="hljs-title">rate</span><span class="hljs-params">(<span class="hljs-number">10.0</span>)</span></span>;<br>	<span class="hljs-keyword">while</span> (node.<span class="hljs-built_in">ok</span>())<br>	&#123;<br>		<span class="hljs-comment">// 获取turtle1与turtle2坐标系之间的tf数据</span><br>		tf::StampedTransform transform;<br>		<span class="hljs-keyword">try</span><br>		&#123;<br>			listener.<span class="hljs-built_in">waitForTransform</span>(<span class="hljs-string">&quot;/turtle2&quot;</span>, <span class="hljs-string">&quot;/turtle1&quot;</span>, ros::<span class="hljs-built_in">Time</span>(<span class="hljs-number">0</span>), ros::<span class="hljs-built_in">Duration</span>(<span class="hljs-number">3.0</span>));<br>			listener.<span class="hljs-built_in">lookupTransform</span>(<span class="hljs-string">&quot;/turtle2&quot;</span>, <span class="hljs-string">&quot;/turtle1&quot;</span>, ros::<span class="hljs-built_in">Time</span>(<span class="hljs-number">0</span>), transform);<br>		&#125;<br>		<span class="hljs-built_in">catch</span> (tf::TransformException &amp;ex) <br>		&#123;<br>			<span class="hljs-built_in">ROS_ERROR</span>(<span class="hljs-string">&quot;%s&quot;</span>,ex.<span class="hljs-built_in">what</span>());<br>			ros::<span class="hljs-built_in">Duration</span>(<span class="hljs-number">1.0</span>).<span class="hljs-built_in">sleep</span>();<br>			<span class="hljs-keyword">continue</span>;<br>		&#125;<br><br>		<span class="hljs-comment">// 根据turtle1与turtle2坐标系之间的位置关系，发布turtle2的速度控制指令</span><br>		geometry_msgs::Twist vel_msg;<br>		vel_msg.angular.z = <span class="hljs-number">4.0</span> * <span class="hljs-built_in">atan2</span>(transform.<span class="hljs-built_in">getOrigin</span>().<span class="hljs-built_in">y</span>(),<br>				                        transform.<span class="hljs-built_in">getOrigin</span>().<span class="hljs-built_in">x</span>());<br>		vel_msg.linear.x = <span class="hljs-number">0.5</span> * <span class="hljs-built_in">sqrt</span>(<span class="hljs-built_in">pow</span>(transform.<span class="hljs-built_in">getOrigin</span>().<span class="hljs-built_in">x</span>(), <span class="hljs-number">2</span>) +<br>				                      <span class="hljs-built_in">pow</span>(transform.<span class="hljs-built_in">getOrigin</span>().<span class="hljs-built_in">y</span>(), <span class="hljs-number">2</span>));<br>		turtle_vel.<span class="hljs-built_in">publish</span>(vel_msg);<br><br>		rate.<span class="hljs-built_in">sleep</span>();<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>步骤：<ol>
+<li>定义 TF 广播器</li>
+<li>创建坐标变换值</li>
+<li>发布坐标变换</li>
+</ol>
+</li>
+</ul>
+<h5 id="tf-监听器代码"><a href="#tf-监听器代码" class="headerlink" title="tf 监听器代码"></a>tf 监听器代码</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 该例程监听tf数据，并计算、发布turtle2的速度指令</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ros/ros.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;tf/transform_listener.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;geometry_msgs/Twist.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;turtlesim/Spawn.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> **argv)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-comment">// 初始化ROS节点</span><br>	ros::<span class="hljs-built_in">init</span>(argc, argv, <span class="hljs-string">&quot;my_tf_listener&quot;</span>);<br><br>	<span class="hljs-comment">// 创建节点句柄</span><br>	ros::NodeHandle node;<br><br>	<span class="hljs-comment">// 请求产生turtle2</span><br>	ros::service::<span class="hljs-built_in">waitForService</span>(<span class="hljs-string">&quot;/spawn&quot;</span>);<br>	ros::ServiceClient add_turtle = node.<span class="hljs-built_in">serviceClient</span>&lt;turtlesim::Spawn&gt;(<span class="hljs-string">&quot;/spawn&quot;</span>);<br>	turtlesim::Spawn srv;<br>	add_turtle.<span class="hljs-built_in">call</span>(srv);<br><br>	<span class="hljs-comment">// 创建发布turtle2速度控制指令的发布者</span><br>	ros::Publisher turtle_vel = node.<span class="hljs-built_in">advertise</span>&lt;geometry_msgs::Twist&gt;(<span class="hljs-string">&quot;/turtle2/cmd_vel&quot;</span>, <span class="hljs-number">10</span>);<br><br>	<span class="hljs-comment">// 创建tf的监听器</span><br>	tf::TransformListener listener;<br><br>	<span class="hljs-function">ros::Rate <span class="hljs-title">rate</span><span class="hljs-params">(<span class="hljs-number">10.0</span>)</span></span>;<br>	<span class="hljs-keyword">while</span> (node.<span class="hljs-built_in">ok</span>())<br>	&#123;<br>		<span class="hljs-comment">// 获取turtle1与turtle2坐标系之间的tf数据</span><br>		tf::StampedTransform transform;<br>		<span class="hljs-keyword">try</span><br>		&#123;<br>			listener.<span class="hljs-built_in">waitForTransform</span>(<span class="hljs-string">&quot;/turtle2&quot;</span>, <span class="hljs-string">&quot;/turtle1&quot;</span>, ros::<span class="hljs-built_in">Time</span>(<span class="hljs-number">0</span>), ros::<span class="hljs-built_in">Duration</span>(<span class="hljs-number">3.0</span>));<br>			listener.<span class="hljs-built_in">lookupTransform</span>(<span class="hljs-string">&quot;/turtle2&quot;</span>, <span class="hljs-string">&quot;/turtle1&quot;</span>, ros::<span class="hljs-built_in">Time</span>(<span class="hljs-number">0</span>), transform);<br>		&#125;<br>		<span class="hljs-built_in">catch</span> (tf::TransformException &amp;ex)<br>		&#123;<br>			<span class="hljs-built_in">ROS_ERROR</span>(<span class="hljs-string">&quot;%s&quot;</span>, ex.<span class="hljs-built_in">what</span>());<br>			ros::<span class="hljs-built_in">Duration</span>(<span class="hljs-number">1.0</span>).<span class="hljs-built_in">sleep</span>();<br>			<span class="hljs-keyword">continue</span>;<br>		&#125;<br><br>		<span class="hljs-comment">// 根据turtle1与turtle2坐标系之间的位置关系，发布turtle2的速度控制指令</span><br>		geometry_msgs::Twist vel_msg;<br>		vel_msg.angular.z = <span class="hljs-number">4.0</span> * <span class="hljs-built_in">atan2</span>(transform.<span class="hljs-built_in">getOrigin</span>().<span class="hljs-built_in">y</span>(), transform.<span class="hljs-built_in">getOrigin</span>().<span class="hljs-built_in">x</span>());<br>		vel_msg.linear.x = <span class="hljs-number">0.5</span> * <span class="hljs-built_in">sqrt</span>(<span class="hljs-built_in">pow</span>(transform.<span class="hljs-built_in">getOrigin</span>().<span class="hljs-built_in">x</span>(), <span class="hljs-number">2</span>) + <span class="hljs-built_in">pow</span>(transform.<span class="hljs-built_in">getOrigin</span>().<span class="hljs-built_in">y</span>(), <span class="hljs-number">2</span>));<br>		turtle_vel.<span class="hljs-built_in">publish</span>(vel_msg);<br><br>		rate.<span class="hljs-built_in">sleep</span>();<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">add_executable</span>(turtle_tf_broadcaster src/turtle_tf_broadcaster.cpp)<br><span class="hljs-keyword">add_executable</span>(turtle_tf_listener src/turtle_tf_listener.cpp)<br><span class="hljs-keyword">target_link_libraries</span>(turtle_tf_broadcaster <span class="hljs-variable">$&#123;catkin_LIBRARIES&#125;</span>)<br><span class="hljs-keyword">target_link_libraries</span>(turtle_tf_broadcaster <span class="hljs-variable">$&#123;catkin_LIBRARIES&#125;</span>)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/catkin_ws<br>catkin_make<br><span class="hljs-built_in">source</span> devel/setup.bash<br>roscore<br>rosrun turtlesim turtlesim_node<br>rosrun learning_tf turtle_tf_broadcaster __name:=turtle1_tf_broadcaster /turtle1<br>rosrun learning_tf turtle_tf_broadcaster __name:=turtle2_tf_broadcaster /turtle2<br>rosrun learning_tf turtle_tf_listener<br>rosrun turtlesim turtle_teleop_key<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>上面第6行中，<code>/turtle1</code>是输入参数，<code>__name:=turtle1_tf_broadcaster</code>是重映射</li>
+</ul>
+<h4 id="Python-版本-7"><a href="#Python-版本-7" class="headerlink" title="Python 版本"></a>Python 版本</h4><h5 id="tf-广播器代码-1"><a href="#tf-广播器代码-1" class="headerlink" title="tf 广播器代码"></a>tf 广播器代码</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><br><span class="hljs-comment"># 该例程将请求/show_person服务，服务数据类型learning_service::Person</span><br><br><span class="hljs-keyword">import</span> roslib<br><br>roslib.load_manifest(<span class="hljs-string">&quot;learning_tf&quot;</span>)<br><span class="hljs-keyword">import</span> rospy<br><br><span class="hljs-keyword">import</span> tf<br><span class="hljs-keyword">import</span> turtlesim.msg<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">handle_turtle_pose</span>(<span class="hljs-params">msg, turtlename</span>):<br>    br = tf.TransformBroadcaster()<br>    br.sendTransform(<br>        (msg.x, msg.y, <span class="hljs-number">0</span>),<br>        tf.transformations.quaternion_from_euler(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, msg.theta),<br>        rospy.Time.now(),<br>        turtlename,<br>        <span class="hljs-string">&quot;world&quot;</span>,<br>    )<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    rospy.init_node(<span class="hljs-string">&quot;turtle_tf_broadcaster&quot;</span>)<br>    turtlename = rospy.get_param(<span class="hljs-string">&quot;~turtle&quot;</span>)<br>    rospy.Subscriber(<br>        <span class="hljs-string">&quot;/%s/pose&quot;</span> % turtlename, turtlesim.msg.Pose, handle_turtle_pose, turtlename<br>    )<br>    rospy.spin()<br></code></pre></td></tr></table></figure>
+
+<h5 id="tf-监听器代码-1"><a href="#tf-监听器代码-1" class="headerlink" title="tf 监听器代码"></a>tf 监听器代码</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><br><span class="hljs-comment"># 该例程将请求/show_person服务，服务数据类型learning_service::Person</span><br><br><span class="hljs-keyword">import</span> roslib<br><br>roslib.load_manifest(<span class="hljs-string">&quot;learning_tf&quot;</span>)<br><span class="hljs-keyword">import</span> rospy<br><span class="hljs-keyword">import</span> math<br><span class="hljs-keyword">import</span> tf<br><span class="hljs-keyword">import</span> geometry_msgs.msg<br><span class="hljs-keyword">import</span> turtlesim.srv<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    rospy.init_node(<span class="hljs-string">&quot;turtle_tf_listener&quot;</span>)<br><br>    listener = tf.TransformListener()<br><br>    rospy.wait_for_service(<span class="hljs-string">&quot;spawn&quot;</span>)<br>    spawner = rospy.ServiceProxy(<span class="hljs-string">&quot;spawn&quot;</span>, turtlesim.srv.Spawn)<br>    spawner(<span class="hljs-number">4</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;turtle2&quot;</span>)<br><br>    turtle_vel = rospy.Publisher(<br>        <span class="hljs-string">&quot;turtle2/cmd_vel&quot;</span>, geometry_msgs.msg.Twist, queue_size=<span class="hljs-number">1</span><br>    )<br><br>    rate = rospy.Rate(<span class="hljs-number">10.0</span>)<br>    <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> rospy.is_shutdown():<br>        <span class="hljs-keyword">try</span>:<br>            (trans, rot) = listener.lookupTransform(<br>                <span class="hljs-string">&quot;/turtle2&quot;</span>, <span class="hljs-string">&quot;/turtle1&quot;</span>, rospy.Time(<span class="hljs-number">0</span>)<br>            )<br>        <span class="hljs-keyword">except</span> (<br>            tf.LookupException,<br>            tf.ConnectivityException,<br>            tf.ExtrapolationException,<br>        ):<br>            <span class="hljs-keyword">continue</span><br><br>        angular = <span class="hljs-number">4</span> * math.atan2(trans[<span class="hljs-number">1</span>], trans[<span class="hljs-number">0</span>])<br>        linear = <span class="hljs-number">0.5</span> * math.sqrt(trans[<span class="hljs-number">0</span>] ** <span class="hljs-number">2</span> + trans[<span class="hljs-number">1</span>] ** <span class="hljs-number">2</span>)<br>        cmd = geometry_msgs.msg.Twist()<br>        cmd.linear.x = linear<br>        cmd.angular.z = angular<br>        turtle_vel.publish(cmd)<br><br>        rate.sleep()<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cmake">catkin_install_python(PROGRAMS<br>	scripts/turtle_tf_broadcaster.py<br>	DESTINATION <span class="hljs-variable">$&#123;CATKIN_PACKAGE_BIN_DESTINATION&#125;</span><br>)<br><br>catkin_install_python(PROGRAMS<br>	scripts/turtle_tf_listener.py<br>	DESTINATION <span class="hljs-variable">$&#123;CATKIN_PACKAGE_BIN_DESTINATION&#125;</span><br>)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/catkin_ws<br>catkin_make<br><span class="hljs-built_in">source</span> devel/setup.bash<br>roscore<br>rosrun turtlesim turtlesim_node<br>rosrun learning_tf turtle_tf_broadcaster.py __name:=turtle1_tf_broadcaster _turtle:=turtle1<br>rosrun learning_tf turtle_tf_broadcaster.py __name:=turtle2_tf_broadcaster _turtle:=turtle2<br>rosrun learning_tf turtle_tf_listener<br>rosrun turtlesim turtle_teleop_key<br></code></pre></td></tr></table></figure>
+
+<h2 id="launch-启动文件"><a href="#launch-启动文件" class="headerlink" title="launch 启动文件"></a>launch 启动文件</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><ul>
+<li><p>Launch 文件：通过 XML 文件实现多节点的配置和启动（可自动启动 ROS Master）</p>
+</li>
+<li><p>launch 文件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">launch</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;turtlesim&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;sim1&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;turtlesim_node&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;turtlesim&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;sim2&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;turtlesim_node&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">launch</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>&lt;launch&gt;</code>为文件的根元素</li>
+<li><code>&lt;node&gt;</code>为启动节点<ul>
+<li><code>pkg</code>：节点所在功能包名称</li>
+<li><code>type</code>：节点的可执行文件名称</li>
+<li><code>name</code>：节点运行时的名称</li>
+<li><code>output</code>：控制节点是否要将控制信息打印到当前终端</li>
+<li><code>respawn</code>：控制节点挂掉后，是否进行重启</li>
+<li><code>required</code>：是否在launch文件，该结点一定要启动起来</li>
+<li><code>ns</code>：namespace 命名空间</li>
+<li><code>args</code>：结点的输入参数</li>
+<li>前三个属性是必须属性，后面的属性为可选属性</li>
+</ul>
+</li>
+<li><code>&lt;param name=&quot;output_frame&quot; value=&quot;odom&quot; /&gt;</code><ul>
+<li>设置 ROS 系统运行中的参数，存储在参数服务器中</li>
+<li><code>name</code>：参数名</li>
+<li><code>value</code>：参数值</li>
+</ul>
+</li>
+<li><code>&lt;rosparam file=&quot;params.yaml&quot; command=&quot;load&quot; ns=&quot;params&quot; /&gt;</code><ul>
+<li>加载参数文件中多个参数</li>
+</ul>
+</li>
+<li><code>&lt;arg name=&quot;arg-name&quot; default=&quot;arg-value&quot; /&gt;</code><ul>
+<li>launch 文件内部的局部变量，仅限于 launch 文件使用</li>
+<li><code>name</code>：参数名</li>
+<li><code>value</code>：参数值</li>
+<li>调用方法：<ul>
+<li><code>&lt;param name=&quot;foo&quot; value=&quot;$(arg arg-name)&quot; /&gt;</code></li>
+<li><code>&lt;node name=&quot;node&quot; pkg=&quot;package&quot; type=&quot;type&quot; args=&quot;$(arg arg-name)&quot; /&gt;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>&lt;remap from=&quot;/turtlebot/cmd_vel&quot; to=&quot;/cmd_vel&quot; /&gt;</code><ul>
+<li>重映射 ROS 计算图资源的命名</li>
+<li><code>from</code>：原命名</li>
+<li><code>to</code>：映射之后的命名</li>
+</ul>
+</li>
+<li><code>&lt;include file=&quot;$(dirname)/other.launch&quot; /&gt;</code><ul>
+<li>包含其他 launch 文件，类似 C 语言中的头文件包含</li>
+<li><code>file</code>：包含的其他 launc 文件路径</li>
+<li>包含的文件会运行一遍</li>
+</ul>
+</li>
+<li>其他详见：<a target="_blank" rel="noopener" href="https://wiki.ros.org/roslaunch/xml">https://wiki.ros.org/roslaunch/xml</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><ul>
+<li><p>创建<code>learning_launch</code>功能包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">catkin_create_pkg learning_launch<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>不需要任何依赖</li>
+</ul>
+</li>
+<li><p>在<code>learning_launch</code>功能包下创建文件夹<code>launch</code></p>
+</li>
+<li><p>创建文件<code>simple.launch</code> </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">launch</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;learning_topic&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;person_subscriber&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;talker&quot;</span> <span class="hljs-attr">output</span>=<span class="hljs-string">&quot;screen&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;learning_topic&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;person_publisher&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;listener&quot;</span> <span class="hljs-attr">output</span>=<span class="hljs-string">&quot;screen&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">launch</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>编译：<code>catkin_make</code></li>
+<li>启动：<code>roslaunch learning_launch simple.launch</code></li>
+</ul>
+</li>
+<li><p>创建文件<code>turtlesim_parameter_config.launch</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">launch</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">param</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;/turtle_number&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;2&quot;</span> /&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;turtlesim&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;turtlesim_node&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;turtlesim_node&quot;</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">param</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;turtle_name1&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Tom&quot;</span> /&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">param</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;turtle_name2&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Jerry&quot;</span> /&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">rosparam</span> <span class="hljs-attr">file</span>=<span class="hljs-string">&quot;$(find learning_launch)/config/param.yaml&quot;</span> <span class="hljs-attr">command</span>=<span class="hljs-string">&quot;load&quot;</span> /&gt;</span><br>	<span class="hljs-tag">&lt;/<span class="hljs-name">node</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;turtlesim&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;turtle_teleop_key&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;turtle_teleop_key&quot;</span> <span class="hljs-attr">output</span>=<span class="hljs-string">&quot;screen&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">launch</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>创建文件夹：<code>catkin_ws/src/learning_launch/config</code></p>
+</li>
+<li><p>创建文件：<code>param.yaml</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">A:</span> <span class="hljs-number">123</span><br><span class="hljs-attr">B:</span> <span class="hljs-string">&quot;hello&quot;</span><br><br><span class="hljs-attr">group:</span><br>  <span class="hljs-attr">C:</span> <span class="hljs-number">456</span><br>  <span class="hljs-attr">D:</span> <span class="hljs-string">&quot;hello&quot;</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>其中<code>group</code>是命名空间</li>
+</ul>
+</li>
+<li><p>启动：<code>roslaunch learning_launch turtlesim_parameter_config.launch </code></p>
+</li>
+<li><p>查看参数：<code>rosparam list</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">/turtle_number<br>/turtlesim_node/A<br>/turtlesim_node/B<br>/turtlesim_node/group/C<br>/turtlesim_node/group/D<br>/turtlesim_node/turtle_name1<br>/turtlesim_node/turtle_name2<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>以上为运行的<code>launch</code>文件中设置的参数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>创建文件<code>start_tf_demo_c++.launch</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">launch</span>&gt;</span><br>  <span class="hljs-comment">&lt;!-- Turtlesim Node--&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;turtlesim&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;turtlesim_node&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;sim&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;turtlesim&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;turtle_teleop_key&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;teleop&quot;</span> <span class="hljs-attr">output</span>=<span class="hljs-string">&quot;screen&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;learning_tf&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;turtle_tf_broadcaster&quot;</span> <span class="hljs-attr">args</span>=<span class="hljs-string">&quot;/turtle1&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;turtle1_tf_broadcaster&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;learning_tf&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;turtle_tf_broadcaster&quot;</span> <span class="hljs-attr">args</span>=<span class="hljs-string">&quot;/turtle2&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;turtle2_tf_broadcaster&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;learning_tf&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;turtle_tf_listener&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;listener&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">launch</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">roslaunch learning_launch start_tf_demo_c++.launch<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>创建文件<code>start_tf_demo_py.launch</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">launch</span>&gt;</span><br>	<span class="hljs-comment">&lt;!-- Turtlesim Node--&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;turtlesim&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;turtlesim_node&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;sim&quot;</span> /&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;turtlesim&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;turtle_teleop_key&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;teleop&quot;</span> <span class="hljs-attr">output</span>=<span class="hljs-string">&quot;screen&quot;</span> /&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;turtle1_tf_broadcaster&quot;</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;learning_tf&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;turtle_tf_broadcaster.py&quot;</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">param</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;turtle&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;string&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;turtle1&quot;</span> /&gt;</span><br>	<span class="hljs-tag">&lt;/<span class="hljs-name">node</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;turtle2_tf_broadcaster&quot;</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;learning_tf&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;turtle_tf_broadcaster.py&quot;</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">param</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;turtle&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;string&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;turtle2&quot;</span> /&gt;</span><br>	<span class="hljs-tag">&lt;/<span class="hljs-name">node</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;learning_tf&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;turtle_tf_listener.py&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;listener&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">launch</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">roslaunch learning_launch start_tf_demo_py.launch<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>创建<code>turtlesim_remap.launch</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">launch</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">include</span> <span class="hljs-attr">file</span>=<span class="hljs-string">&quot;$(find learning_launch)/launch/simple.launch&quot;</span> /&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;turtlesim&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;turtlesim_node&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;turtlesim_node&quot;</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">remap</span> <span class="hljs-attr">from</span>=<span class="hljs-string">&quot;/turtle1/cmd_vel&quot;</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/cmd_vel&quot;</span> /&gt;</span><br>	<span class="hljs-tag">&lt;/<span class="hljs-name">node</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">launch</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="可视化工具"><a href="#可视化工具" class="headerlink" title="可视化工具"></a>可视化工具</h1><ul>
+<li><p>Qt 工具箱：</p>
+<ul>
+<li>rqt_console：日志输出工具</li>
+<li>rqt_graph：计算图可视化工具</li>
+<li>rqt_plot：数据绘图工具</li>
+<li>rqt_image_view：图像渲染工具</li>
+<li>rqt：命令行直接输入该命令，会打开所有qt工具箱的集合窗口</li>
+</ul>
+</li>
+<li><p>Rviz：</p>
+<ul>
+<li><p>三维可视化工具</p>
+</li>
+<li><p>可以使用XML对机器人、周围物理等任何实物进行尺寸、质量、位置、材质、关节等属性的描述，并且在界面中呈现出来</p>
+</li>
+<li><p>可以通过图形化的方式，实时显示机器人传感器的信息、机器人的运动状态、周围环境的变化等信息</p>
+</li>
+<li><p>rviz 通过机器人模型参数、机器人发布的传感信息等数据，为用户进行所有可检测信息的图形化显示。用户和开发者也可以在 rviz 的控制界面下，通过按钮、滑动条、数值等方式，控制机器人的行为</p>
+</li>
+<li><p>启动方式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">roscore<br>rosrun rviz rviz<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>Gazebo：</p>
+<ul>
+<li>强大的三维物理仿真平台</li>
+<li>强大的物理引擎、高质量的图形渲染、方便的编程与图形接口、开源免费</li>
+<li>应用场景：<ul>
+<li>测试机器人算法</li>
+<li>机器人的设计</li>
+<li>现实场景下的回溯测试</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="其他学习资料"><a href="#其他学习资料" class="headerlink" title="其他学习资料"></a>其他学习资料</h1><p><a target="_blank" rel="noopener" href="http://www.autolabor.com.cn/book/ROSTutorials/">Introduction · Autolabor-ROS机器人入门课程《ROS理论与实践》零基础教程</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/ROS/" class="category-chain-item">ROS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/ROS/" class="print-no-link">#ROS</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>ROS基础入门</div>
+      <div>https://strive-c.github.io/2023/10/21/ROS基础入门/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>bjx</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年10月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/11/04/ROS%E8%BF%9B%E9%98%B6/" title="ROS进阶">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ROS进阶</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/16/Docker%E6%8C%87%E5%8C%97/" title="Docker指北">
+                        <span class="hidden-mobile">Docker指北</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://strive-c.github.io/2023/10/21/ROS%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/';
+          this.page.identifier = '/2023/10/21/ROS%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

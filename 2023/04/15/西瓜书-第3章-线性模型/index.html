@@ -1,0 +1,731 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="bjx">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第 3 章 线性模型3.1 基本形式对于由$d$个属性描述的示例$x&#x3D;(x_1;x_2;\dots;x_d)$，线性模型 linear model 试图学得一个通过属性的线性组合来进行预测的函数，即$f(x)&#x3D;w^Tx+b$，$w$和$b$学得之后，模型就得以确定。 线性模型是许多非线性模型 nonlinear model 的基础，且线性模型具有很好的可解释性 comprehe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="西瓜书-第3章-线性模型">
+<meta property="og:url" content="https://strive-c.github.io/2023/04/15/%E8%A5%BF%E7%93%9C%E4%B9%A6-%E7%AC%AC3%E7%AB%A0-%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:site_name" content="strive-C blog">
+<meta property="og:description" content="第 3 章 线性模型3.1 基本形式对于由$d$个属性描述的示例$x&#x3D;(x_1;x_2;\dots;x_d)$，线性模型 linear model 试图学得一个通过属性的线性组合来进行预测的函数，即$f(x)&#x3D;w^Tx+b$，$w$和$b$学得之后，模型就得以确定。 线性模型是许多非线性模型 nonlinear model 的基础，且线性模型具有很好的可解释性 comprehe">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-15T08:08:19.000Z">
+<meta property="article:modified_time" content="2024-03-19T11:54:18.413Z">
+<meta property="article:author" content="bjx">
+<meta property="article:tag" content="西瓜书">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>西瓜书-第3章-线性模型 - strive-C blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"strive-c.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="西瓜书-第3章-线性模型"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-15 16:08" pubdate>
+          2023年4月15日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">西瓜书-第3章-线性模型</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="第-3-章-线性模型"><a href="#第-3-章-线性模型" class="headerlink" title="第 3 章 线性模型"></a>第 3 章 线性模型</h1><h2 id="3-1-基本形式"><a href="#3-1-基本形式" class="headerlink" title="3.1 基本形式"></a>3.1 基本形式</h2><p>对于由$d$个属性描述的示例$x&#x3D;(x_1;x_2;\dots;x_d)$，线性模型 linear model 试图学得一个通过属性的线性组合来进行预测的函数，即$f(x)&#x3D;w^Tx+b$，$w$和$b$学得之后，模型就得以确定。</p>
+<p>线性模型是许多非线性模型 nonlinear model 的基础，且线性模型具有很好的可解释性 comprehensibility。</p>
+<h2 id="3-2-线性回归"><a href="#3-2-线性回归" class="headerlink" title="3.2 线性回归"></a>3.2 线性回归</h2><blockquote>
+<p>分类问题：预测值为分类型变量，即离散的</p>
+<p>回归问题：预测值为连续性变量</p>
+<p>逻辑回归问题：</p>
+</blockquote>
+<p>线性回归：使用线性模型，来学习预测</p>
+<p><strong>对于离散的属性，若属性值间存在序 order 关系，通过连续化转化为连续值。若属性值间不存在序关系，假定有$k$个属性值，通常转化为$k$维向量。</strong>例如属性“瓜类”取值有“西瓜”，“南瓜”，“黄瓜”，可转化为$(0,0,1),(0,1,0),(1,0,0)$</p>
+<p>均方误差是回归任务中最常用的性能度量</p>
+<p><strong>基于均方误差最小化来进行模型求解的方法称为“最小二乘法” least square method</strong>。就是试图抓到一条直线，使所有样本到直线上的欧式距离之和最小。<br>$$<br>E_{(w,b)}&#x3D;\sum_{i&#x3D;1}^m(y_i-wx_i-b)^2\ 均方误差\<br>\frac{\partial E_{(w,b)}}{\partial w}&#x3D;2(w\sum_{i&#x3D;1}^mx^2_i-\sum_{i&#x3D;1}^m(y_i-b)x_i)\<br>\frac{\partial E_{(w,b)}}{\partial b}&#x3D;2(mb-\sum_{i&#x3D;1}^m(y_i-wx_i))<br>$$<br>令上式分别为0，可得到$w$和$b$最优解的闭式 closed-form 解</p>
+<blockquote>
+<p>闭式解：解析解，不同于数值解，是通过公式计算推导而来</p>
+</blockquote>
+<p>求解$w$和$b$使均方误差最小化的过程，称为线性回归模型的最小二乘“参数估计” parameter estimation</p>
+<p>当$x$为一属性向量时，则称为多元线性回归</p>
+<hr>
+<h1 id="对于矩阵形式来说，我们把-w-和-b-吸收入向量形式-hat-w-w-b-。同样，把数据集-D-表示为一个-m-times-d-1-大小的矩阵-X，-矩阵的每一行对应一个示例，前-d-个元素对应示例中的-d-个属性值，最后一个元素恒置为1，即：-X-begin-pmatrix-x-11-x-12-cdots-x-1d-1-x-21-x-22-cdots-x-2d-1-vdots-vdots-ddots-vdots-vdots-x-m1-x-m2-cdots-x-md-1-end-pmatrix"><a href="#对于矩阵形式来说，我们把-w-和-b-吸收入向量形式-hat-w-w-b-。同样，把数据集-D-表示为一个-m-times-d-1-大小的矩阵-X，-矩阵的每一行对应一个示例，前-d-个元素对应示例中的-d-个属性值，最后一个元素恒置为1，即：-X-begin-pmatrix-x-11-x-12-cdots-x-1d-1-x-21-x-22-cdots-x-2d-1-vdots-vdots-ddots-vdots-vdots-x-m1-x-m2-cdots-x-md-1-end-pmatrix" class="headerlink" title="对于矩阵形式来说，我们把$w$和$b$吸收入向量形式$\hat{w}&#x3D;(w;b)$。同样，把数据集 $D$ 表示为一个$m\times(d+1)$大小的矩阵$X，$矩阵的每一行对应一个示例，前$d$个元素对应示例中的$d$个属性值，最后一个元素恒置为1，即：$$X&#x3D;\begin{pmatrix}x_{11}&amp;x_{12}&amp;\cdots&amp;x_{1d}&amp;1\x_{21}&amp;x_{22}&amp;\cdots&amp;x_{2d}&amp;1\\vdots&amp;\vdots&amp;\ddots&amp;\vdots&amp;\vdots\x_{m1}&amp;x_{m2}&amp;\cdots&amp;x_{md}&amp;1\end{pmatrix}"></a>对于矩阵形式来说，我们把$w$和$b$吸收入向量形式$\hat{w}&#x3D;(w;b)$。同样，把数据集 $D$ 表示为一个$m\times(d+1)$大小的矩阵$X，$矩阵的每一行对应一个示例，前$d$个元素对应示例中的$d$个属性值，最后一个元素恒置为1，即：<br>$$<br>X&#x3D;<br>\begin{pmatrix}<br>x_{11}&amp;x_{12}&amp;\cdots&amp;x_{1d}&amp;1\<br>x_{21}&amp;x_{22}&amp;\cdots&amp;x_{2d}&amp;1\<br>\vdots&amp;\vdots&amp;\ddots&amp;\vdots&amp;\vdots\<br>x_{m1}&amp;x_{m2}&amp;\cdots&amp;x_{md}&amp;1<br>\end{pmatrix}</h1><p>\begin{pmatrix}<br>x_1^T &amp; 1 \<br>x_2^T &amp; 1 \<br>\vdots &amp; \vdots \<br>x_m^T &amp; 1 \<br>\end{pmatrix}<br>$$<br>要求的参数$\hat{w}^*&#x3D;arg_\hat{w}min(y-X\hat{w})(y-X\hat{w})$，就是将各样本的误差求均方和</p>
+<p>其中，$E_{\hat w}&#x3D;(y-X\hat{w})^T(y-X\hat{w})$，对$\hat{w}$求导，得：<br>$$<br>\frac{\partial E_{\hat{w}}}{\partial{\hat{w}}}&#x3D;2X^T(X\hat{w}-y)<br>$$<br>令上式为零，即可求出$\hat{w}$最优的闭式解</p>
+<p>若能解出多个解时，选择哪一个解作为输出，将由学习算法的归纳偏好决定，常见的做法是引入正则化 regularization 项</p>
+<h2 id="3-3对数几率回归"><a href="#3-3对数几率回归" class="headerlink" title="3.3	对数几率回归"></a>3.3	对数几率回归</h2><ul>
+<li><p>线性模型的预测值为连续值，如果想要将线性模型应用到分类问题中，就需要找到一个映射函数，将预测值转化为分类值。并且该函数还需要具有单调可微性</p>
+</li>
+<li><p>考虑二分类问题，输出$y\in{0,1}$，我们需要将线性回归的预测值$y\in R$转换为${0,1}$，最理想的即为“单位阶跃函数”：</p>
+<ul>
+<li><p>$$<br>y&#x3D;<br>\begin{cases}<br>0, &amp; z&lt;0;\<br>0.5, &amp; z&#x3D;0;\<br>1, &amp; z&gt;0,<br>\end{cases}<br>$$</p>
+</li>
+<li><p>但是由于我们还需要在运算过程中涉及，求导等操作，需要保证映射函数单调可微，所以我们转而寻求可以近似单位阶跃函数的替代函数，对数几率函数就是一种常用的替代函数</p>
+</li>
+<li><p>$$<br>y&#x3D;\frac{1}{1+e^{-z}}<br>$$</p>
+</li>
+</ul>
+</li>
+<li><p>从而，分类问题的式子变为$y&#x3D;\frac{1}{1+e^{-(w^Tx+b)}}$。可以看出，该式子使用线性回归模型的预测值结果去逼近真实标记的对数几率，因此，该模型称为“对数几率回归”（有时也称为，逻辑回归）</p>
+<ul>
+<li>可以看出，虽然名字叫回归，其实解决的是一个分类问题</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-4线性判别分析"><a href="#3-4线性判别分析" class="headerlink" title="3.4	线性判别分析"></a>3.4	线性判别分析</h2><ul>
+<li>线性判别分析（Linear Discriminant Analysis，LDA）是一种经典的线性学习方法，在二分类问题上最早提出，也称为“Fisher判别分析”</li>
+<li>LDA 的思想：给定训练集，将样例投影到直线上，使同类样例的投影点尽可能接近，异类样例的投影点尽可能远离。在对新样例进行分类时，将其投影到同样的直线上，根据投影点的位置来确定新样本的类别。</li>
+</ul>
+<h2 id="3-5多分类学习"><a href="#3-5多分类学习" class="headerlink" title="3.5	多分类学习"></a>3.5	多分类学习</h2><ul>
+<li>在多分类任务中，有些二分类方法可以直接推广到多分类中。</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%A5%BF%E7%93%9C%E4%B9%A6/" class="print-no-link">#西瓜书</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>西瓜书-第3章-线性模型</div>
+      <div>https://strive-c.github.io/2023/04/15/西瓜书-第3章-线性模型/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>bjx</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年4月15日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/04/15/%E8%A5%BF%E7%93%9C%E4%B9%A6-%E7%AC%AC1%E7%AB%A0-%E7%BB%AA%E8%AE%BA/" title="西瓜书-第1章-绪论">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">西瓜书-第1章-绪论</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/16/BUTP%E6%88%90%E7%BB%A9%E6%9F%A5%E8%AF%A2%E8%84%9A%E6%9C%AC/" title="BUPT成绩查询脚本">
+                        <span class="hidden-mobile">BUPT成绩查询脚本</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://strive-c.github.io/2023/04/15/%E8%A5%BF%E7%93%9C%E4%B9%A6-%E7%AC%AC3%E7%AB%A0-%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/';
+          this.page.identifier = '/2023/04/15/%E8%A5%BF%E7%93%9C%E4%B9%A6-%E7%AC%AC3%E7%AB%A0-%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
