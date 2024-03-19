@@ -16,12 +16,12 @@
   <meta name="author" content="bjx">
   <meta name="keywords" content="">
   
-    <meta name="description" content="第1、2章	绪论&amp;分布式数据库系统设计	总结 数据库根据其数据模型，可分为关系型数据库(RDBMS)和非关系型数据库(NOSQL)。根据部署架构，可分为集中式数据库和分布式数据库。  $E-R$模型主要包括实体、属性、联系、连接。  在关系$R$中选择操作记做：$\sigma_F(R)&#x3D;{r|r\in R\wedge F(r&#x3D;’真’}$  已知两个关系$R$和$S$如图">
+    <meta name="description" content="第1、2章	绪论&amp;分布式数据库系统设计	总结 数据库根据其数据模型，可分为关系型数据库(RDBMS)和非关系型数据库(NOSQL)。根据部署架构，可分为集中式数据库和分布式数据库。  $E-R$模型主要包括实体、属性、联系、连接。  在关系$R$中选择操作记做：$\sigma_F(R)&#x3D;{r|r\in R\wedge F(r&#x3D;’真’)}$  已知两个关系$R$和$S$如">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分布式数据库总结">
 <meta property="og:url" content="https://strive-c.github.io/2023/05/30/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="strive-C blog">
-<meta property="og:description" content="第1、2章	绪论&amp;分布式数据库系统设计	总结 数据库根据其数据模型，可分为关系型数据库(RDBMS)和非关系型数据库(NOSQL)。根据部署架构，可分为集中式数据库和分布式数据库。  $E-R$模型主要包括实体、属性、联系、连接。  在关系$R$中选择操作记做：$\sigma_F(R)&#x3D;{r|r\in R\wedge F(r&#x3D;’真’}$  已知两个关系$R$和$S$如图">
+<meta property="og:description" content="第1、2章	绪论&amp;分布式数据库系统设计	总结 数据库根据其数据模型，可分为关系型数据库(RDBMS)和非关系型数据库(NOSQL)。根据部署架构，可分为集中式数据库和分布式数据库。  $E-R$模型主要包括实体、属性、联系、连接。  在关系$R$中选择操作记做：$\sigma_F(R)&#x3D;{r|r\in R\wedge F(r&#x3D;’真’)}$  已知两个关系$R$和$S$如">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://strive-c.github.io/2023/05/30/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%BB%E7%BB%93/image-20230530201619560.png">
 <meta property="og:image" content="https://strive-c.github.io/2023/05/30/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%BB%E7%BB%93/%E5%85%B3%E7%B3%BB%E4%BB%A3%E6%95%B0%E7%AD%89%E4%BB%B7%E5%8F%98%E6%8D%A2%E8%A7%84%E5%88%99.png">
@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://strive-c.github.io/2023/05/30/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%BB%E7%BB%93/image-20230530205049811.png">
 <meta property="og:image" content="https://strive-c.github.io/2023/05/30/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%BB%E7%BB%93/%E4%B8%89%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E5%8D%8F%E8%AE%AE.png">
 <meta property="article:published_time" content="2023-05-30T09:45:19.000Z">
-<meta property="article:modified_time" content="2024-03-19T11:54:18.490Z">
+<meta property="article:modified_time" content="2024-03-19T12:36:39.353Z">
 <meta property="article:author" content="bjx">
 <meta property="article:tag" content="分布式数据库">
 <meta name="twitter:card" content="summary_large_image">
@@ -93,6 +93,8 @@
   
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.1.1"></head>
 
 
@@ -297,7 +299,7 @@
 </li>
 <li><p>$E-R$模型主要包括<code>实体、属性、联系、连接</code>。</p>
 </li>
-<li><p>在关系$R$中选择操作记做：$\sigma_F(R)&#x3D;{r|r\in R\wedge F(r&#x3D;’真’}$</p>
+<li><p>在关系$R$中选择操作记做：$\sigma_F(R)&#x3D;{r|r\in R\wedge F(r&#x3D;’真’)}$</p>
 </li>
 <li><p>已知两个关系$R$和$S$如图所示，求关系$R$和$S$的广义笛卡尔积。</p>
 </li>
@@ -352,18 +354,16 @@
 </li>
 <li><p>垂直分片问题和垂直群集问题的区别是：<code>垂直分片的组必须只在某个键属性上重叠，其他属性不可重叠，而垂直群集的组在其他属性上也可以重叠。</code></p>
 </li>
-<li><p>已知 $EMP(E#, NAME, SAL, TEL, MAGNUM, DEPT)$，假定 Key：$E#$，主要用$Sa$站点查询$NAME,SAL,TEL$;$Sc$站点查询$NAME,MAGNUM,DEPT$。给出了一个垂直分片和垂直群集。</p>
+<li><p>已知$EMP(E$#$, NAME, SAL, TEL, MAGNUM, DEPT)$，假定 Key：$E$#，主要用$Sa$站点查询$NAME,SAL,TEL$;$Sc$站点查询$NAME,MAGNUM,DEPT$。给出了一个垂直分片和垂直群集。</p>
 <ul>
-<li>垂直分片：$EMP1(E#,NAME,SAL,TEL)$，$EMP2(E#,MAGNUM,DEPT)$</li>
-<li>垂直群集：$EMP1(E#,NAME,SAL,TEL)$，$EMP2(E#,NAME,MAGNUM,DEPT)$</li>
+<li>垂直分片：$EMP1(E$#$,NAME,SAL,TEL)$，$EMP2(E$#$,MAGNUM,DEPT)$</li>
+<li>垂直群集：$EMP1(E$#$,NAME,SAL,TEL)$，$EMP2(E$#$,NAME,MAGNUM,DEPT)$</li>
 </ul>
 </li>
 <li><p>针对分布式数据库的数据分配的方法</p>
 <ul>
-<li><p>非冗余：<code>最佳适应法</code></p>
-</li>
-<li><p>冗余分配的设计可选用以下两种方法的一种：<code>所有得益站点法</code>和<code>附加复制法</code>。</p>
-</li>
+<li>非冗余：<code>最佳适应法</code></li>
+<li>冗余分配的设计可选用以下两种方法的一种：<code>所有得益站点法</code>和<code>附加复制法</code>。</li>
 </ul>
 </li>
 <li><p>数据库设计的步骤：</p>
@@ -890,6 +890,12 @@
   
 
 
+  
+  
+
+
+
+
 
 
 
@@ -1081,6 +1087,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
