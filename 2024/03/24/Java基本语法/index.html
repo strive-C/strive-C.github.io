@@ -16,15 +16,15 @@
   <meta name="author" content="bjx">
   <meta name="keywords" content="">
   
-    <meta name="description" content="面向对象编程 OOP 封装 继承 多态  多态：父类指针&#x2F;引用指向子类对象，从而在调用方法的时候，通过指向的子类对象的不同而调用不同的子类方法。 C++中的多态是通过继承和虚函数来实现的 Java中的多态是通过接口来实现的  C++  继承就是允许派生类拥有调用基类中属性和方法的权利 成员函数可以分为三种：普通成员函数、虚函数、纯虚函数 虚函数表示希望子类重新实现，且父类">
+    <meta name="description" content="1 Java语言概述 简要介绍  Java是学习JavaEE后台、大数据、Android开发的基石 常用的DOS命令  DOS（Disk Operating System，磁盘操作系统）是微软公司在Windows之前推出的一个操作系统，是单用户、单任务的操作系统。后来被Windows系统取代 md：创建文件夹 cd：跳转路径 rd：删除文件夹 del：删除文件 cls：清屏">
 <meta property="og:type" content="article">
-<meta property="og:title" content="面向对象编程OOP解析">
-<meta property="og:url" content="https://strive-c.github.io/2024/03/17/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8BOOP%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:title" content="Java基本语法">
+<meta property="og:url" content="https://strive-c.github.io/2024/03/24/Java%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/index.html">
 <meta property="og:site_name" content="strive-C blog">
-<meta property="og:description" content="面向对象编程 OOP 封装 继承 多态  多态：父类指针&#x2F;引用指向子类对象，从而在调用方法的时候，通过指向的子类对象的不同而调用不同的子类方法。 C++中的多态是通过继承和虚函数来实现的 Java中的多态是通过接口来实现的  C++  继承就是允许派生类拥有调用基类中属性和方法的权利 成员函数可以分为三种：普通成员函数、虚函数、纯虚函数 虚函数表示希望子类重新实现，且父类">
+<meta property="og:description" content="1 Java语言概述 简要介绍  Java是学习JavaEE后台、大数据、Android开发的基石 常用的DOS命令  DOS（Disk Operating System，磁盘操作系统）是微软公司在Windows之前推出的一个操作系统，是单用户、单任务的操作系统。后来被Windows系统取代 md：创建文件夹 cd：跳转路径 rd：删除文件夹 del：删除文件 cls：清屏">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-17T15:48:40.000Z">
-<meta property="article:modified_time" content="2024-03-19T11:54:18.672Z">
+<meta property="article:published_time" content="2024-03-24T14:11:55.000Z">
+<meta property="article:modified_time" content="2024-03-24T15:37:02.382Z">
 <meta property="article:author" content="bjx">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>面向对象编程OOP解析 - strive-C blog</title>
+  <title>Java基本语法 - strive-C blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="面向对象编程OOP解析"></span>
+            <span id="subtitle" data-typed-text="Java基本语法"></span>
           
         </div>
 
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-17 23:48" pubdate>
-          2024年3月17日 晚上
+        <time datetime="2024-03-24 22:11" pubdate>
+          2024年3月24日 晚上
         </time>
       </span>
     
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          330 字
+          414 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          3 分钟
+          4 分钟
         
       </span>
     
@@ -281,34 +281,56 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">面向对象编程OOP解析</h1>
+            <h1 id="seo-header">Java基本语法</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="面向对象编程-oop">面向对象编程 OOP</h1>
-<h2 id="封装">封装</h2>
-<h2 id="继承">继承</h2>
-<h2 id="多态">多态</h2>
+                <h1 id="java语言概述">1 Java语言概述</h1>
+<h2 id="简要介绍">简要介绍</h2>
 <ul>
-<li>多态：父类指针/引用指向子类对象，从而在调用方法的时候，通过指向的子类对象的不同而调用不同的子类方法。</li>
-<li>C++中的多态是通过继承和虚函数来实现的</li>
-<li>Java中的多态是通过接口来实现的</li>
+<li>Java是学习JavaEE后台、大数据、Android开发的基石</li>
+<li>常用的DOS命令
+<ul>
+<li>DOS（Disk Operating
+System，磁盘操作系统）是微软公司在Windows之前推出的一个操作系统，是单用户、单任务的操作系统。后来被Windows系统取代</li>
+<li>md：创建文件夹</li>
+<li>cd：跳转路径</li>
+<li>rd：删除文件夹</li>
+<li>del：删除文件</li>
+<li>cls：清屏</li>
+</ul></li>
+<li>Talk is cheap, show me your code</li>
+<li>Java是SUN公司于1995年推出的高级变成语言</li>
+<li>Java之父：Gosling（詹姆斯 高斯林）</li>
+<li>Java在1.2版本开始分成了J2SE（标准版）、J2EE（企业版）、J2ME（小型版）</li>
+<li>Java从5.0版本开始不再采用1.几的版本编号，平台更名为JavaSE、JavaEE、JavaME</li>
+<li>Java 8.0是5.0以来变化最大的版本，长期支持版本LST，2014年</li>
+<li>Java9.0开始每半年更新一次，每年3月和9月就发布新版本</li>
+<li>JavaSE 标准版
+<ul>
+<li>支持面向桌面级应用的Java平台</li>
+</ul></li>
+<li>JavaEE 企业版
+<ul>
+<li>服务器端Web应用开发</li>
+</ul></li>
+<li>JavaME 小型版
+<ul>
+<li>移动终端</li>
+<li><code>Android开发不等同于Java ME开发</code></li>
+</ul></li>
 </ul>
-<h2 id="c">C++</h2>
-<ol type="1">
-<li><p>继承就是允许派生类拥有调用基类中属性和方法的权利</p></li>
-<li><p>成员函数可以分为三种：普通成员函数、虚函数、纯虚函数</p></li>
-<li><p>虚函数表示希望子类重新实现，且父类中有对应的实现方式</p></li>
-<li><p>纯虚函数表示要求子类一定要实现，且父类中没有对应的实现方式</p></li>
-<li><p>为什么要把某些函数设成虚函数?：父类在定义函数时决定暂缓具体实现步骤,
-因为子类在设计时有更具体的,精细的想法,
-我作为父类的设计者允许子类去override, 通过把自己的函数设置成虚函数,
-子类才有机会(权限)去重新定义。</p></li>
-<li><p>含义一个纯虚函数的类称为纯虚类，纯虚类不允许声明对象 ##
-Java</p></li>
-<li><p>Java中的接口是一个类，可以简单的等效于C++的纯虚类</p></li>
-</ol>
+<h2 id="开发环境搭建">开发环境搭建</h2>
+<ul>
+<li>JDK（Java Development
+Kit）：Java程序开发工具包，包含JRE和开发人员使用的工具</li>
+<li>JRE（Java Runtime
+Environment）：Java程序的运行时环境，包含JVM和运行时所需要的核心类库</li>
+<li>本文档采用Java8.0和Java17.0对比参考学习，主要使用Java17</li>
+<li>安装完Java17后，会自动在系统环境变量path中添加<code>C:\Program Files\Common Files\Oracle\Java\javapath</code>，这个路径自动映射到我们选择安装的路径下面。</li>
+<li>我们采用JAVA_HOME的方式进行环境变量的配置，将上面自动添加的也不做修改，只是让%JAVA_HOME%。（至于为什么不删除，我也不知道）</li>
+</ul>
 
                 
               </div>
@@ -326,8 +348,8 @@ Java</p></li>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>面向对象编程OOP解析</div>
-      <div>https://strive-c.github.io/2024/03/17/面向对象编程OOP解析/</div>
+      <div>Java基本语法</div>
+      <div>https://strive-c.github.io/2024/03/24/Java基本语法/</div>
     </div>
     <div class="license-meta">
       
@@ -339,7 +361,7 @@ Java</p></li>
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年3月17日</div>
+          <div>2024年3月24日</div>
         </div>
       
       
@@ -371,18 +393,12 @@ Java</p></li>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/03/24/Java%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" title="Java基本语法">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java基本语法</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/02/17/%E9%93%BE%E6%8E%A5%E5%BA%93%E6%8C%87%E5%8C%97/" title="链接库指北">
-                        <span class="hidden-mobile">链接库指北</span>
+                      <a href="/2024/03/17/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8BOOP%E8%A7%A3%E6%9E%90/" title="面向对象编程OOP解析">
+                        <span class="hidden-mobile">面向对象编程OOP解析</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -402,8 +418,8 @@ Java</p></li>
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://strive-c.github.io/2024/03/17/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8BOOP%E8%A7%A3%E6%9E%90/';
-          this.page.identifier = '/2024/03/17/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8BOOP%E8%A7%A3%E6%9E%90/';
+          this.page.url = 'https://strive-c.github.io/2024/03/24/Java%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/';
+          this.page.identifier = '/2024/03/24/Java%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
