@@ -25,13 +25,15 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pytorch.org/tutorials/_images/comp-graph.png">
 <meta property="article:published_time" content="2023-05-13T01:45:03.000Z">
-<meta property="article:modified_time" content="2024-03-19T11:54:18.584Z">
+<meta property="article:modified_time" content="2024-03-24T04:42:36.347Z">
 <meta property="article:author" content="bjx">
 <meta property="article:tag" content="Pytorch">
 <meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://pytorch.org/tutorials/_images/comp-graph.png">
   
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>Pytorch快速入门 - strive-C blog</title>
@@ -511,8 +513,8 @@ x.requires_grad_(True) 方法。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Gradient function for z = <span class="hljs-subst">&#123;z.grad_fn&#125;</span>&quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Gradient function for loss = <span class="hljs-subst">&#123;loss.grad_fn&#125;</span>&quot;</span>)<br></code></pre></td></tr></table></figure>
 <h2 id="计算导数">计算导数</h2>
 <p>为了优化神经网络中参数的权重，我们需要计算损失函数关于参数的导数，即，我们需要在一些固定值x和y下计算<span
-class="math inline">\(\frac{\part loss}{\part w}\)</span>和<span
-class="math inline">\(\frac{\part loss}{\part
+class="math inline">\(\frac{\partial{loss}}{\partial{w}}\)</span>和<span
+class="math inline">\(\frac{\partial loss}{\partial
 b}\)</span>。为了计算这些导数，我们调用 loss.backward()，然后从 w.grad
 和 b.grad 中检索值：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">loss.backward()<br><span class="hljs-built_in">print</span>(w.grad)<br><span class="hljs-built_in">print</span>(b.grad)<br></code></pre></td></tr></table></figure>
@@ -574,9 +576,11 @@ class="math display">\[
 J=
 \left \{
 \begin{matrix}
-\frac{\part y_1}{\part x_1}&amp;\cdots&amp;\frac{\part y_1}{\part x_n}\\
+\frac{\partial y_1}{\partial x_1}&amp;\cdots&amp;\frac{\partial
+y_1}{\partial x_n}\\
 \vdots&amp;\ddots&amp;\vdots\\
-\frac{\part y_m}{\part x_1}&amp;\cdots&amp;\frac{\part y_m}{\part x_n}
+\frac{\partial y_m}{\partial x_1}&amp;\cdots&amp;\frac{\partial
+y_m}{\partial x_n}
 \end{matrix}
 \right \}
 \]</span> PyTorch 允许计算<span
@@ -936,6 +940,30 @@ model.state_dict()）传递给保存函数：</p>
     </div>
   
   
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
   
   
 </div>
@@ -1126,6 +1154,8 @@ model.state_dict()）传递给保存函数：</p>
   <script  src="/js/local-search.js" ></script>
 
   <script defer src="/js/leancloud.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 

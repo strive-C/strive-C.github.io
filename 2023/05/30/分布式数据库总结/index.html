@@ -32,12 +32,14 @@
 <meta property="og:image" content="https://strive-c.github.io/2023/05/30/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%BB%E7%BB%93/image-20230530205049811.png">
 <meta property="og:image" content="https://strive-c.github.io/2023/05/30/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%BB%E7%BB%93/%E4%B8%89%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E5%8D%8F%E8%AE%AE.png">
 <meta property="article:published_time" content="2023-05-30T09:45:19.000Z">
-<meta property="article:modified_time" content="2024-03-19T12:36:39.353Z">
+<meta property="article:modified_time" content="2024-03-24T04:48:35.214Z">
 <meta property="article:author" content="bjx">
 <meta property="article:tag" content="分布式数据库">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://strive-c.github.io/2023/05/30/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%BB%E7%BB%93/image-20230530201619560.png">
   
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>分布式数据库总结 - strive-C blog</title>
@@ -384,7 +386,7 @@ id="第34章-分布式数据库的查询处理和优化分布式数据库中事�
 <ol type="1">
 <li><p>在关系代数操作中，五种基本操作为：<code>并</code>、<code>交</code>、<code>笛卡尔积</code>、<code>选择</code>、<code>投影</code></p></li>
 <li><p>设关系R和S如下图所示，求关系R和S的连接：<span
-class="math inline">\(R\infin_{C&lt;E}S\)</span>：</p></li>
+class="math inline">\(R\infty_{C&lt;E}S\)</span>：</p></li>
 </ol>
 <p><span class="math display">\[
 R=\
@@ -406,7 +408,7 @@ S=\
 \hline b5&amp;2\\
 \hline
 \end{array}\\
-R\infin_{C&lt;E}S=
+R\infty_{C&lt;E}S=
 \begin{array}{|c|c|c|}
 \hline A&amp;R.B&amp;C&amp;R.B&amp;E\\
 \hline a1&amp;b1&amp;5&amp;b2&amp;7\\
@@ -446,7 +448,7 @@ SC.C\#=&#39;C03&#39;}(S\times SC))\)</span></li>
 <li>查询树：<img src="image-20230530201619560.png" srcset="/img/loading.gif" lazyload alt="image-20230530201619560" style="zoom: 50%;" /></li>
 </ul></li>
 <li>设关系R和S如下图所示，求关系R和S的等值连接<span
-class="math inline">\(R\infin_{R.B=S.B}S\)</span></li>
+class="math inline">\(R\infty_{R.B=S.B}S\)</span></li>
 </ol>
 <p><span class="math display">\[
 R=\
@@ -468,7 +470,7 @@ S=\
 \hline b5&amp;2\\
 \hline
 \end{array}\\
-R\infin_{R.B=S.B}S=
+R\infty_{R.B=S.B}S=
 \begin{array}{|c|c|c|}
 \hline A&amp;R.B&amp;C&amp;R.B&amp;E\\
 \hline a1&amp;b1&amp;5&amp;b1&amp;3\\
@@ -544,7 +546,7 @@ X\)</span></li>
 <li><p>请利用半连接方法来表示连接操作</p>
 <ul>
 <li><span
-class="math inline">\(R\infin_{A=B}S=(R\propto_{A=B}S)\infin_{A=B}S=(R\infin_{A=B}(\pi_B(S))\infin_{A=B}S)\)</span></li>
+class="math inline">\(R\infty_{A=B}S=(R\propto_{A=B}S)\infty_{A=B}S=(R\infty_{A=B}(\pi_B(S))\infty_{A=B}S)\)</span></li>
 </ul></li>
 <li><p>阐述采用半连接算法优化连接操作的基本思想：</p>
 <ul>
@@ -1013,6 +1015,30 @@ redo</li>
     </div>
   
   
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
   
   
 </div>
@@ -1203,6 +1229,8 @@ redo</li>
   <script  src="/js/local-search.js" ></script>
 
   <script defer src="/js/leancloud.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
