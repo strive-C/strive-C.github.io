@@ -16,12 +16,12 @@
   <meta name="author" content="bjx">
   <meta name="keywords" content="">
   
-    <meta name="description" content="ROS 进阶配置方法 添加自定义头文件方式：ROS中添加自定义头文件的方式_ros 服务中添加自己包生成的头文件-CSDN博客  ROS中使用opencv方式： 123find_package(OpenCV REQUIRED)include_directories(include $&#123;OpenCV_INCLUDE_DIRS&#125;)target_link_libraries(open">
+    <meta name="description" content="ROS 进阶 配置方法  添加自定义头文件方式：ROS中添加自定义头文件的方式_ros 服务中添加自己包生成的头文件-CSDN博客 ROS中使用opencv方式： 123find_package(OpenCV REQUIRED)include_directories(include $&#123;OpenCV_INCLUDE_DIRS&#125;)target_link_librari">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ROS进阶">
 <meta property="og:url" content="https://strive-c.github.io/2023/11/04/ROS%E8%BF%9B%E9%98%B6/index.html">
 <meta property="og:site_name" content="strive-C blog">
-<meta property="og:description" content="ROS 进阶配置方法 添加自定义头文件方式：ROS中添加自定义头文件的方式_ros 服务中添加自己包生成的头文件-CSDN博客  ROS中使用opencv方式： 123find_package(OpenCV REQUIRED)include_directories(include $&#123;OpenCV_INCLUDE_DIRS&#125;)target_link_libraries(open">
+<meta property="og:description" content="ROS 进阶 配置方法  添加自定义头文件方式：ROS中添加自定义头文件的方式_ros 服务中添加自己包生成的头文件-CSDN博客 ROS中使用opencv方式： 123find_package(OpenCV REQUIRED)include_directories(include $&#123;OpenCV_INCLUDE_DIRS&#125;)target_link_librari">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-11-04T12:04:07.000Z">
 <meta property="article:modified_time" content="2024-03-19T11:54:18.279Z">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          254 字
+          253 字
         
       </span>
     
@@ -284,38 +284,47 @@
             
               <div class="markdown-body">
                 
-                <h1 id="ROS-进阶"><a href="#ROS-进阶" class="headerlink" title="ROS 进阶"></a>ROS 进阶</h1><h2 id="配置方法"><a href="#配置方法" class="headerlink" title="配置方法"></a>配置方法</h2><ul>
-<li><p>添加自定义头文件方式：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37945352/article/details/83303382">ROS中添加自定义头文件的方式_ros 服务中添加自己包生成的头文件-CSDN博客</a></p>
-</li>
+                <h1 id="ros-进阶">ROS 进阶</h1>
+<h2 id="配置方法">配置方法</h2>
+<ul>
+<li><p>添加自定义头文件方式：<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37945352/article/details/83303382">ROS中添加自定义头文件的方式_ros
+服务中添加自己包生成的头文件-CSDN博客</a></p></li>
 <li><p>ROS中使用opencv方式：</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">find_package</span>(OpenCV REQUIRED)<br><span class="hljs-keyword">include_directories</span>(<span class="hljs-keyword">include</span> <span class="hljs-variable">$&#123;OpenCV_INCLUDE_DIRS&#125;</span>)<br><span class="hljs-keyword">target_link_libraries</span>(opencv_test_node <span class="hljs-variable">$&#123;catkin_LIBRARIES&#125;</span> <span class="hljs-variable">$&#123;OpenCV_LIBRARIES&#125;</span>)<br></code></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="消息处理"><a href="#消息处理" class="headerlink" title="消息处理"></a>消息处理</h2><h3 id="图像消息"><a href="#图像消息" class="headerlink" title="图像消息"></a>图像消息</h3><ul>
+<h2 id="消息处理">消息处理</h2>
+<h3 id="图像消息">图像消息</h3>
+<ul>
 <li><p><code>sensor_msgs/Image</code></p>
 <ul>
 <li><p>运行<code>rosmsg info sensor_msgs/Image</code>即可查看该消息的具体格式</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">std_msgs/Header header<br>  uint32 <span class="hljs-built_in">seq</span><br>  time stamp<br>  string frame_id<br>uint32 height<br>uint32 width<br>string encoding<br>uint8 is_bigendian<br>uint32 step<br>uint8[] data<br></code></pre></td></tr></table></figure>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/Image.html">sensor_msgs&#x2F;Image Documentation (ros.org)</a></p>
-</li>
-</ul>
-</li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">std_msgs/Header header<br>  uint32 <span class="hljs-built_in">seq</span><br>  time stamp<br>  string frame_id<br>uint32 height<br>uint32 width<br>string encoding<br>uint8 is_bigendian<br>uint32 step<br>uint8[] data<br></code></pre></td></tr></table></figure></li>
+<li><p><a
+target="_blank" rel="noopener" href="https://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/Image.html">sensor_msgs/Image
+Documentation (ros.org)</a></p></li>
+</ul></li>
 <li><p>如果要使用<code>OpenCV</code>对图像进行处理，需要借助<code>cv_bridge</code>。CvBridge是一个ROS库，提供ROS和OpenCV之间的接口</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="http://wiki.ros.org/cv_bridge">cv_bridge - ROS Wiki</a></li>
+<li><a target="_blank" rel="noopener" href="http://wiki.ros.org/cv_bridge">cv_bridge - ROS
+Wiki</a></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="Gazebo"><a href="#Gazebo" class="headerlink" title="Gazebo"></a>Gazebo</h2><ul>
+<h2 id="gazebo">Gazebo</h2>
+<ul>
 <li>在Gazebo中环境模型是以<code>.world</code>的文件进行保存</li>
 <li>我们可以通过ros中的launch来启动加载world文件</li>
 <li>在Gazebo中，机器人模型是通过URDF文件来描述的，URDF文件本质是xml格式</li>
-<li>详见：<a target="_blank" rel="noopener" href="http://wiki.ros.org/urdf">http://wiki.ros.org/urdf</a></li>
+<li>详见：<a
+target="_blank" rel="noopener" href="http://wiki.ros.org/urdf">http://wiki.ros.org/urdf</a></li>
 <li><code>check_urdf mybot.urdf</code>检测urdf语法是否正确</li>
 <li>我们可以通过ros中的launch来启动加载urdf文件</li>
-<li>xacro文件是对urdf文件的补充，详见：<a target="_blank" rel="noopener" href="http://wiki.ros.org/xacro">xacro - ROS Wiki</a></li>
-<li>gazebo插件：<a target="_blank" rel="noopener" href="https://classic.gazebosim.org/tutorials?tut=ros_gzplugins">Gazebo : Tutorial : Gazebo plugins in ROS (gazebosim.org)</a></li>
-<li>gazebo标签的用法：<a target="_blank" rel="noopener" href="https://classic.gazebosim.org/tutorials?tut=ros_urdf&cat=connect_ros">https://classic.gazebosim.org/tutorials?tut=ros_urdf&amp;cat=connect_ros</a></li>
+<li>xacro文件是对urdf文件的补充，详见：<a
+target="_blank" rel="noopener" href="http://wiki.ros.org/xacro">xacro - ROS Wiki</a></li>
+<li>gazebo插件：<a
+target="_blank" rel="noopener" href="https://classic.gazebosim.org/tutorials?tut=ros_gzplugins">Gazebo
+: Tutorial : Gazebo plugins in ROS (gazebosim.org)</a></li>
+<li>gazebo标签的用法：https://classic.gazebosim.org/tutorials?tut=ros_urdf&amp;cat=connect_ros</li>
 </ul>
 
                 

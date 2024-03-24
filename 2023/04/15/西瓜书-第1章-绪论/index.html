@@ -16,15 +16,15 @@
   <meta name="author" content="bjx">
   <meta name="keywords" content="">
   
-    <meta name="description" content="第1章 绪论learning algorithm：从数据中产生模型的算法 机器学习算法被认为是一种从数据中学习的算法。所谓“学习”有一个定义：‘‘对于某类任务 T 和性能度量 P，一个计算机程序被认为可以从经验 E 中学习是指，通过经验 E 改进后，它在任务 T 上由性能度量 P 衡量的性能有所提升。”  数据集 属性 &#x2F; 特征 属性值 属性空间 &#x2F; 样本空间 &#x2F; 输">
+    <meta name="description" content="第1章 绪论  learning algorithm：从数据中产生模型的算法 机器学习算法被认为是一种从数据中学习的算法。所谓“学习”有一个定义：‘‘对于某类任务 T 和性能度量 P，一个计算机程序被认为可以从经验 E 中学习是指，通过经验 E 改进后，它在任务 T 上由性能度量 P 衡量的性能有所提升。” 数据集 属性 &#x2F; 特征 属性值 属性空间 &#x2F; 样本空间 &#x2F; 输入空间">
 <meta property="og:type" content="article">
 <meta property="og:title" content="西瓜书-第1章-绪论">
 <meta property="og:url" content="https://strive-c.github.io/2023/04/15/%E8%A5%BF%E7%93%9C%E4%B9%A6-%E7%AC%AC1%E7%AB%A0-%E7%BB%AA%E8%AE%BA/index.html">
 <meta property="og:site_name" content="strive-C blog">
-<meta property="og:description" content="第1章 绪论learning algorithm：从数据中产生模型的算法 机器学习算法被认为是一种从数据中学习的算法。所谓“学习”有一个定义：‘‘对于某类任务 T 和性能度量 P，一个计算机程序被认为可以从经验 E 中学习是指，通过经验 E 改进后，它在任务 T 上由性能度量 P 衡量的性能有所提升。”  数据集 属性 &#x2F; 特征 属性值 属性空间 &#x2F; 样本空间 &#x2F; 输">
+<meta property="og:description" content="第1章 绪论  learning algorithm：从数据中产生模型的算法 机器学习算法被认为是一种从数据中学习的算法。所谓“学习”有一个定义：‘‘对于某类任务 T 和性能度量 P，一个计算机程序被认为可以从经验 E 中学习是指，通过经验 E 改进后，它在任务 T 上由性能度量 P 衡量的性能有所提升。” 数据集 属性 &#x2F; 特征 属性值 属性空间 &#x2F; 样本空间 &#x2F; 输入空间">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-15T08:17:39.000Z">
-<meta property="article:modified_time" content="2024-03-19T11:54:18.448Z">
+<meta property="article:published_time" content="2023-04-15T08:00:39.000Z">
+<meta property="article:modified_time" content="2024-03-24T03:39:28.718Z">
 <meta property="article:author" content="bjx">
 <meta property="article:tag" content="西瓜书">
 <meta name="twitter:card" content="summary_large_image">
@@ -212,7 +212,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-15 16:17" pubdate>
+        <time datetime="2023-04-15 16:00" pubdate>
           2023年4月15日 下午
         </time>
       </span>
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          405 字
+          399 字
         
       </span>
     
@@ -285,35 +285,44 @@
             
               <div class="markdown-body">
                 
-                <h1 id="第1章-绪论"><a href="#第1章-绪论" class="headerlink" title="第1章 绪论"></a>第1章 绪论</h1><p>learning algorithm：从数据中产生模型的算法</p>
-<p>机器学习算法被认为是一种从数据中学习的算法。所谓“学习”有一个定义：‘‘对于某类任务 T 和性能度量 P，一个计算机程序被认为可以从经验 E 中学习是指，通过经验 E 改进后，它在任务 T 上由性能度量 P 衡量的性能有所提升。” </p>
-<p>数据集</p>
-<p>属性 &#x2F; 特征</p>
-<p>属性值</p>
-<p>属性空间 &#x2F; 样本空间 &#x2F; 输入空间</p>
-<p>特征向量 feature vector</p>
-<p>假设 hypothesis</p>
-<p>真相 &#x2F; 真实 ground-truth</p>
-<p>学习器 learner</p>
-<p>学习的过程是为了找出或逼近真相</p>
-<p>标记空间 &#x2F; 输出空间</p>
-<p>分类 classification：预测的是离散值</p>
-<p>回归 regression：预测的是连续值</p>
-<p>二分类：正类 positive class 反类 negative class</p>
-<p>多分类问题</p>
-<p>学习任务：</p>
+                <h1 id="第1章-绪论">第1章 绪论</h1>
 <ul>
-<li>监督 supervised learning  分类&#x2F;回归</li>
-<li>无监督 unsupervised learning  聚类</li>
+<li><p>learning algorithm：从数据中产生模型的算法</p></li>
+<li><p>机器学习算法被认为是一种从数据中学习的算法。所谓“学习”有一个定义：‘‘对于某类任务
+T 和性能度量 P，一个计算机程序被认为可以从经验 E 中学习是指，通过经验 E
+改进后，它在任务 T 上由性能度量 P 衡量的性能有所提升。”</p></li>
+<li><p>数据集</p></li>
+<li><p>属性 / 特征</p></li>
+<li><p>属性值</p></li>
+<li><p>属性空间 / 样本空间 / 输入空间</p></li>
+<li><p>特征向量 feature vector</p></li>
+<li><p>假设 hypothesis</p></li>
+<li><p>真相 / 真实 ground-truth</p></li>
+<li><p>学习器 learner</p></li>
+<li><p>学习的过程是为了找出或逼近真相</p></li>
+<li><p>标记空间 / 输出空间</p></li>
+<li><p>分类 classification：预测的是离散值</p></li>
+<li><p>回归 regression：预测的是连续值</p></li>
+<li><p>二分类：正类 positive class 反类 negative class</p></li>
+<li><p>多分类问题</p></li>
+<li><p>学习任务：</p>
+<ul>
+<li><p>监督 supervised learning 分类/回归</p></li>
+<li><p>无监督 unsupervised learning 聚类</p></li>
+</ul></li>
+<li><p>泛化能力 generalization</p></li>
+<li><p>样本服从 D
+分布，独立同分布采样，通过学习获得强泛化能力的模型</p></li>
+<li><p>归纳偏好 inductive
+bias（偏好）：机器学习算法在学习过程中对某种类型假设的偏好</p></li>
+<li><p>任何一个有效的机器学习算法必定有其归纳偏好，否则无法产生确定的学习结果</p></li>
+<li><p>归纳偏好可看做学习算法自身在庞大的假设空间中对假设进行选择的启发式或价值观</p></li>
+<li><p>奥卡姆剃刀原则 Occam’s
+razor：若有多个建设与观察一致，则选最简单的那个</p></li>
+<li><p>没有免费的午餐定理 No Free Lunch Theorem NFL
+表明具体问题具体分析</p></li>
+<li><p>BP back propagation 算法</p></li>
 </ul>
-<p>泛化能力 generalization</p>
-<p>样本服从 D 分布，独立同分布采样，通过学习获得强泛化能力的模型</p>
-<p>归纳偏好 inductive bias（偏好）：机器学习算法在学习过程中对某种类型假设的偏好</p>
-<p>任何一个有效的机器学习算法必定有其归纳偏好，否则无法产生确定的学习结果</p>
-<p>归纳偏好可看做学习算法自身在庞大的假设空间中对假设进行选择的启发式或价值观</p>
-<p>奥卡姆剃刀原则 Occam’s razor：若有多个建设与观察一致，则选最简单的那个</p>
-<p>没有免费的午餐定理 No Free Lunch Theorem NFL 表明具体问题具体分析</p>
-<p>BP back propagation 算法</p>
 
                 
               </div>
@@ -414,8 +423,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/15/%E8%A5%BF%E7%93%9C%E4%B9%A6-%E7%AC%AC3%E7%AB%A0-%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" title="西瓜书-第3章-线性模型">
-                        <span class="hidden-mobile">西瓜书-第3章-线性模型</span>
+                      <a href="/2023/02/16/BUTP%E6%88%90%E7%BB%A9%E6%9F%A5%E8%AF%A2%E8%84%9A%E6%9C%AC/" title="BUPT成绩查询脚本">
+                        <span class="hidden-mobile">BUPT成绩查询脚本</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

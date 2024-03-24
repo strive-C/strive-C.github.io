@@ -16,12 +16,12 @@
   <meta name="author" content="bjx">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Docker快速上手 docker镜像交流社区：https:&#x2F;&#x2F;hub.docker.com&#x2F;  123456docker run -d \  --name mysql \  -p 3306:3306 \  -e TZ&#x3D;Asia&#x2F;Shanghai \  -e MYSQL_ROOT_PASSWORD&#x3D;123 \  mysql   docker run -d ：创建并运行一个容器，-d则是让容器以后台">
+    <meta name="description" content="Docker 快速上手  docker镜像交流社区：https:&#x2F;&#x2F;hub.docker.com&#x2F;  123456docker run -d \  --name mysql \  -p 3306:3306 \  -e TZ&#x3D;Asia&#x2F;Shanghai \  -e MYSQL_ROOT_PASSWORD&#x3D;123 \  mysql  docker run -d ：创建并运行一个容器，-">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker指北">
 <meta property="og:url" content="https://strive-c.github.io/2023/10/16/Docker%E6%8C%87%E5%8C%97/index.html">
 <meta property="og:site_name" content="strive-C blog">
-<meta property="og:description" content="Docker快速上手 docker镜像交流社区：https:&#x2F;&#x2F;hub.docker.com&#x2F;  123456docker run -d \  --name mysql \  -p 3306:3306 \  -e TZ&#x3D;Asia&#x2F;Shanghai \  -e MYSQL_ROOT_PASSWORD&#x3D;123 \  mysql   docker run -d ：创建并运行一个容器，-d则是让容器以后台">
+<meta property="og:description" content="Docker 快速上手  docker镜像交流社区：https:&#x2F;&#x2F;hub.docker.com&#x2F;  123456docker run -d \  --name mysql \  -p 3306:3306 \  -e TZ&#x3D;Asia&#x2F;Shanghai \  -e MYSQL_ROOT_PASSWORD&#x3D;123 \  mysql  docker run -d ：创建并运行一个容器，-">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://strive-c.github.io/2023/10/16/Docker%E6%8C%87%E5%8C%97/%E6%95%B0%E6%8D%AE%E5%8D%B7.png">
 <meta property="article:published_time" content="2023-10-16T13:32:30.000Z">
@@ -286,176 +286,213 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h2><ul>
-<li>docker镜像交流社区：<a target="_blank" rel="noopener" href="https://hub.docker.com/">https://hub.docker.com/</a></li>
+                <h1 id="docker">Docker</h1>
+<h2 id="快速上手">快速上手</h2>
+<ul>
+<li>docker镜像交流社区：<a
+target="_blank" rel="noopener" href="https://hub.docker.com/">https://hub.docker.com/</a></li>
 </ul>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs powershell">docker run <span class="hljs-literal">-d</span> \<br>  <span class="hljs-literal">--name</span> mysql \<br>  <span class="hljs-literal">-p</span> <span class="hljs-number">3306</span>:<span class="hljs-number">3306</span> \<br>  <span class="hljs-literal">-e</span> TZ=Asia/Shanghai \<br>  <span class="hljs-literal">-e</span> MYSQL_ROOT_PASSWORD=<span class="hljs-number">123</span> \<br>  mysql<br></code></pre></td></tr></table></figure>
-
 <ul>
-<li><p><code>docker run -d</code> ：创建并运行一个容器，<code>-d</code>则是让容器以后台进程运行</p>
-</li>
-<li><p><code>--name mysql </code> : 给容器起个名字叫<code>mysql</code>，你可以叫别的</p>
-</li>
+<li><p><code>docker run -d</code>
+：创建并运行一个容器，<code>-d</code>则是让容器以后台进程运行</p></li>
+<li><p><code>--name mysql</code> :
+给容器起个名字叫<code>mysql</code>，你可以叫别的</p></li>
 <li><p><code>-p 3306:3306</code> : 设置端口映射。</p>
 <ul>
 <li><strong>容器是隔离环境</strong>，外界不可访问。但是可以<strong>将宿主机端口映射容器内到端口</strong>，当访问宿主机指定端口时，就是在访问容器内的端口了。</li>
 <li>容器内端口往往是由容器内的进程决定，例如MySQL进程默认端口是3306，因此容器内端口一定是3306；而宿主机端口则可以任意指定，一般与容器内保持一致。</li>
-<li>格式： <code>-p 宿主机端口:容器内端口</code>，示例中就是将宿主机的3306映射到容器内的3306端口</li>
-</ul>
-</li>
-<li><p><code>-e TZ=Asia/Shanghai</code> : 配置容器内进程运行时的一些参数</p>
+<li>格式：
+<code>-p 宿主机端口:容器内端口</code>，示例中就是将宿主机的3306映射到容器内的3306端口</li>
+</ul></li>
+<li><p><code>-e TZ=Asia/Shanghai</code> :
+配置容器内进程运行时的一些参数</p>
 <ul>
 <li>格式：<code>-e KEY=VALUE</code>，KEY和VALUE都由容器内进程决定</li>
 <li>案例中，<code>TZ=Asia/Shanghai</code>是设置时区；<code>MYSQL_ROOT_PASSWORD=123</code>是设置MySQL默认密码</li>
-</ul>
-</li>
-<li><p><code>mysql</code> : 设置<strong>镜像</strong>名称，Docker会根据这个名字搜索并下载镜像</p>
+</ul></li>
+<li><p><code>mysql</code> :
+设置<strong>镜像</strong>名称，Docker会根据这个名字搜索并下载镜像</p>
 <ul>
 <li>格式：<code>REPOSITORY:TAG</code>，例如<code>mysql:8.0</code>，其中<code>REPOSITORY</code>可以理解为镜像名，<code>TAG</code>是版本号</li>
 <li>在未指定<code>TAG</code>的情况下，默认是最新版本，也就是<code>mysql:latest</code></li>
-</ul>
-</li>
-<li><p>官方文档：<a target="_blank" rel="noopener" href="https://docs.docker.com/">https://docs.docker.com/</a></p>
-</li>
-<li><table>
+</ul></li>
+<li><p>官方文档：<a
+target="_blank" rel="noopener" href="https://docs.docker.com/">https://docs.docker.com/</a></p></li>
+<li><table style="width:100%;">
+
 <thead>
-<tr>
-<th align="center"><strong>命令</strong></th>
-<th align="center"><strong>说明</strong></th>
-<th align="center"><strong>文档地址</strong></th>
+<tr class="header">
+<th style="text-align: center;"><strong>命令</strong></th>
+<th style="text-align: center;"><strong>说明</strong></th>
+<th style="text-align: center;"><strong>文档地址</strong></th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">docker pull</td>
-<td align="center">拉取镜像</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/pull/">docker pull</a></td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">docker pull</td>
+<td style="text-align: center;">拉取镜像</td>
+<td style="text-align: center;"><a
+target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/pull/">docker
+pull</a></td>
 </tr>
-<tr>
-<td align="center">docker push</td>
-<td align="center">推送镜像到DockerRegistry</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/push/">docker push</a></td>
+<tr class="even">
+<td style="text-align: center;">docker push</td>
+<td style="text-align: center;">推送镜像到DockerRegistry</td>
+<td style="text-align: center;"><a
+target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/push/">docker
+push</a></td>
 </tr>
-<tr>
-<td align="center">docker images</td>
-<td align="center">查看本地镜像</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/images/">docker images</a></td>
+<tr class="odd">
+<td style="text-align: center;">docker images</td>
+<td style="text-align: center;">查看本地镜像</td>
+<td style="text-align: center;"><a
+target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/images/">docker
+images</a></td>
 </tr>
-<tr>
-<td align="center">docker rmi</td>
-<td align="center">删除本地镜像</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/rmi/">docker rmi</a></td>
+<tr class="even">
+<td style="text-align: center;">docker rmi</td>
+<td style="text-align: center;">删除本地镜像</td>
+<td style="text-align: center;"><a
+target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/rmi/">docker
+rmi</a></td>
 </tr>
-<tr>
-<td align="center">docker run</td>
-<td align="center">创建并运行容器（不能重复创建）</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/run/">docker run</a></td>
+<tr class="odd">
+<td style="text-align: center;">docker run</td>
+<td style="text-align: center;">创建并运行容器（不能重复创建）</td>
+<td style="text-align: center;"><a
+target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/run/">docker
+run</a></td>
 </tr>
-<tr>
-<td align="center">docker stop</td>
-<td align="center">停止指定容器</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/stop/">docker stop</a></td>
+<tr class="even">
+<td style="text-align: center;">docker stop</td>
+<td style="text-align: center;">停止指定容器</td>
+<td style="text-align: center;"><a
+target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/stop/">docker
+stop</a></td>
 </tr>
-<tr>
-<td align="center">docker start</td>
-<td align="center">启动指定容器</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/start/">docker start</a></td>
+<tr class="odd">
+<td style="text-align: center;">docker start</td>
+<td style="text-align: center;">启动指定容器</td>
+<td style="text-align: center;"><a
+target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/start/">docker
+start</a></td>
 </tr>
-<tr>
-<td align="center">docker restart</td>
-<td align="center">重新启动容器</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/restart/">docker restart</a></td>
+<tr class="even">
+<td style="text-align: center;">docker restart</td>
+<td style="text-align: center;">重新启动容器</td>
+<td style="text-align: center;"><a
+target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/restart/">docker
+restart</a></td>
 </tr>
-<tr>
-<td align="center">docker rm</td>
-<td align="center">删除指定容器</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/rm/">docs.docker.com</a></td>
+<tr class="odd">
+<td style="text-align: center;">docker rm</td>
+<td style="text-align: center;">删除指定容器</td>
+<td style="text-align: center;"><a
+target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/rm/">docs.docker.com</a></td>
 </tr>
-<tr>
-<td align="center">docker ps</td>
-<td align="center">查看容器</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/ps/">docker ps</a></td>
+<tr class="even">
+<td style="text-align: center;">docker ps</td>
+<td style="text-align: center;">查看容器</td>
+<td style="text-align: center;"><a
+target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/ps/">docker
+ps</a></td>
 </tr>
-<tr>
-<td align="center">docker logs</td>
-<td align="center">查看容器运行日志</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/logs/">docker logs</a></td>
+<tr class="odd">
+<td style="text-align: center;">docker logs</td>
+<td style="text-align: center;">查看容器运行日志</td>
+<td style="text-align: center;"><a
+target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/logs/">docker
+logs</a></td>
 </tr>
-<tr>
-<td align="center">docker exec</td>
-<td align="center">进入容器</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/exec/">docker exec</a></td>
+<tr class="even">
+<td style="text-align: center;">docker exec</td>
+<td style="text-align: center;">进入容器</td>
+<td style="text-align: center;"><a
+target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/exec/">docker
+exec</a></td>
 </tr>
-<tr>
-<td align="center">docker save</td>
-<td align="center">保存镜像到本地压缩文件</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/save/">docker save</a></td>
+<tr class="odd">
+<td style="text-align: center;">docker save</td>
+<td style="text-align: center;">保存镜像到本地压缩文件</td>
+<td style="text-align: center;"><a
+target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/save/">docker
+save</a></td>
 </tr>
-<tr>
-<td align="center">docker load</td>
-<td align="center">加载本地压缩文件到镜像</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/load/">docker load</a></td>
+<tr class="even">
+<td style="text-align: center;">docker load</td>
+<td style="text-align: center;">加载本地压缩文件到镜像</td>
+<td style="text-align: center;"><a
+target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/load/">docker
+load</a></td>
 </tr>
-<tr>
-<td align="center">docker inspect</td>
-<td align="center">查看容器详细信息</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/inspect/">docker inspect</a></td>
+<tr class="odd">
+<td style="text-align: center;">docker inspect</td>
+<td style="text-align: center;">查看容器详细信息</td>
+<td style="text-align: center;"><a
+target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/inspect/">docker
+inspect</a></td>
 </tr>
-</tbody></table>
-</li>
+</tbody>
+</table></li>
 <li><p>默认情况下，每次重启虚拟机我们都需要手动启动Docker和Docker中的容器。通过命令可以实现开机自启：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell"><span class="hljs-comment"># Docker开机自启</span><br>systemctl enable docker<br><br><span class="hljs-comment"># Docker容器开机自启</span><br>docker update <span class="hljs-literal">--restart</span>=always [容器名/容器<span class="hljs-type">id</span>]<br></code></pre></td></tr></table></figure>
-
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">sudo docker exec <span class="hljs-literal">-it</span> nginx bash<br></code></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="深入了解"><a href="#深入了解" class="headerlink" title="深入了解"></a>深入了解</h2><ul>
-<li><p>容器提供程序的运行环境，但是<strong>程序运行产生的数据、程序运行依赖的配置都应该与容器解耦</strong>。</p>
-</li>
-<li><p><strong>数据卷（volume）</strong>是一个虚拟目录，是<strong>容器内目录</strong>与<strong>宿主机目录</strong>之间映射的桥梁。</p>
-</li>
-<li><img src="数据卷.png" srcset="/img/loading.gif" lazyload alt="数据卷" />
-</li>
+<h2 id="深入了解">深入了解</h2>
+<ul>
+<li><p>容器提供程序的运行环境，但是<strong>程序运行产生的数据、程序运行依赖的配置都应该与容器解耦</strong>。</p></li>
+<li><p><strong>数据卷（volume）</strong>是一个虚拟目录，是<strong>容器内目录</strong>与<strong>宿主机目录</strong>之间映射的桥梁。</p></li>
+<li><p><img src="数据卷.png" srcset="/img/loading.gif" lazyload alt="数据卷" /></p></li>
 <li><p>将容器中的目录与宿主机目录关联起来，称为<strong>挂载</strong>。此时，操作宿主机中的对应文件目录，就是操作容器内的对应文件目录</p>
 <ul>
 <li><code>/var/lib/docker/volumes</code>这个目录就是默认的存放所有容器数据卷的目录，其下再根据数据卷名称创建新目录，格式为<code>/数据卷名/_data</code>。</li>
-</ul>
-</li>
+</ul></li>
 <li><table>
+
 <thead>
-<tr>
-<th align="center"><strong>命令</strong></th>
-<th align="center"><strong>说明</strong></th>
-<th align="center"><strong>文档地址</strong></th>
+<tr class="header">
+<th style="text-align: center;"><strong>命令</strong></th>
+<th style="text-align: center;"><strong>说明</strong></th>
+<th style="text-align: center;"><strong>文档地址</strong></th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">docker volume create</td>
-<td align="center">创建数据卷</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/volume_create/">docker volume create</a></td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">docker volume create</td>
+<td style="text-align: center;">创建数据卷</td>
+<td style="text-align: center;"><a
+target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/volume_create/">docker
+volume create</a></td>
 </tr>
-<tr>
-<td align="center">docker volume ls</td>
-<td align="center">查看所有数据卷</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/volume_ls/">docs.docker.com</a></td>
+<tr class="even">
+<td style="text-align: center;">docker volume ls</td>
+<td style="text-align: center;">查看所有数据卷</td>
+<td style="text-align: center;"><a
+target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/volume_ls/">docs.docker.com</a></td>
 </tr>
-<tr>
-<td align="center">docker volume rm</td>
-<td align="center">删除指定数据卷</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/volume_prune/">docs.docker.com</a></td>
+<tr class="odd">
+<td style="text-align: center;">docker volume rm</td>
+<td style="text-align: center;">删除指定数据卷</td>
+<td style="text-align: center;"><a
+target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/volume_prune/">docs.docker.com</a></td>
 </tr>
-<tr>
-<td align="center">docker volume inspect</td>
-<td align="center">查看某个数据卷的详情</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/volume_inspect/">docs.docker.com</a></td>
+<tr class="even">
+<td style="text-align: center;">docker volume inspect</td>
+<td style="text-align: center;">查看某个数据卷的详情</td>
+<td style="text-align: center;"><a
+target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/volume_inspect/">docs.docker.com</a></td>
 </tr>
-<tr>
-<td align="center">docker volume prune</td>
-<td align="center">清除数据卷</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/volume_prune/">docker volume prune</a></td>
+<tr class="odd">
+<td style="text-align: center;">docker volume prune</td>
+<td style="text-align: center;">清除数据卷</td>
+<td style="text-align: center;"><a
+target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/volume_prune/">docker
+volume prune</a></td>
 </tr>
-</tbody></table>
-</li>
-<li><p>如果容器已经创建了，是没有办法再去挂载的，所以要在容器创建的时候就指明挂载。</p>
-</li>
+</tbody>
+</table></li>
+<li><p>如果容器已经创建了，是没有办法再去挂载的，所以要在容器创建的时候就指明挂载。</p></li>
 <li><p>创建容器的过程中，数据卷会自动创建。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">docker run <span class="hljs-literal">-d</span> <span class="hljs-literal">--name</span> nginx <span class="hljs-literal">-p</span> <span class="hljs-number">80</span>:<span class="hljs-number">80</span> <span class="hljs-literal">-v</span> html:/usr/share/nginx/html nginx<br></code></pre></td></tr></table></figure></li>
 </ul>

@@ -16,12 +16,12 @@
   <meta name="author" content="bjx">
   <meta name="keywords" content="">
   
-    <meta name="description" content="第 5 章	神经网络5.1	神经元模型神经网络中最基本的成分是神经元 neuron &#x2F; unit 模型，当神经元的电位超过一个阈值，就会被激活，向其他神经元发送化学物质 M-P 神经元模型：   理想的激活函数：   但是，阶跃函数具有不连续，不光滑的性质。因此，常使用 Sigmoid 函数：   把许多这样的神经元按一定的层次结构连接起来，就得到了神经网络  引入激活函数的作用：  给">
+    <meta name="description" content="第 5 章 神经网络 5.1 神经元模型 神经网络中最基本的成分是神经元 neuron &#x2F; unit 模型，当神经元的电位超过一个阈值，就会被激活，向其他神经元发送化学物质 M-P 神经元模型：  理想的激活函数：  但是，阶跃函数具有不连续，不光滑的性质。因此，常使用 Sigmoid 函数：  把许多这样的神经元按一定的层次结构连接起来，就得到了神经网络  引入激活函数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="西瓜书-第5章-神经网络">
 <meta property="og:url" content="https://strive-c.github.io/2023/04/15/%E8%A5%BF%E7%93%9C%E4%B9%A6-%E7%AC%AC5%E7%AB%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html">
 <meta property="og:site_name" content="strive-C blog">
-<meta property="og:description" content="第 5 章	神经网络5.1	神经元模型神经网络中最基本的成分是神经元 neuron &#x2F; unit 模型，当神经元的电位超过一个阈值，就会被激活，向其他神经元发送化学物质 M-P 神经元模型：   理想的激活函数：   但是，阶跃函数具有不连续，不光滑的性质。因此，常使用 Sigmoid 函数：   把许多这样的神经元按一定的层次结构连接起来，就得到了神经网络  引入激活函数的作用：  给">
+<meta property="og:description" content="第 5 章 神经网络 5.1 神经元模型 神经网络中最基本的成分是神经元 neuron &#x2F; unit 模型，当神经元的电位超过一个阈值，就会被激活，向其他神经元发送化学物质 M-P 神经元模型：  理想的激活函数：  但是，阶跃函数具有不连续，不光滑的性质。因此，常使用 Sigmoid 函数：  把许多这样的神经元按一定的层次结构连接起来，就得到了神经网络  引入激活函数">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://strive-c.github.io/2023/04/15/%E8%A5%BF%E7%93%9C%E4%B9%A6-%E7%AC%AC5%E7%AB%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E7%AC%AC5%E7%AB%A0%20%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C.assets/image-20230403195540918.png">
 <meta property="og:image" content="https://strive-c.github.io/2023/04/15/%E8%A5%BF%E7%93%9C%E4%B9%A6-%E7%AC%AC5%E7%AB%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E7%AC%AC5%E7%AB%A0%20%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C.assets/image-20230403195835152.png">
@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://strive-c.github.io/2023/04/15/%E8%A5%BF%E7%93%9C%E4%B9%A6-%E7%AC%AC5%E7%AB%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E7%AC%AC5%E7%AB%A0%20%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C.assets/image-20230403202259504.png">
 <meta property="og:image" content="https://strive-c.github.io/2023/04/15/%E8%A5%BF%E7%93%9C%E4%B9%A6-%E7%AC%AC5%E7%AB%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E7%AC%AC5%E7%AB%A0%20%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C.assets/image-20230403202459424.png">
 <meta property="article:published_time" content="2023-04-15T08:19:56.000Z">
-<meta property="article:modified_time" content="2024-03-19T11:54:18.377Z">
+<meta property="article:modified_time" content="2024-03-24T03:39:39.231Z">
 <meta property="article:author" content="bjx">
 <meta property="article:tag" content="西瓜书">
 <meta name="twitter:card" content="summary_large_image">
@@ -231,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          1.1k 字
         
       </span>
     
@@ -292,85 +292,94 @@
             
               <div class="markdown-body">
                 
-                <h1 id="第-5-章神经网络"><a href="#第-5-章神经网络" class="headerlink" title="第 5 章	神经网络"></a>第 5 章	神经网络</h1><h2 id="5-1神经元模型"><a href="#5-1神经元模型" class="headerlink" title="5.1	神经元模型"></a>5.1	神经元模型</h2><p>神经网络中最基本的成分是神经元 neuron &#x2F; unit 模型，当神经元的电位超过一个阈值，就会被激活，向其他神经元发送化学物质</p>
+                <h1 id="第-5-章-神经网络">第 5 章 神经网络</h1>
+<h2 id="神经元模型">5.1 神经元模型</h2>
+<p>神经网络中最基本的成分是神经元 neuron / unit
+模型，当神经元的电位超过一个阈值，就会被激活，向其他神经元发送化学物质</p>
 <p>M-P 神经元模型：</p>
-<img src="第5章 神经网络.assets/image-20230403195540918.png" srcset="/img/loading.gif" lazyload alt="image-20230403195540918" style="zoom: 50%;" />
-
+<p><img src="第5章 神经网络.assets/image-20230403195540918.png" srcset="/img/loading.gif" lazyload alt="image-20230403195540918" style="zoom: 50%;" /></p>
 <p>理想的激活函数：</p>
-<img src="第5章 神经网络.assets/image-20230403195835152.png" srcset="/img/loading.gif" lazyload alt="image-20230403195835152" style="zoom: 50%;" />
-
-<p>但是，阶跃函数具有不连续，不光滑的性质。因此，常使用 Sigmoid 函数：</p>
-<img src="第5章 神经网络.assets/image-20230403200123887.png" srcset="/img/loading.gif" lazyload alt="image-20230403200123887" style="zoom:50%;" />
-
+<p><img src="第5章 神经网络.assets/image-20230403195835152.png" srcset="/img/loading.gif" lazyload alt="image-20230403195835152" style="zoom: 50%;" /></p>
+<p>但是，阶跃函数具有不连续，不光滑的性质。因此，常使用 Sigmoid
+函数：</p>
+<p><img src="第5章 神经网络.assets/image-20230403200123887.png" srcset="/img/loading.gif" lazyload alt="image-20230403200123887" style="zoom:50%;" /></p>
 <p>把许多这样的神经元按一定的层次结构连接起来，就得到了神经网络</p>
 <blockquote>
 <p>引入激活函数的作用：</p>
-<ol>
+<ol type="1">
 <li>给模型引入非线性关系</li>
 <li>表示该神经元是否被激活，即该神经元接收到的信息是否有用，该留下或者抛弃</li>
 </ol>
 </blockquote>
-<h2 id="5-2感知机与多层网络"><a href="#5-2感知机与多层网络" class="headerlink" title="5.2	感知机与多层网络"></a>5.2	感知机与多层网络</h2><ul>
+<h2 id="感知机与多层网络">5.2 感知机与多层网络</h2>
+<ul>
 <li>感知机 Perceptron 由两层神经元组成：</li>
 </ul>
-<img src="第5章 神经网络.assets/image-20230403201104867.png" srcset="/img/loading.gif" lazyload alt="image-20230403201104867" style="zoom:67%;" />
-
+<p><img src="第5章 神经网络.assets/image-20230403201104867.png" srcset="/img/loading.gif" lazyload alt="image-20230403201104867" style="zoom:67%;" /></p>
 <ul>
-<li><p>神经网络就是为了学习出权重和阈值，而阈值可以看作一个固定输入为-1.0的哑结点 dummy node 所对应的连接权重$w_{n+1}$，这样权重和阈值的学习可以统一为权重的学习。</p>
-</li>
+<li><p>神经网络就是为了学习出权重和阈值，而阈值可以看作一个固定输入为-1.0的哑结点
+dummy node 所对应的连接权重<span
+class="math inline">\(w_{n+1}\)</span>，这样权重和阈值的学习可以统一为权重的学习。</p></li>
 <li><p>感知机的学习规则：</p>
 <ul>
-<li><p>对于训练样例$(x,y)$，若当前感知机的输出为$\hat{y}$，则感知机权重进行如下调整：</p>
-</li>
-<li><p>$w_i\leftarrow w_i+\Delta w_i$</p>
-</li>
-<li><p>$\Delta w_i&#x3D;\eta(y-\hat{y})x_i$</p>
-</li>
-<li><p>其中$\eta \in(0,1)$称为学习率(learning rate)</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46762820">算法——感知机详解（推导+证明） - 知乎 (zhihu.com)</a></p>
-</li>
-</ul>
-</li>
-<li><p>感知机只有输出层神经元进行激活函数处理，只拥有一层功能神经元 functional neuron，学习能力有限</p>
-</li>
+<li><p>对于训练样例<span
+class="math inline">\((x,y)\)</span>，若当前感知机的输出为<span
+class="math inline">\(\hat{y}\)</span>，则感知机权重进行如下调整：</p></li>
+<li><p><span class="math inline">\(w_i\leftarrow w_i+\Delta
+w_i\)</span></p></li>
+<li><p><span class="math inline">\(\Delta
+w_i=\eta(y-\hat{y})x_i\)</span></p></li>
+<li><p>其中<span class="math inline">\(\eta
+\in(0,1)\)</span>称为学习率(learning rate)</p></li>
+<li><p><a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46762820">算法——感知机详解（推导+证明）
+- 知乎 (zhihu.com)</a></p></li>
+</ul></li>
+<li><p>感知机只有输出层神经元进行激活函数处理，只拥有一层功能神经元
+functional neuron，学习能力有限</p></li>
 <li><p>两层感知机</p>
 <ul>
 <li><img src="第5章 神经网络.assets/image-20230403202259504.png" srcset="/img/loading.gif" lazyload alt="image-20230403202259504" style="zoom:50%;" /></li>
-<li>其中有隐层 &#x2F; 隐含层 hidden layer，隐含层和输出层神经元都是拥有激活函数的功能神经元</li>
-</ul>
-</li>
+<li>其中有隐层 / 隐含层 hidden
+layer，隐含层和输出层神经元都是拥有激活函数的功能神经元</li>
+</ul></li>
 <li><p>多层前馈神经网络 multi-layer feedforward neural networks：</p>
 <ul>
 <li><img src="第5章 神经网络.assets/image-20230403202459424.png" srcset="/img/loading.gif" lazyload alt="image-20230403202459424" style="zoom:67%;" /></li>
 <li>前馈指的是网络拓扑结构上不存在环或回路</li>
+</ul></li>
+<li><p>神经网络的学习过程，就是根据训练数据来调整神经元之间的“连接权”（connection
+weight）以及每个功能神经元之间的阈值</p></li>
 </ul>
-</li>
-<li><p>神经网络的学习过程，就是根据训练数据来调整神经元之间的“连接权”（connection weight）以及每个功能神经元之间的阈值</p>
-</li>
-</ul>
-<h2 id="5-3误差逆传播算法"><a href="#5-3误差逆传播算法" class="headerlink" title="5.3	误差逆传播算法"></a>5.3	误差逆传播算法</h2><ul>
-<li>为了训练多层网络，就需要更加强大的学习算法。误差逆传播 error BackPropagation，简称 BP 算法，是其中的代表。</li>
+<h2 id="误差逆传播算法">5.3 误差逆传播算法</h2>
+<ul>
+<li>为了训练多层网络，就需要更加强大的学习算法。误差逆传播 error
+BackPropagation，简称 BP 算法，是其中的代表。</li>
 <li></li>
 </ul>
-<h2 id="5-4全局最小与局部极小"><a href="#5-4全局最小与局部极小" class="headerlink" title="5.4	全局最小与局部极小"></a>5.4	全局最小与局部极小</h2><ul>
-<li>神经网络的训练过程可看作一个参数寻优过程，即在参数空间中，寻找一组最优参数使得$E$最小</li>
-<li>最优：<ul>
+<h2 id="全局最小与局部极小">5.4 全局最小与局部极小</h2>
+<ul>
+<li>神经网络的训练过程可看作一个参数寻优过程，即在参数空间中，寻找一组最优参数使得<span
+class="math inline">\(E\)</span>最小</li>
+<li>最优：
+<ul>
 <li>局部极小 local minimum</li>
 <li>全局最小 global minimum</li>
-</ul>
-</li>
+</ul></li>
 <li>基于梯度下降的搜索是使用最为广泛的参数寻优方法</li>
-<li>为了防止陷入局部极小，而不能保证找到全局最小，我们可以采用以下操作：<ul>
+<li>为了防止陷入局部极小，而不能保证找到全局最小，我们可以采用以下操作：
+<ul>
 <li>以多组不同参数值初始化多个网络，取其中误差最小解作为最终参数</li>
-<li>使用“模拟退火”技术（simulated annealing）：在每一步都以一定的概率接受比当前解更差的结果，从而有助于“跳出”局部极小。在每步迭代过程中，接受“次优解”的概率要随着时间的推移而逐渐降低，从而保证算法稳定。</li>
+<li>使用“模拟退火”技术（simulated
+annealing）：在每一步都以一定的概率接受比当前解更差的结果，从而有助于“跳出”局部极小。在每步迭代过程中，接受“次优解”的概率要随着时间的推移而逐渐降低，从而保证算法稳定。</li>
 <li>使用随机梯度下降：与标准梯度下降法精确计算梯度不同，随机梯度下降法在计算梯度时加入了随机因素。于是，即便陷入局部极小点，它计算出的梯度仍可能不为零，这样就有机会跳出局部极小继续搜索。</li>
-<li>遗传算法 genetic algorithm 也常用来训练神经网络以更好地逼近全局最小。</li>
+<li>遗传算法 genetic algorithm
+也常用来训练神经网络以更好地逼近全局最小。</li>
 <li>上述用于跳出局部极小的的技术大多是启发式，理论缺乏保障。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="5-5其他常见神经网络"><a href="#5-5其他常见神经网络" class="headerlink" title="5.5	其他常见神经网络"></a>5.5	其他常见神经网络</h2><ul>
+<h2 id="其他常见神经网络">5.5 其他常见神经网络</h2>
+<ul>
 <li>RBF 网络</li>
 <li>ART 网络</li>
 <li>SOM 网络</li>
@@ -378,18 +387,23 @@
 <li>Elman 网络</li>
 <li>Boltzmann 机</li>
 </ul>
-<h2 id="5-6深度学习"><a href="#5-6深度学习" class="headerlink" title="5.6	深度学习"></a>5.6	深度学习</h2><ul>
+<h2 id="深度学习">5.6 深度学习</h2>
+<ul>
 <li>增加隐层数目比增加隐层神经元更能提高模型的复杂度</li>
-<li>多隐层神经网络往往难以直接用经典算法进行训练，由于误差在多隐层内逆传播时，往往会发散 diverge，而不能收敛到稳定状态</li>
-<li>无监督逐层训练 unsupervised layer-wise training 是多隐层网络训练的有效手段，基本思想：<ul>
-<li>每次训练一层隐结点，训练时将上一层隐结点的输出作为输入，本层隐结点的输出作为下一层隐结点的输入。预训练 pre-training</li>
+<li>多隐层神经网络往往难以直接用经典算法进行训练，由于误差在多隐层内逆传播时，往往会发散
+diverge，而不能收敛到稳定状态</li>
+<li>无监督逐层训练 unsupervised layer-wise training
+是多隐层网络训练的有效手段，基本思想：
+<ul>
+<li>每次训练一层隐结点，训练时将上一层隐结点的输出作为输入，本层隐结点的输出作为下一层隐结点的输入。预训练
+pre-training</li>
 <li>预训练全部完成后，对整个网络进行微调 fine-tuning 训练</li>
-</ul>
-</li>
-<li>另一种节省训练开销的策略是“权共享” weight sharing，让一组神经元使用相同的连接权。<ul>
+</ul></li>
+<li>另一种节省训练开销的策略是“权共享” weight
+sharing，让一组神经元使用相同的连接权。
+<ul>
 <li>该策略在卷积神经网络中发挥了重要作用</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 
                 

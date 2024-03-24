@@ -16,12 +16,12 @@
   <meta name="author" content="bjx">
   <meta name="keywords" content="">
   
-    <meta name="description" content="第 6 章	支持向量机6.1	间隔与支持向量 分类学习最基本的想法就是基于训练集$D$在样本空间中找到一个划分超平面，将不同类别的样本分开。  划分超平面可以通过如下线性方程来描述：  $$w^Tx+b&#x3D;0$$  $w&#x3D;(w_1;w_2;\cdots;w_d)$为法向量，决定了超平面的方向  $b$为位移项，决定了超平面与原点之间的距离    样本空间中任意点$x$到超平面$(">
+    <meta name="description" content="第 6 章 支持向量机 6.1 间隔与支持向量  分类学习最基本的想法就是基于训练集\(D\)在样本空间中找到一个划分超平面，将不同类别的样本分开。 划分超平面可以通过如下线性方程来描述：  \[ w^Tx+b&#x3D;0 \] \(w&#x3D;(w_1;w_2;\cdots;w_d)\)为法向量，决定了超平面的方向 \(b\)为位移项，决定了超平面与原点之间的距离  样本空间中任意点\(">
 <meta property="og:type" content="article">
 <meta property="og:title" content="西瓜书-第6章-支持向量机">
 <meta property="og:url" content="https://strive-c.github.io/2023/04/15/%E8%A5%BF%E7%93%9C%E4%B9%A6-%E7%AC%AC6%E7%AB%A0-%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/index.html">
 <meta property="og:site_name" content="strive-C blog">
-<meta property="og:description" content="第 6 章	支持向量机6.1	间隔与支持向量 分类学习最基本的想法就是基于训练集$D$在样本空间中找到一个划分超平面，将不同类别的样本分开。  划分超平面可以通过如下线性方程来描述：  $$w^Tx+b&#x3D;0$$  $w&#x3D;(w_1;w_2;\cdots;w_d)$为法向量，决定了超平面的方向  $b$为位移项，决定了超平面与原点之间的距离    样本空间中任意点$x$到超平面$(">
+<meta property="og:description" content="第 6 章 支持向量机 6.1 间隔与支持向量  分类学习最基本的想法就是基于训练集\(D\)在样本空间中找到一个划分超平面，将不同类别的样本分开。 划分超平面可以通过如下线性方程来描述：  \[ w^Tx+b&#x3D;0 \] \(w&#x3D;(w_1;w_2;\cdots;w_d)\)为法向量，决定了超平面的方向 \(b\)为位移项，决定了超平面与原点之间的距离  样本空间中任意点\(">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-15T08:20:30.000Z">
 <meta property="article:modified_time" content="2024-03-19T11:54:19.146Z">
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          359 字
+          352 字
         
       </span>
     
@@ -285,40 +285,51 @@
             
               <div class="markdown-body">
                 
-                <h1 id="第-6-章支持向量机"><a href="#第-6-章支持向量机" class="headerlink" title="第 6 章	支持向量机"></a>第 6 章	支持向量机</h1><h2 id="6-1间隔与支持向量"><a href="#6-1间隔与支持向量" class="headerlink" title="6.1	间隔与支持向量"></a>6.1	间隔与支持向量</h2><ul>
-<li><p>分类学习最基本的想法就是基于训练集$D$在样本空间中找到一个<strong>划分超平面</strong>，将不同类别的样本分开。</p>
-</li>
+                <h1 id="第-6-章-支持向量机">第 6 章 支持向量机</h1>
+<h2 id="间隔与支持向量">6.1 间隔与支持向量</h2>
+<ul>
+<li><p>分类学习最基本的想法就是基于训练集<span
+class="math inline">\(D\)</span>在样本空间中找到一个<strong>划分超平面</strong>，将不同类别的样本分开。</p></li>
 <li><p>划分超平面可以通过如下线性方程来描述：</p>
 <ul>
-<li><p>$$<br>w^Tx+b&#x3D;0<br>$$</p>
-</li>
-<li><p>$w&#x3D;(w_1;w_2;\cdots;w_d)$为法向量，决定了超平面的方向</p>
-</li>
-<li><p>$b$为位移项，决定了超平面与原点之间的距离</p>
-</li>
-</ul>
-</li>
-<li><p>样本空间中任意点$x$到超平面$(w,b)$的距离可以写作：</p>
+<li><p><span class="math display">\[
+w^Tx+b=0
+\]</span></p></li>
+<li><p><span
+class="math inline">\(w=(w_1;w_2;\cdots;w_d)\)</span>为法向量，决定了超平面的方向</p></li>
+<li><p><span
+class="math inline">\(b\)</span>为位移项，决定了超平面与原点之间的距离</p></li>
+</ul></li>
+<li><p>样本空间中任意点<span
+class="math inline">\(x\)</span>到超平面<span
+class="math inline">\((w,b)\)</span>的距离可以写作：</p>
 <ul>
-<li>$$<br>r&#x3D;\frac{|w^Tx+b|}{||w||}(点到平面距离公式)<br>$$</li>
-</ul>
-</li>
-<li><p>若超平面能够将训练样本正确分类，对于$y_i&#x3D;+1$，带入超平面方程大于等于+1；对于$y_i&#x3D;-1$，带入超平面方程小于等于-1；</p>
-</li>
-<li><p>距离超平面最近的几个训练样本使得以上等号成立，被称为“支持向量” support vector，两个异类支持向量到超平面的距离之和为：$\gamma&#x3D;\frac{2}{||w||}$，被称为间隔 margin。</p>
-</li>
-<li><p>要找到具有最大间隔的划分超平面，即找到能够上式，使得$\gamma$最大。显然仅需$||w||^{-1}$最大，等价于最小化$||w||^2$</p>
-</li>
+<li><span class="math display">\[
+r=\frac{|w^Tx+b|}{||w||}(点到平面距离公式)
+\]</span></li>
+</ul></li>
+<li><p>若超平面能够将训练样本正确分类，对于<span
+class="math inline">\(y_i=+1\)</span>，带入超平面方程大于等于+1；对于<span
+class="math inline">\(y_i=-1\)</span>，带入超平面方程小于等于-1；</p></li>
+<li><p>距离超平面最近的几个训练样本使得以上等号成立，被称为“支持向量”
+support vector，两个异类支持向量到超平面的距离之和为：<span
+class="math inline">\(\gamma=\frac{2}{||w||}\)</span>，被称为间隔
+margin。</p></li>
+<li><p>要找到具有最大间隔的划分超平面，即找到能够上式，使得<span
+class="math inline">\(\gamma\)</span>最大。显然仅需<span
+class="math inline">\(||w||^{-1}\)</span>最大，等价于最小化<span
+class="math inline">\(||w||^2\)</span></p></li>
 <li><p>我们可以写出如下式子：</p>
 <ul>
-<li><p>$$<br>min_{w,b}\ \frac{1}{2}||w||^2\<br>s.t.\ y_i(w^Tx_i+b)\geq 1, i&#x3D;1,2,\cdots,m<br>$$</p>
-</li>
-<li><p>以上就是支持向量机的基本型 Support Vector Machine，SVM</p>
-</li>
+<li><p><span class="math display">\[
+min_{w,b}\ \frac{1}{2}||w||^2\\
+s.t.\ y_i(w^Tx_i+b)\geq 1, i=1,2,\cdots,m
+\]</span></p></li>
+<li><p>以上就是支持向量机的基本型 Support Vector Machine，SVM</p></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="6-2对偶问题"><a href="#6-2对偶问题" class="headerlink" title="6.2	对偶问题"></a>6.2	对偶问题</h2>
+<h2 id="对偶问题">6.2 对偶问题</h2>
+
                 
               </div>
             
