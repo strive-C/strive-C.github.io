@@ -24,7 +24,7 @@
 <meta property="og:description" content="1 Java语言概述 简要介绍  Java是学习JavaEE后台、大数据、Android开发的基石 常用的DOS命令  DOS（Disk Operating System，磁盘操作系统）是微软公司在Windows之前推出的一个操作系统，是单用户、单任务的操作系统。后来被Windows系统取代 md：创建文件夹 cd：跳转路径 rd：删除文件夹 del：删除文件 cls：清屏">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-24T14:11:55.000Z">
-<meta property="article:modified_time" content="2024-03-25T15:24:36.924Z">
+<meta property="article:modified_time" content="2024-03-26T02:45:02.246Z">
 <meta property="article:author" content="bjx">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary_large_image">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          947 字
+          950 字
         
       </span>
     
@@ -339,20 +339,27 @@ Environment）：Java程序的运行时环境，包含JVM和运行时所需要�
 <li><p>通过javac命令对该java文件进行编译，生成一个或多个字节码文件.class</p></li>
 <li><p>通过java命令对生成的class文件进行运行</p></li>
 <li><p>在HelloWorld.java文件中编写代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">HelloChina</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;Hello World!&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><p>命令javac
+HelloWorld.java编译生成HelloChina.class字节码文件</p></li>
+<li><p>命令java HelloChina运行该字节码文件，得到结果</p></li>
+<li><p><code>编译以后，会生成一个或多个字节码文件，每一个字节码文件对应一个Java类，并且字节码文件名与类名相同</code></p></li>
+<li><p><code>在一个源文件中，只允许一个类是public的，并且要求该类名要与源文件名相同</code></p></li>
+</ul>
+<h2 id="注释">注释</h2>
 <ul>
-<li>```java class HelloChina { public static void main(String[] args) {
-System.out.println("Hello World!"); } } <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><br><span class="hljs-bullet">-</span> 命令javac HelloWorld.java编译生成HelloChina.class字节码文件<br><br><span class="hljs-bullet">-</span> 命令java HelloChina运行该字节码文件，得到结果<br><br><span class="hljs-bullet">-</span> <span class="hljs-code">`编译以后，会生成一个或多个字节码文件，每一个字节码文件对应一个Java类，并且字节码文件名与类名相同`</span><br><br><span class="hljs-bullet">-</span> <span class="hljs-code">`在一个源文件中，只允许一个类是public的，并且要求该类名要与源文件名相同`</span><br><br><span class="hljs-section">## 注释</span><br><br><span class="hljs-bullet">-</span> 单行注释<br><br><span class="hljs-bullet">  -</span> <span class="hljs-code">```java</span><br><span class="hljs-code">    // 单行注释</span><br></code></pre></td></tr></table></figure></li>
-</ul></li>
+<li><p>单行注释</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 单行注释</span><br></code></pre></td></tr></table></figure></li>
 <li><p>多行数值</p>
-<ul>
-<li>```java /<em> 多行注释 </em>/ <figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey"><br>- 单行注释和多行注释中的信息不参与编译，字节码文件中不包含注释信息<br><br>- 文档注释<br><br>  - ```java<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">    	@author 指定java程序的作者</span><br><span class="hljs-comment">    	@version 指定源文件的版本</span><br><span class="hljs-comment">    */</span><br></code></pre></td></tr></table></figure></li>
-</ul></li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/*</span><br><span class="hljs-comment">多行注释</span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure></li>
+<li><p>单行注释和多行注释中的信息不参与编译，字节码文件中不包含注释信息</p></li>
+<li><p>文档注释</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">	<span class="hljs-doctag">@author</span> 指定java程序的作者</span><br><span class="hljs-comment">	<span class="hljs-doctag">@version</span> 指定源文件的版本</span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure></li>
 <li><p>文档注释内容可以被JDK提供的工具 javadoc
 所解析，生成一套以网页文件形式体现的该程序的说明文档</p></li>
 <li><p>命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">javadoc -d mydoc -author -version HelloWorld.java<br></code></pre></td></tr></table></figure>
 <ul>
-<li><div class="sourceCode" id="cb1"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  <span class="ex">javadoc</span> <span class="at">-d</span> mydoc <span class="at">-author</span> <span class="at">-version</span> HelloWorld.java</span></code></pre></div></li>
 <li><p>-d mydoc：mydoc为输出文档的文件夹</p></li>
 <li><p>-author -version为指定输出的内容</p></li>
 <li><p>HelloWorld.java为指定的java源文件</p></li>
