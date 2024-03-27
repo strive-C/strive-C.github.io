@@ -16,15 +16,15 @@
   <meta name="author" content="bjx">
   <meta name="keywords" content="">
   
-    <meta name="description" content="面向对象编程 OOP 封装 继承 多态  多态：父类指针&#x2F;引用指向子类对象，从而在调用方法的时候，通过指向的子类对象的不同而调用不同的子类方法。 C++中的多态是通过继承和虚函数来实现的 Java中的多态是通过接口来实现的  C++  继承就是允许派生类拥有调用基类中属性和方法的权利 成员函数可以分为三种：普通成员函数、虚函数、纯虚函数 虚函数表示希望子类重新实现，且父类">
+    <meta name="description" content="面向对象编程 OOP 封装 继承 多态  多态：父类指针&#x2F;引用指向子类对象，从而在调用方法的时候，通过指向的子类对象的不同而调用不同的子类方法。 C++中的多态是通过继承和虚函数来实现的 Java中的多态是通过继承和接口来实现的  C++  继承就是允许派生类拥有调用基类中属性和方法的权利 成员函数可以分为三种：普通成员函数、虚函数、纯虚函数 虚函数表示希望子类重新实现，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面向对象编程OOP解析">
 <meta property="og:url" content="https://strive-c.github.io/2024/03/17/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8BOOP%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="strive-C blog">
-<meta property="og:description" content="面向对象编程 OOP 封装 继承 多态  多态：父类指针&#x2F;引用指向子类对象，从而在调用方法的时候，通过指向的子类对象的不同而调用不同的子类方法。 C++中的多态是通过继承和虚函数来实现的 Java中的多态是通过接口来实现的  C++  继承就是允许派生类拥有调用基类中属性和方法的权利 成员函数可以分为三种：普通成员函数、虚函数、纯虚函数 虚函数表示希望子类重新实现，且父类">
+<meta property="og:description" content="面向对象编程 OOP 封装 继承 多态  多态：父类指针&#x2F;引用指向子类对象，从而在调用方法的时候，通过指向的子类对象的不同而调用不同的子类方法。 C++中的多态是通过继承和虚函数来实现的 Java中的多态是通过继承和接口来实现的  C++  继承就是允许派生类拥有调用基类中属性和方法的权利 成员函数可以分为三种：普通成员函数、虚函数、纯虚函数 虚函数表示希望子类重新实现，">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:40.000Z">
-<meta property="article:modified_time" content="2024-03-19T11:54:18.672Z">
+<meta property="article:modified_time" content="2024-03-27T01:59:22.939Z">
 <meta property="article:author" content="bjx">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          330 字
+          333 字
         
       </span>
     
@@ -293,21 +293,23 @@
 <ul>
 <li>多态：父类指针/引用指向子类对象，从而在调用方法的时候，通过指向的子类对象的不同而调用不同的子类方法。</li>
 <li>C++中的多态是通过继承和虚函数来实现的</li>
-<li>Java中的多态是通过接口来实现的</li>
+<li>Java中的多态是通过继承和接口来实现的</li>
 </ul>
 <h2 id="c">C++</h2>
 <ol type="1">
-<li><p>继承就是允许派生类拥有调用基类中属性和方法的权利</p></li>
-<li><p>成员函数可以分为三种：普通成员函数、虚函数、纯虚函数</p></li>
-<li><p>虚函数表示希望子类重新实现，且父类中有对应的实现方式</p></li>
-<li><p>纯虚函数表示要求子类一定要实现，且父类中没有对应的实现方式</p></li>
-<li><p>为什么要把某些函数设成虚函数?：父类在定义函数时决定暂缓具体实现步骤,
+<li>继承就是允许派生类拥有调用基类中属性和方法的权利</li>
+<li>成员函数可以分为三种：普通成员函数、虚函数、纯虚函数</li>
+<li>虚函数表示希望子类重新实现，且父类中有对应的实现方式</li>
+<li>纯虚函数表示要求子类一定要实现，且父类中没有对应的实现方式</li>
+<li>为什么要把某些函数设成虚函数?：父类在定义函数时决定暂缓具体实现步骤,
 因为子类在设计时有更具体的,精细的想法,
 我作为父类的设计者允许子类去override, 通过把自己的函数设置成虚函数,
-子类才有机会(权限)去重新定义。</p></li>
-<li><p>含义一个纯虚函数的类称为纯虚类，纯虚类不允许声明对象 ##
-Java</p></li>
-<li><p>Java中的接口是一个类，可以简单的等效于C++的纯虚类</p></li>
+子类才有机会(权限)去重新定义。</li>
+<li>含义一个纯虚函数的类称为纯虚类，纯虚类不允许声明对象</li>
+</ol>
+<h2 id="java">Java</h2>
+<ol type="1">
+<li>Java中的接口是一个类，可以简单的等效于C++的纯虚类</li>
 </ol>
 
                 
