@@ -25,8 +25,9 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://strive-c.github.io/2024/03/24/Java%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E6%9B%B4%E6%94%B9%E9%A1%B9%E7%9B%AE%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F.png">
 <meta property="og:image" content="https://strive-c.github.io/2024/03/24/Java%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%8A%A8%E7%BC%96%E8%AF%91.png">
+<meta property="og:image" content="https://strive-c.github.io/2024/03/24/Java%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/JVM%E7%BB%84%E6%88%90.png">
 <meta property="article:published_time" content="2024-03-24T14:11:55.000Z">
-<meta property="article:modified_time" content="2024-03-27T08:42:00.424Z">
+<meta property="article:modified_time" content="2024-03-27T09:19:11.270Z">
 <meta property="article:author" content="bjx">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="变成语言">
@@ -230,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.3k 字
+          3.6k 字
         
       </span>
     
@@ -241,7 +242,7 @@
         
         
         
-          28 分钟
+          30 分钟
         
       </span>
     
@@ -730,7 +731,28 @@ class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="
 <h2 id="内存结构">内存结构</h2>
 <ul>
 <li>为了提高运算效率，Java虚拟机对空间进行了不同区域的划分，每一片区域都有特定的数据处理方式和内存管理方式</li>
-<li></li>
+<li>JVM由三个独立部分组成（<code>类运执</code>）
+<ul>
+<li>类加载子系统</li>
+<li>运行时数据区（<code>两栈堆区器</code>）
+<ul>
+<li>虚拟机栈：存储正在执行的每个Java方法的局部变量表等。局部变量表存放了编译期可知长度的各种基本数据类型、对象引用、方法执行完、自动释放。</li>
+<li>堆内存：存储对象（包括数组对象），new来创建的，都存储在堆内存</li>
+<li>方法区：存储已被虚拟机加载的类信息、常量、（静态变量）、即时编译器编译后的代码等数据</li>
+<li>本地方法栈：当程序中调用了native的本地方法时，本地方法执行期间的内存区域</li>
+<li>程序计数器：是CPU中的寄存器，包含每一个线程下一条要执行的指令的地址</li>
+</ul></li>
+<li>执行引擎</li>
+<li>图片解析
+<ul>
+<li><img src="JVM组成.png" srcset="/img/loading.gif" lazyload alt="JVM组成" style="zoom: 50%;" /></li>
+</ul></li>
+</ul></li>
+<li>与数组有关的内存结构
+<ul>
+<li>虚拟机栈：存放方法中声明的变量</li>
+<li>堆：存放数组的实体（即数组中的所有元素）</li>
+</ul></li>
 </ul>
 
                 
