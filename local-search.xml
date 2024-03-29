@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Python命名规范</title>
+    <link href="/2024/03/29/Python%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/"/>
+    <url>/2024/03/29/Python%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/</url>
+    
+    <content type="html"><![CDATA[<h1 id="python命名规范">Python命名规范</h1><ul><li><p>通用的四种命名方式</p><ul><li>小写下划线：lower_uderscore</li><li>大写下划线：UPPER_UNDERSCORE</li><li>大驼峰：CamelCase</li><li>小驼峰：mixedCase（在Python中不会用到）</li></ul></li><li><p>大写下划线只用来表示常量</p></li><li><p>其他命名都是小写下划线</p></li><li><p>单下划线：占位符，表示用不到的变量</p></li><li><p>一个前置下划线，表示弱私有，尝试表达private性质，但是还是可以强制使用的</p></li><li><p>单前置下划线的小tips：在from module import*时，是不会把单下划线的global variable导入，比较偏无所谓记不记</p></li><li><p>双前置下划线，表示强私有，但是在实际中是对双前置下划线变量进行namemangling，改为单下划线+类名+该变量名</p><ul><li><div class="sourceCode" id="cb1"><preclass="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">class</span> MyClass:</span><span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>      <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span><span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>          <span class="va">self</span>.__srcret <span class="op">=</span> <span class="dv">0</span></span><span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  o <span class="op">=</span> MyClass()</span><span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(o._MyClass__srcret)</span></code></pre></div></li><li>所以该机制不是一个安全的feature，只是为了防止误用</li></ul></li><li><p>前后各有两个下划线，叫做dunderscore（double underscore），表示Python中的magicmethod，对于Python的使用者不要把自定义的方法写成这种格式</p></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Python</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Python</tag>
+      
+      <tag>编程语言</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Java基本语法</title>
     <link href="/2024/03/24/Java%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/"/>
     <url>/2024/03/24/Java%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</url>
@@ -383,11 +410,11 @@
     
     <tags>
       
-      <tag>环境搭建</tag>
-      
       <tag>Pytorch</tag>
       
       <tag>机器学习</tag>
+      
+      <tag>环境搭建</tag>
       
     </tags>
     
