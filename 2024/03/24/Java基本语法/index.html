@@ -27,10 +27,10 @@
 <meta property="og:image" content="https://strive-c.github.io/2024/03/24/Java%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%8A%A8%E7%BC%96%E8%AF%91.png">
 <meta property="og:image" content="https://strive-c.github.io/2024/03/24/Java%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/JVM%E7%BB%84%E6%88%90.png">
 <meta property="article:published_time" content="2024-03-24T14:11:55.000Z">
-<meta property="article:modified_time" content="2024-04-03T09:16:21.242Z">
+<meta property="article:modified_time" content="2024-04-03T14:05:02.759Z">
 <meta property="article:author" content="bjx">
 <meta property="article:tag" content="Java">
-<meta property="article:tag" content="变成语言">
+<meta property="article:tag" content="编程语言">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://strive-c.github.io/2024/03/24/Java%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E6%9B%B4%E6%94%B9%E9%A1%B9%E7%9B%AE%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F.png">
   
@@ -231,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          9.1k 字
+          10k 字
         
       </span>
     
@@ -242,7 +242,7 @@
         
         
         
-          76 分钟
+          84 分钟
         
       </span>
     
@@ -1228,6 +1228,60 @@ overrride：子类在继承父类后，就获取了父类中声明的所有方�
 <li>代码块赋值：一般静态代码块会用，非静态代码块一般不常用</li>
 </ul></li>
 </ul>
+<h2 id="final">final</h2>
+<ul>
+<li>final 最终的，可以用来修饰：
+<ul>
+<li>类：该类不能被继承，如：String、StringBuffer、StringBuilder</li>
+<li>方法：该方法不能被重写，如Object类中getClass()方法</li>
+<li>变量：成员变量和局部变量，常量，一旦赋值不可更改，在形参列表中可以加上关键字final</li>
+</ul></li>
+<li>final和static搭配修饰成员变量时，我们可以称该变量为全局常量</li>
+</ul>
+<h2 id="abstract">abstract</h2>
+<ul>
+<li>随着继承层次中一个个新子类的定义，类变得越来越具体，而父类则更一般，更通用。类的设计应该保证父类和子类能够共享特征。有时将一个父类设计得非常抽象，以至于没有具体的实例，这样的类叫做<code>抽象类</code>。</li>
+<li>在类前面使用abstract关键字修饰，该类称为抽象类，不能实例化，但是抽象类有构造器，用于提供给子类用</li>
+<li>在方法前面使用abstract关键字修饰，该方法称为抽象方法，不能有方法体，包含抽象方法的类称为抽象类。子类必须实现（implement）父类中的抽象方法。</li>
+<li>抽象类的子类要么实现抽象类的所有方法，要么也是一个抽象类</li>
+<li>abstract不能和哪些关键字共用
+<ul>
+<li>私有方法：如果一个方法是私有的，就无法被重写，也就无法使用abstract</li>
+<li>static：抽象方法没有方法体，但是static修饰的方法可以使用类调用，矛盾</li>
+<li>final：抽象方法需要被重写，final方法不能被重写，矛盾</li>
+</ul></li>
+</ul>
+<h2 id="interface">interface</h2>
+<ul>
+<li>接口和类是并列的结构</li>
+<li>继承是“是不是”的关系“is-a”，接口是能不能得关系“has-a”</li>
+<li>接口的本质是契约、标准、规范</li>
+<li>接口的关键字：interface</li>
+<li>接口内部
+<ul>
+<li>属性：必须使用public static final修饰（全局常量），可以省略不写</li>
+<li>方法：jdk8之前，只能声明抽象方法，使用public
+abstract修饰；jdk8，可以声明静态方法，默认方法；jdk9，可以声明私有方法</li>
+<li>不能有构造器和代码块</li>
+</ul></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">InterfaceTest</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">Bullet</span> <span class="hljs-variable">bullet</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Bullet</span>();<br>        bullet.fly();<br>        bullet.attack();<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Flyable</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">double</span> <span class="hljs-variable">MIN_SPEED</span> <span class="hljs-operator">=</span> <span class="hljs-number">0.0</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">double</span> <span class="hljs-variable">MAX_SPEED</span> <span class="hljs-operator">=</span> <span class="hljs-number">7900</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">fly</span><span class="hljs-params">()</span>;<br>&#125;<br><br><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Attackable</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">attack</span><span class="hljs-params">()</span>;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Bullet</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Flyable</span>, Attackable &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">fly</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;让子弹飞一会儿&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">attack</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;子弹有攻击性&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><p>类相较于父类来说称为子类，相较于实现的接口来说，称为实现类。一个类只能有一个直接父类，但是可以实现多个接口</p></li>
+<li><p>如果一个类没有将其实现的接口中的所有方法都实现，那么可以将该方法声明为抽象类</p></li>
+<li><p>接口和接口之间可以继承，并且可以多继承</p></li>
+<li><p>接口的多态的形式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">接口名 变量名 = <span class="hljs-keyword">new</span> 实现类();<br></code></pre></td></tr></table></figure></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UsbTest</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">Computer</span> <span class="hljs-variable">computer</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Computer</span>();<br><br>        <span class="hljs-comment">// 1. 创建接口实现类的对象</span><br>        <span class="hljs-type">Usb</span> <span class="hljs-variable">usb1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Camera</span>();<br>        computer.transfer(usb1);<br>        <span class="hljs-comment">// 2. 创建接口实现类的匿名对象</span><br>        computer.transfer(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Camera</span>());<br>        <span class="hljs-comment">// 3. 创建接口匿名实现类的对象</span><br>        <span class="hljs-type">Usb</span> <span class="hljs-variable">usb2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Usb</span>() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">start</span><span class="hljs-params">()</span> &#123;<br>                System.out.println(<span class="hljs-string">&quot;打印机开始接收数据&quot;</span>);<br>            &#125;<br><br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">stop</span><span class="hljs-params">()</span> &#123;<br>                System.out.println(<span class="hljs-string">&quot;打印机停止接收数据&quot;</span>);<br>            &#125;<br>        &#125;;<br>        computer.transfer(usb2);<br>        <span class="hljs-comment">// 4. 创建接口匿名实现类的匿名对象</span><br>        computer.transfer(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Usb</span>() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">start</span><span class="hljs-params">()</span> &#123;<br>                System.out.println(<span class="hljs-string">&quot;硬盘开始接收数据&quot;</span>);<br>            &#125;<br><br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">stop</span><span class="hljs-params">()</span> &#123;<br>                System.out.println(<span class="hljs-string">&quot;硬盘停止接收数据&quot;</span>);<br>            &#125;<br>        &#125;);<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Usb</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">start</span><span class="hljs-params">()</span>;<br><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">stop</span><span class="hljs-params">()</span>;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Computer</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">transfer</span><span class="hljs-params">(Usb usb)</span> &#123;<br>        usb.start();<br>        usb.stop();<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Camera</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Usb</span> &#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">start</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;相机开始接收数据&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">stop</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;相机停止接收数据&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>仔细看一下上面的代码</li>
+<li>抽象类和接口的异同
+<ul>
+<li>相同：都可以声明抽象方法；都不能实例化</li>
+<li>不同：抽象类一定有构造器，接口没有构造器；</li>
+</ul></li>
+</ul>
 
                 
               </div>
@@ -1263,7 +1317,7 @@ overrride：子类在继承父类后，就获取了父类中声明的所有方�
       
         <a href="/tags/Java/" class="print-no-link">#Java</a>
       
-        <a href="/tags/%E5%8F%98%E6%88%90%E8%AF%AD%E8%A8%80/" class="print-no-link">#变成语言</a>
+        <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="print-no-link">#编程语言</a>
       
     </div>
   
