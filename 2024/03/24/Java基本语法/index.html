@@ -26,8 +26,10 @@
 <meta property="og:image" content="https://strive-c.github.io/2024/03/24/Java%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E6%9B%B4%E6%94%B9%E9%A1%B9%E7%9B%AE%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F.png">
 <meta property="og:image" content="https://strive-c.github.io/2024/03/24/Java%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%8A%A8%E7%BC%96%E8%AF%91.png">
 <meta property="og:image" content="https://strive-c.github.io/2024/03/24/Java%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/JVM%E7%BB%84%E6%88%90.png">
+<meta property="og:image" content="https://strive-c.github.io/2024/03/24/Java%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E8%87%AA%E5%AE%9A%E4%B9%89JUnit%E6%A8%A1%E6%9D%BF%E6%AD%A5%E9%AA%A41.png">
+<meta property="og:image" content="https://strive-c.github.io/2024/03/24/Java%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E8%87%AA%E5%AE%9A%E4%B9%89JUnit%E6%A8%A1%E6%9D%BF%E6%AD%A5%E9%AA%A42.png">
 <meta property="article:published_time" content="2024-03-24T14:11:55.000Z">
-<meta property="article:modified_time" content="2024-04-03T14:05:02.759Z">
+<meta property="article:modified_time" content="2024-04-08T13:40:43.591Z">
 <meta property="article:author" content="bjx">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="编程语言">
@@ -231,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          10k 字
+          12k 字
         
       </span>
     
@@ -242,7 +244,7 @@
         
         
         
-          84 分钟
+          104 分钟
         
       </span>
     
@@ -1280,6 +1282,217 @@ abstract修饰；jdk8，可以声明静态方法，默认方法；jdk9，可以�
 <ul>
 <li>相同：都可以声明抽象方法；都不能实例化</li>
 <li>不同：抽象类一定有构造器，接口没有构造器；</li>
+</ul></li>
+</ul>
+<h3 id="final方法的扩充">final方法的扩充</h3>
+<ul>
+<li>jdk8之前，只能声明抽象方法，使用public
+abstract修饰；jdk8，可以声明静态方法，默认方法；jdk9，可以声明私有方法</li>
+<li>接口中声明的静态方法只能被接口调用，不能使用其实现类进行调用</li>
+<li>默认方法关键字：default</li>
+<li>接口中声明的默认方法可以被实现类继承，实现类在没有重写该方法的情况下，默认调用接口中声明的默认方法。如果实现类重写了该方法，则调用的是自己重写的方法。</li>
+<li>接口冲突：实现了两个接口，两个接口中定义了同名同参数的默认方法，则实现类在没有重写
+此两个接口默认方法的情况下，会报错。
+<ul>
+<li>解决方法：实现类必须重写接口中定义的同名同参数的方法</li>
+</ul></li>
+<li>类优先原则：子类继承了父类，并实现了接口。父类和接口中声明了同名同参数的方法，此时调用方法是调用了父类中的方法。</li>
+<li>如何在子类（实现类）中调用父类或接口中被重写的方法：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">InterfaceTest</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">SubClass</span> <span class="hljs-variable">subClass</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SubClass</span>();<br>        subClass.method2();<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">SuperClass</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">method1</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;父类中的方法1&quot;</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">SubClass</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">SuperClass</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Method</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">method1</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;子类中的方法1&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">method2</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-built_in">super</span>.method1();         <span class="hljs-comment">// 调用父类</span><br>        <span class="hljs-built_in">this</span>.method1();          <span class="hljs-comment">// 调用自己</span><br>        Method.<span class="hljs-built_in">super</span>.method1();  <span class="hljs-comment">// 调用接口</span><br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Method</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">method1</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;接口中的方法1&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="内部类">内部类</h2>
+<ul>
+<li>内部类：将类A定义在类B里面，则类A称为内部类
+InnerClass，类B称为外部类 OuterClass</li>
+<li>为什么需要内部类：
+<ul>
+<li>当一个事物A的内部，还有一个部分需要一个完整的结构B进行描述，而这个内部的完整结构B又只在为外部事物A提供服务，不在其他地方单独使用，那么这个内部的完整结构B最好使用内部类</li>
+<li>遵循高内聚、低耦合的面向对象开发原则</li>
+</ul></li>
+<li>内部类的举例
+<ul>
+<li>Thread类内部声明了State类，表示线程的生命周期</li>
+<li>HashMap类中声明了Node类，表示封装的key和value</li>
+</ul></li>
+<li>内部类的分类
+<ul>
+<li>成员内部类：直接声明在外部类的里面
+<ul>
+<li>静态内部类</li>
+<li>非静态内部类</li>
+</ul></li>
+<li>局部内部类：声明在方法内、构造器内、代码块内
+<ul>
+<li>匿名的局部内部类</li>
+<li>非匿名的局部内部类</li>
+</ul></li>
+</ul></li>
+<li>成员内部类的理解
+<ul>
+<li>与外部类具有相同特性</li>
+<li>和其他成员相同，可以使用四种权限修饰符进行修饰</li>
+</ul></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OuterClassTest</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-comment">// 1. 创建静态的成员内部类</span><br>        Person.<span class="hljs-type">Dog</span> <span class="hljs-variable">dog</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>.Dog();<br>        dog.eat();<br>        <span class="hljs-comment">// 2. 创建非静态的成员内部类</span><br>        <span class="hljs-type">Person</span> <span class="hljs-variable">p1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>();<br>        Person.<span class="hljs-type">Bird</span> <span class="hljs-variable">bird</span> <span class="hljs-operator">=</span> p1.<span class="hljs-keyword">new</span> <span class="hljs-title class_">Bird</span>();<br>        bird.eat();<br><br>        bird.show(<span class="hljs-string">&quot;啄木鸟&quot;</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;<br>    <span class="hljs-type">String</span> <span class="hljs-variable">name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;人&quot;</span>;<br><br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Dog</span> &#123;<br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">eat</span><span class="hljs-params">()</span> &#123;<br>            System.out.println(<span class="hljs-string">&quot;狗吃骨头&quot;</span>);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">Bird</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;鹦鹉&quot;</span>;<br><br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">eat</span><span class="hljs-params">()</span> &#123;<br>            System.out.println(<span class="hljs-string">&quot;鸟吃米&quot;</span>);<br>        &#125;<br><br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">show</span><span class="hljs-params">(String name)</span> &#123;<br>            System.out.println(name);<br>            System.out.println(<span class="hljs-built_in">this</span>.name);<br>            System.out.println(Person.<span class="hljs-built_in">this</span>.name);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="枚举类">枚举类</h2>
+<ul>
+<li><p>枚举类本质上也是一种类，只不过是这个类的对象是有限的、固定的几个，不能让用户随意创建</p></li>
+<li><p>若枚举只有一个对象，则可以作为一种单例模式的视线方式</p></li>
+<li><p>枚举类的实现</p>
+<ul>
+<li>在JDK5之前，需要自定义枚举类型</li>
+<li>在之后，支持enum关键字来快速定义枚举类型</li>
+</ul></li>
+<li><p>枚举类和普通类有以下几个不同点：</p>
+<ol type="1">
+<li>枚举类不能指定继承的父类（因为继承了java.lang.Enum类），但是可以实现多个接口，枚举类默认实现了Comparable接口和Serializable接口</li>
+<li>枚举类的构造方法的访问权限只可为private</li>
+<li>枚举类的实例必须显式列出</li>
+</ol></li>
+<li><p>JDK5.0之前枚举类的写法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// jdk5.0 之前定义枚举类的方式</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Season</span> &#123;<br>    <span class="hljs-comment">// 2. 声明当前类的对象的实例变量</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String seasonName;  <span class="hljs-comment">// 季节的名称</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String seasonDesc;  <span class="hljs-comment">// 季节的描述</span><br><br>    <span class="hljs-comment">// 1. 私有化类的构造器</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-title function_">Season</span><span class="hljs-params">(String seasonName, String seasonDesc)</span> &#123;<br>        <span class="hljs-built_in">this</span>.seasonName = seasonName;<br>        <span class="hljs-built_in">this</span>.seasonDesc = seasonDesc;<br>    &#125;<br>    <span class="hljs-comment">// 3. 提供实例变量的get方法</span><br><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getSeasonName</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> seasonName;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getSeasonDesc</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> seasonDesc;<br>    &#125;<br><br>    <span class="hljs-comment">// 4. 创建当前类的实例</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Season</span> <span class="hljs-variable">spring</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Season</span>(<span class="hljs-string">&quot;春天&quot;</span>, <span class="hljs-string">&quot;春暖花开&quot;</span>);<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Season</span> <span class="hljs-variable">summer</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Season</span>(<span class="hljs-string">&quot;夏天&quot;</span>, <span class="hljs-string">&quot;夏日炎炎&quot;</span>);<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Season</span> <span class="hljs-variable">autumn</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Season</span>(<span class="hljs-string">&quot;秋天&quot;</span>, <span class="hljs-string">&quot;秋高气爽&quot;</span>);<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Season</span> <span class="hljs-variable">winter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Season</span>(<span class="hljs-string">&quot;冬天&quot;</span>, <span class="hljs-string">&quot;白雪皑皑&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><p>Enum类中常用的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">EnumTest</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-comment">// 调用toString方法</span><br>        System.out.println(Season.SPRING);<br>        <span class="hljs-comment">// 获取当前对象名</span><br>        System.out.println(Season.SUMMER.name());<br>        <span class="hljs-comment">// 获取所有对象数组</span><br>        Season[] values = Season.values();<br>        <span class="hljs-keyword">for</span> (Season value : values) &#123;<br>            System.out.println(value);<br>        &#125;<br>        <span class="hljs-comment">// valueOf(String objName): 返回当前枚举类中名称为objName的枚举类对象，如果不存在，则报错</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">objName</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;WINTER&quot;</span>;<br>        <span class="hljs-type">Season</span> <span class="hljs-variable">season</span> <span class="hljs-operator">=</span> Season.valueOf(objName);<br>        System.out.println(season);<br>        <span class="hljs-comment">// ordinal(): 返回次序号，默认从0开始</span><br>        System.out.println(Season.AUTUMN.ordinal());<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">enum</span> <span class="hljs-title class_">Season</span> &#123;<br>    SPRING(<span class="hljs-string">&quot;春天&quot;</span>),<br>    SUMMER(<span class="hljs-string">&quot;夏天&quot;</span>),<br>    AUTUMN(<span class="hljs-string">&quot;秋天&quot;</span>),<br>    WINTER(<span class="hljs-string">&quot;冬天&quot;</span>);<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String name;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-title function_">Season</span><span class="hljs-params">(String name)</span> &#123;<br>        <span class="hljs-built_in">this</span>.name = name;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getName</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> name;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">toString</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Season&#123;&quot;</span> +<br>                <span class="hljs-string">&quot;name=&#x27;&quot;</span> + name + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>                <span class="hljs-string">&#x27;&#125;&#x27;</span>;<br>    &#125;<br>&#125;<br>================================================================================<br>Season&#123;name=<span class="hljs-string">&#x27;春天&#x27;</span>&#125;<br>SUMMER<br>Season&#123;name=<span class="hljs-string">&#x27;春天&#x27;</span>&#125;<br>Season&#123;name=<span class="hljs-string">&#x27;夏天&#x27;</span>&#125;<br>Season&#123;name=<span class="hljs-string">&#x27;秋天&#x27;</span>&#125;<br>Season&#123;name=<span class="hljs-string">&#x27;冬天&#x27;</span>&#125;<br>Season&#123;name=<span class="hljs-string">&#x27;冬天&#x27;</span>&#125;<br><span class="hljs-number">2</span><br></code></pre></td></tr></table></figure></li>
+<li><p>实际中的用法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">EmployeeTest</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">Employee</span> <span class="hljs-variable">e</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Employee</span>(<span class="hljs-string">&quot;小张&quot;</span>, <span class="hljs-number">26</span>, Status.BUSY);<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Employee</span> &#123;<br>    <span class="hljs-keyword">private</span> String name;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> age;<br>    <span class="hljs-keyword">private</span> Status status;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Employee</span><span class="hljs-params">()</span> &#123;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Employee</span><span class="hljs-params">(String name, <span class="hljs-type">int</span> age, Status status)</span> &#123;<br>        <span class="hljs-built_in">this</span>.name = name;<br>        <span class="hljs-built_in">this</span>.age = age;<br>        <span class="hljs-built_in">this</span>.status = status;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getName</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> name;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setName</span><span class="hljs-params">(String name)</span> &#123;<br>        <span class="hljs-built_in">this</span>.name = name;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getAge</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> age;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setAge</span><span class="hljs-params">(<span class="hljs-type">int</span> age)</span> &#123;<br>        <span class="hljs-built_in">this</span>.age = age;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> Status <span class="hljs-title function_">getStatus</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> status;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setStatus</span><span class="hljs-params">(Status status)</span> &#123;<br>        <span class="hljs-built_in">this</span>.status = status;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">toString</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Employee&#123;&quot;</span> +<br>                <span class="hljs-string">&quot;name=&#x27;&quot;</span> + name + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>                <span class="hljs-string">&quot;, age=&quot;</span> + age +<br>                <span class="hljs-string">&quot;, status=&quot;</span> + status +<br>                <span class="hljs-string">&#x27;&#125;&#x27;</span>;<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">enum</span> <span class="hljs-title class_">Status</span> &#123;<br>    BUSY, FREE, VOCATION, DIMISSION;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="注解">注解</h2>
+<ul>
+<li><p>Annotation
+注解：从JDK5.0开始引入，以<code>@注解名</code>在代码中存在。例如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-meta">@Deprecated</span><br><span class="hljs-meta">@SuppressWarnings(value=&quot;unchecked&quot;)</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>Annotation可以像修饰符一样被使用，可用于修饰包、类、构造器、方法、成员变量、参数、局部变量的声明。还可以添加一些参数，这些信息被保存在Annotation的"name=value"对中</li>
+<li>注解可以在类编译、运行时进行加载，体现不同的功能</li>
+</ul></li>
+<li><p>在<code>JavaSE</code>中，注解的使用比较简单。在<code>JavaEE/Android</code>中注解占据了更重要的角色，例如用来配置应用程序的任何切面，代替JavaEE旧版中所遗留的<code>繁冗代码</code>和<code>XML</code>配置等</p></li>
+<li><p>一定程度上可以说：<code>框架 = 注解 + 反射 + 设计模式</code></p></li>
+<li><p>Java基础阶段涉及的三个常用注解</p>
+<ul>
+<li><span class="citation"
+data-cites="Override">@Override</span>：限定重写父类方法，只能用于方法，可以提供检查机制</li>
+<li><span class="citation"
+data-cites="Deprecated">@Deprecated</span>：表示所修饰的元素（类、方法等）已过时。通常是因为所修饰的结构危险或存在更好的选择</li>
+<li><span class="citation"
+data-cites="SuppressWarnings">@SuppressWarnings</span>：抑制编译器警告</li>
+</ul></li>
+<li><p>自定义注解：以SupperWarnings为参照，进行定义即可</p></li>
+<li><p>元注解：对现有的注解进行解释说明的注解</p>
+<ul>
+<li><span class="citation"
+data-cites="Target">@Target</span>：用于描述注解的使用范围</li>
+<li><span class="citation"
+data-cites="Retention">@Retention</span>：用于描述注解的声明周期</li>
+<li><span class="citation"
+data-cites="Documented">@Documented</span>：表明这个注解应该被javadoc工具记录</li>
+<li><span class="citation"
+data-cites="Inherited">@Inherited</span>：允许子类继承父类中的注解</li>
+</ul></li>
+</ul>
+<h2 id="junit单元测试">JUnit单元测试</h2>
+<ul>
+<li>测试分类
+<ul>
+<li>黑盒测试：不需要写代码，给输入值，看程序是否能够输出期望的值</li>
+<li>白盒测试：需要写代码，关注程序具体的执行流程</li>
+</ul></li>
+<li>JUnit是Erich和Kent编写的一个测试框架，供Java开发人员编写单元测试用。</li>
+<li>JUnit测试是白盒测试</li>
+<li>要使用JUnit，必须在项目的编译路径中引入JUnit的库，即相关的.class文件组成的jar包。jar就是一个压缩包，是开发好的第三方工具类，以.class文件形式存在</li>
+<li>IDEA中导入JUnit包
+<ol type="1">
+<li>从https://github.com/junit-team/junit4/wiki/Download-and-Install中下载两个jar包</li>
+<li>File-&gt;Project
+Structure-&gt;Libraries-&gt;加号-&gt;Java-&gt;选择包-&gt;选择添加到的模块-&gt;OK-&gt;Apply（每次只能添加一个包，或者把两个包放在一个文件夹下，选择该文件夹即可）</li>
+<li>Modules-&gt;上一步选择添加的模块-&gt;Dependencies即可查看导入的包，Scope显示<code>Compile</code></li>
+</ol></li>
+<li>成功导入两个包后，在想要测试的方法上面加上@Test注解即可</li>
+<li>单元测试的要求
+<ul>
+<li>单元测试类必须是public，非抽象，包含唯一的无参构造器</li>
+<li><span class="citation"
+data-cites="Test标记的方法本身必须是public">@Test标记的方法本身必须是public</span>，非抽象的，非静态的，void无返回值，()无参数的</li>
+</ul></li>
+<li>默认情况下，在单元测试方法中使用Scanner会失效
+<ul>
+<li>解决方案：Help-&gt;Edit Custom VM
+Options中加入-Deditable.java.test.console=true，然后重启IDEA即可</li>
+</ul></li>
+<li>由于单元测试需要经常写，所以可以将单元测试方法设置为一个模板
+<ul>
+<li><figure>
+<img src="自定义JUnit模板步骤1.png" srcset="/img/loading.gif" lazyload alt="自定义JUnit模板步骤1" />
+<figcaption aria-hidden="true">自定义JUnit模板步骤1</figcaption>
+</figure></li>
+<li><figure>
+<img src="自定义JUnit模板步骤2.png" srcset="/img/loading.gif" lazyload alt="自定义JUnit模板步骤2" />
+<figcaption aria-hidden="true">自定义JUnit模板步骤2</figcaption>
+</figure></li>
+</ul></li>
+</ul>
+<h2 id="包装类">包装类</h2>
+<ul>
+<li><p>Java提供了两种类型：基本数据类型和引用数据类型。当遇到一些只针对对象设计的API或新特性时，如何将基本数据类型进行应用。因此提出了包装类的结构。</p></li>
+<li><table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">基本数据类型</th>
+<th style="text-align: center;">包装类</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">byte</td>
+<td style="text-align: center;">Byte</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">short</td>
+<td style="text-align: center;">Short</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">int</td>
+<td style="text-align: center;">Integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">long</td>
+<td style="text-align: center;">Long</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">float</td>
+<td style="text-align: center;">Float</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">double</td>
+<td style="text-align: center;">Double</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">boolean</td>
+<td style="text-align: center;">Boolean</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">char</td>
+<td style="text-align: center;">Character</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>其中前六个数值类型的包装类都有个公共的父类Number</p></li>
+<li><p>基本类型与其包装类的相互转换</p>
+<ul>
+<li>基本数据类型-&gt;包装类（装箱）
+<ol type="1">
+<li>使用包装类的构造器（JDK9之后不建议使用）</li>
+<li>valueOf方法（建议使用）</li>
+</ol></li>
+<li>包装类-&gt;基本数据类型（拆箱）
+<ol type="1">
+<li>xxxValue()</li>
+</ol></li>
+</ul></li>
+<li><p>jdk5.0特性：自动拆箱，自动装箱</p>
+<ul>
+<li>直接给包装类赋值就行</li>
+<li>将包装类直接就可以赋值给基本数据类型</li>
+<li>以上是一种语法糖，实际上也是通过valueOf和xxxValue()实现的</li>
 </ul></li>
 </ul>
 
