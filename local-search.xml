@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Java高级应用</title>
+    <link href="/2024/04/09/Java%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/"/>
+    <url>/2024/04/09/Java%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<h1 id="异常处理">10 异常处理</h1><ul><li>异常：指程序在执行过程中，出现的非正常情况，如果不处理最终会导致JVM的非正常停止</li><li>Java中把不同的异常用不同的类表示，一旦发生某种异常，就<code>创建该异常类型的对象</code>，并且抛出throw。然后后续可以捕获catch这个异常对象，并处理。如果没有catch这个异常对象，那这个异常对象将会导致程序终止。</li><li>程序员要编写相应的代码进行<code>异常检测</code>，以及<code>异常处理</code>，保证代码的<code>健壮性</code>。</li></ul><h2 id="java异常体系">Java异常体系</h2><ul><li>Throwable：<code>java.lang.Throwable</code>类是Java程序执行过程中发生的异常事件对应的类的根父类。</li><li>Throwable的常用方法<ul><li><code>public void printStackTrace()</code>：打印异常的详细信息（异常类型、原因、出现的位置）常用此方法</li><li><code>public String getMessage()</code>：获取发生异常的原因</li></ul></li><li>Throwable类有两个子类，Error和Exception<ul><li>Error：JVM无法解决的严重问题，一般不编写针对性的代码进行处理。<ul><li>StackOverflowError：栈内存溢出</li><li>OutOfMemoryError：堆内存溢出</li></ul></li><li>Exception：因编程错误或偶然的外在因素导致的一般性问题，需要使用针对性的代码进行处理。<ul><li>ArrayIndexOutOfBoundsException：数组角标越界</li><li>NullPointerException：空指针访问</li><li>ClassCastException：类转换异常</li><li>FileNotFountException：文件找不到异常</li></ul></li></ul></li><li>Java程序执行分为编译时过程和运行时过程，所以根据异常发生的阶段，可以分为<code>编译时异常</code>和<code>运行时异常</code>。</li><li>编译时异常（checked异常、受检异常）</li><li>运行时异常（runtime异常、unchecked异常、非受检异常）</li></ul><h2 id="异常处理-1">异常处理</h2><ul><li><p>Java异常处理：将异常处理的程序代码集中在一起，与正常的程序代码分开，使得程序简洁、优雅，并易于维护。</p></li><li><p>Java异常处理的方式</p><ul><li>try-catch-finally</li><li>throws + 异常类型</li></ul></li><li><p>try-catch-finally</p><ul><li><p>程序在执行过程中，一旦出现异常，就会在出现异常的代码处创建对应异常的对象，并将该对象抛出。一旦抛出，此程序就不执行其后代码。针对抛出的异常对象，后续进行捕获处理，将异常进行处理后，代码就可以继续执行。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">try</span> &#123;<br>    ...<span class="hljs-comment">//可能出现异常的代码</span><br>&#125;<br><span class="hljs-keyword">catch</span> (异常类型<span class="hljs-number">1</span> e) &#123;<br>    ... <span class="hljs-comment">//当产生异常类型1时处理措施</span><br>&#125;<br><span class="hljs-keyword">catch</span> (异常类型<span class="hljs-number">2</span> e) &#123;<br>    ... <span class="hljs-comment">//当产生异常类型2时处理措施</span><br>&#125;<br><span class="hljs-keyword">finally</span> &#123;<br>    ... <span class="hljs-comment">//无论是否发生异常，都无条件执行的语句</span><br>&#125;<br></code></pre></td></tr></table></figure></li><li><p>如果不同异常类型中存在父子类的关系，则父类异常要写在子类异常下面</p></li><li><p>把一定要执行的代码写在finally中。无论try和catch中是否存在未被处理的异常，无论try或catch中是否存在return语句，finally中声明的语句都一定要执行</p></li><li><p>（输入流、输出流、数据库连接、Socket连接）资源回收需要被放在finally中，避免内存泄漏。</p></li></ul></li><li><p>throws</p><ul><li><p>在方法的声明处，使用<code>throws 异常类型1, 异常类型2, ...</code></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">method1</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> 异常类型<span class="hljs-number">1</span>, 异常类型<span class="hljs-number">2</span> &#123;<br>    <span class="hljs-comment">// 可能会出现异常的代码</span><br>&#125;<br></code></pre></td></tr></table></figure></li><li><p>throws只是将可能出现的异常抛给此方法的调用者，并不算真正处理了异常</p></li></ul></li></ul><h2 id="手动抛出异常对象">手动抛出异常对象</h2><ul><li>在适当位置加入代码：throw new 异常对象("异常信息")</li></ul><h2 id="自定义异常类">自定义异常类</h2><ul><li>要求：<ol type="1"><li>继承于现有的异常体系，通常继承于RuntimeException  Exception</li><li>通常提供几个重载的构造器</li><li>提供一个全局常量，声明为：static final long serialVersionUID;</li><li>具体查看其他异常类源码，仿照构建</li></ol></li><li>使用<ul><li>在具体代码中，满足指定条件的情况下，需要手动使用throw +自定义异常类的对象，将异常对象抛出</li><li>如果自定义异常类是非运行时异常，则必须考虑如何处理此异常类的对象。（try-catch-finally，throws）</li></ul></li><li>为什么要自定义异常类<ul><li>通过异常名称就能直接判断此异常出现的原因，所以自定义异常类，即可见名知义</li></ul></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Java</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Java</tag>
+      
+      <tag>编程语言</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Java面向对象编程</title>
     <link href="/2024/04/01/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/"/>
     <url>/2024/04/01/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/</url>
@@ -437,11 +464,11 @@
     
     <tags>
       
+      <tag>环境搭建</tag>
+      
       <tag>Pytorch</tag>
       
       <tag>机器学习</tag>
-      
-      <tag>环境搭建</tag>
       
     </tags>
     
