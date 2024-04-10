@@ -24,8 +24,10 @@
 <meta property="og:description" content="10 异常处理  异常：指程序在执行过程中，出现的非正常情况，如果不处理最终会导致JVM的非正常停止 Java中把不同的异常用不同的类表示，一旦发生某种异常，就创建该异常类型的对象，并且抛出throw。然后后续可以捕获catch这个异常对象，并处理。如果没有catch这个异常对象，那这个异常对象将会导致程序终止。 程序员要编写相应的代码进行异常检测，以及异常处理，保证代码的健壮性。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://strive-c.github.io/2024/04/09/Java%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/%E8%BF%9B%E7%A8%8B%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4.png">
+<meta property="og:image" content="https://strive-c.github.io/JDK1.5%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE.png">
+<meta property="og:image" content="https://strive-c.github.io/2024/04/09/Java%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/JDK1.5%E5%90%8E%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE.png">
 <meta property="article:published_time" content="2024-04-09T02:46:39.000Z">
-<meta property="article:modified_time" content="2024-04-10T03:48:32.831Z">
+<meta property="article:modified_time" content="2024-04-10T12:42:01.631Z">
 <meta property="article:author" content="bjx">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="编程语言">
@@ -229,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          2.9k 字
         
       </span>
     
@@ -240,7 +242,7 @@
         
         
         
-          14 分钟
+          25 分钟
         
       </span>
     
@@ -407,14 +409,14 @@ thread：进程可进一步细化为线程，是程序内部的一条执行路�
 </ul>
 <h2 id="创建和启动线程">创建和启动线程</h2>
 <ul>
-<li>JVM允许程序运行多个线程，使用<code>java.lang.Thread</code>类代表线程，所有的线程对象都必须是Thread类或其子类的实例。</li>
-<li>Thread类的特性
+<li><p>JVM允许程序运行多个线程，使用<code>java.lang.Thread</code>类代表线程，所有的线程对象都必须是Thread类或其子类的实例。</p></li>
+<li><p>Thread类的特性</p>
 <ul>
 <li>每个线程都是通过某个特定Thread对象的run()方法来完成操作的，把run()方法体称为<code>线程执行体</code></li>
 <li>通过该Thread对象的start()方法来启动这个线程，而非直接调用run()</li>
 <li>要想实现多线程，必须在主线程中创建新的线程对象</li>
 </ul></li>
-<li>继承Thread类的方式创建线程
+<li><p>继承Thread类的方式创建线程</p>
 <ul>
 <li>步骤：
 <ol type="1">
@@ -422,8 +424,127 @@ thread：进程可进一步细化为线程，是程序内部的一条执行路�
 <li>重写run方法，将要执行的操作放到方法体中</li>
 <li>创建该子类对象</li>
 <li>通过对象调用start()方法</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PrintNumberTest</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">EvenNumberPrint</span> <span class="hljs-variable">evenNumberPrint</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">EvenNumberPrint</span>();<br>        <span class="hljs-type">OddNumberPrint</span> <span class="hljs-variable">oddNumberPrint</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">OddNumberPrint</span>();<br>        evenNumberPrint.start();<br>        oddNumberPrint.start();<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">EvenNumberPrint</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Thread</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100</span>; i++) &#123;<br>            <span class="hljs-keyword">if</span> (i % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>) &#123;<br>                System.out.println(<span class="hljs-string">&quot;偶数：&quot;</span> + i);<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">OddNumberPrint</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Thread</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100</span>; i++) &#123;<br>            <span class="hljs-keyword">if</span> (i % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) &#123;<br>                System.out.println(<span class="hljs-string">&quot;奇数: &quot;</span> + i);<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>这种方式如果想要同时调用两个线程执行相同的操作，那么需要创建相同子类的两个不同对象，并调用start方法</li>
+</ul></li>
+<li><p>由于Java是单继承方式，通过继承的方式去创建线程会导致不够灵活，所以第二种方式是通过实现接口的方式。</p></li>
+<li><p>实现Runnable接口的方式创建线程</p>
+<ul>
+<li><p>步骤</p>
+<ol type="1">
+<li>创建一个实现Runnable接口的类</li>
+<li>实现接口的run方法</li>
+<li>创建当前实现类的对象</li>
+<li>将此对象作为参数传递到Thread类的构造器中，创建Thread类的实例</li>
+<li>调用Thread类实例的start方法</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">EvenNumberTest</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">EvenNumberPrint</span> <span class="hljs-variable">evenNumberPrint</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">EvenNumberPrint</span>();<br>        <span class="hljs-type">Thread</span> <span class="hljs-variable">t1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(evenNumberPrint);<br>        t1.start();<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">EvenNumberPrint</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Runnable</span> &#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100</span>; i++) &#123;<br>            <span class="hljs-keyword">if</span> (i % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>) &#123;<br>                System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot;:&quot;</span> + i);<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><p>这种方式如果想要同时调用两个线程执行相同的操作，那么不需要创建相同子类的两个不同对象，而需要创建两个Thread类对象，并调用Thread类对象的start方法</p></li>
+</ul></li>
+<li><p>以上两种方式的异同点</p>
+<ul>
+<li>共同点：
+<ol type="1">
+<li>启动线程，使用的都是Thread类中定义的start()方法</li>
+<li>创建的线程对象，都是Thread类或其子类的实例</li>
 </ol></li>
-<li><code>注意如何有多个线程要执行，在调用start()方法前需要将所有线程的对象均创建好？</code></li>
+<li>不同点
+<ul>
+<li>一个是类的继承，一个是接口的实现</li>
+</ul></li>
+<li>建议使用Runnable接口的方式：避免了类的单继承的局限性；更适合处理有共享数据的问题；实现了代码和数据的分离</li>
+<li>Thread类也实现了Runnable接口</li>
+</ul></li>
+</ul>
+<h2 id="thread类常用结构">Thread类常用结构</h2>
+<ul>
+<li>构造器
+<ul>
+<li>public Thread()：分配一个新的线程对象</li>
+<li>public Thread(String name)：分配一个指定名字的新的线程对象</li>
+<li>public Thread(Runnable
+target)：指定创建线程的目标对象，它实现了Runnable接口中的run方法</li>
+<li>public Thread(Runnable target, String
+name)：分配一个带有指定目标新的线程对象并指定名字</li>
+</ul></li>
+<li>常用方法
+<ul>
+<li>start()：启动线程，调用线程的run()方法</li>
+<li>run()：将线程要执行的操作，声明在run()中</li>
+<li>currentThread()：获取当前正在执行的线程</li>
+<li>getName()：获取线程名</li>
+<li>setName()：设置线程名</li>
+<li>sleep(long millis)：当前线程睡眠指定的毫秒数</li>
+<li>yield()：主动释放CPU的执行权</li>
+<li>join()：在线程A中通过线程B调用join()，意味着线程A进入阻塞状态，直到线程B执行结束，线程A才结束阻塞状态，继续执行</li>
+<li>isAlive()：判断当前线程是否还存活</li>
+</ul></li>
+<li>过时方法
+<ul>
+<li>stop()：强行结束线程的执行</li>
+<li>suspend()和resume()：挂起和唤醒，可能造成死锁</li>
+</ul></li>
+<li>线程的优先级
+<ul>
+<li>Thread类内部声明的三个优先级常量
+<ul>
+<li>MAX_PRIORITY（10）：最高优先级</li>
+<li>MIN_PRIORITY（1）：最低优先级</li>
+<li>NORM_PRIORITY（5）：普通优先级，默认情况下main线程具有普通优先级</li>
+</ul></li>
+<li>getPriority()：获取线程优先级</li>
+<li>setPriority()：设置线程优先级</li>
+</ul></li>
+</ul>
+<h2 id="多线程的生命周期">多线程的生命周期</h2>
+<ul>
+<li>JDK1.5之前，线程有5种状态
+<ul>
+<li>新建New、就绪Runnable、运行Running、阻塞Blocked、死亡Dead</li>
+<li><figure>
+<img src="/JDK1.5线程状态转换图.png" srcset="/img/loading.gif" lazyload alt="JDK1.5线程状态转换图" />
+<figcaption aria-hidden="true">JDK1.5线程状态转换图</figcaption>
+</figure></li>
+</ul></li>
+<li>JDK1.5之后对线程状态进行了更改，将就绪和运行合并，将阻塞细分，有6种状态
+<ul>
+<li><figure>
+<img src="JDK1.5后线程状态转换图.png" srcset="/img/loading.gif" lazyload alt="JDK1.5后线程状态转换图" />
+<figcaption aria-hidden="true">JDK1.5后线程状态转换图</figcaption>
+</figure></li>
+</ul></li>
+</ul>
+<h2 id="线程安全问题及解决">线程安全问题及解决</h2>
+<ul>
+<li><p>当使用多个线程访问同一资源时，若多个线程中对资源有<code>读和写</code>的操作，就容易出现线程安全问题。</p></li>
+<li><p>Java使用同步机制解决线程的安全问题，同步机制有两种：同步代码块和同步方法</p></li>
+<li><p>同步代码块</p>
+<ul>
+<li><p>格式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">synchronized</span>(同步监视器) &#123;<br>	<span class="hljs-comment">// 需要被同步的代码</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><p>说明：</p>
+<ul>
+<li>需要被同步的代码，即为操作共享数据的代码</li>
+<li>共享数据，即多个线程都需要操作的数据</li>
+<li>需要被同步的代码，在被synchronized包裹以后，就使得一个线程在操作这些代码的过程中，其他线程必须等待</li>
+<li>同步监视器，俗称锁。哪个线程获取了锁，哪个线程就能执行需要被同步的代码</li>
+<li>同步监视器，可以使用任何一个类的对象充当。但是，多个线程必须共用同一个同步监视器</li>
+</ul></li>
+<li><p>注意：</p>
+<ul>
+<li>在实现Runnable接口的方式中，同步监视器可以考虑使用：<code>this</code></li>
+<li>在继承Thread类的方式中，同步监视器慎用this，一般考虑使用当前<code>类.class</code></li>
+</ul></li>
+</ul></li>
+<li><p>同步方法</p>
+<ul>
+<li>说明：
+<ul>
+<li>如果操作共享数据的代码完整的声明在了一个方法中，那么我们就可以将此方法声明为同步方法即可</li>
+<li>非静态的同步方法，默认同步监视器就是this</li>
+<li>静态的同步方法，默认同步监视器就是当前类本身</li>
+</ul></li>
 </ul></li>
 </ul>
 
