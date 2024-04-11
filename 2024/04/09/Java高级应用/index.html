@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://strive-c.github.io/JDK1.5%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE.png">
 <meta property="og:image" content="https://strive-c.github.io/2024/04/09/Java%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/JDK1.5%E5%90%8E%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE.png">
 <meta property="article:published_time" content="2024-04-09T02:46:39.000Z">
-<meta property="article:modified_time" content="2024-04-10T12:42:01.631Z">
+<meta property="article:modified_time" content="2024-04-11T03:49:29.467Z">
 <meta property="article:author" content="bjx">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="编程语言">
@@ -231,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.9k 字
+          3.8k 字
         
       </span>
     
@@ -242,7 +242,7 @@
         
         
         
-          25 分钟
+          32 分钟
         
       </span>
     
@@ -545,6 +545,61 @@ name)：分配一个带有指定目标新的线程对象并指定名字</li>
 <li>非静态的同步方法，默认同步监视器就是this</li>
 <li>静态的同步方法，默认同步监视器就是当前类本身</li>
 </ul></li>
+</ul></li>
+</ul>
+<h2 id="线程安全的懒汉式单例模式">线程安全的懒汉式单例模式</h2>
+<ul>
+<li>在单例模式中，饿汉式不存在线程安全问题，懒汉式存在线程安全问题。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">volatile</span> <span class="hljs-type">Singleton</span> <span class="hljs-variable">instance</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-title function_">Singleton</span><span class="hljs-params">()</span> &#123;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span> (instance == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">synchronized</span> (Singleton.class) &#123;<br>                <span class="hljs-keyword">if</span> (instance == <span class="hljs-literal">null</span>) &#123;<br>                    instance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Singleton</span>();<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> instance;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100</span>; i++) &#123;<br>            <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Runnable</span>() &#123;<br>                <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;<br>                    System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot; : &quot;</span> + Singleton.getInstance().hashCode());<br>                &#125;<br>            &#125;).start();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>为了实现线程安全的懒汉式单例模式，需要做两次校验：
+<ul>
+<li>第一次校验：
+也就是第一个if（singleton==null），这个是为了代码提高代码执行效率，由于单例模式只要一次创建实例即可，所以当创建了一个实例之后，再次调用getInstance方法就不必要进入同步代码块，不用竞争锁。直接返回前面创建的实例即可</li>
+<li>第二次校验：
+也就是第二个if（singleton==null），这个校验是防止二次创建实例，假如有一种情况，当singleton还未被创建时，线程t1调用getInstance方法，由于第一次判断singleton==null，此时线程t1准备继续执行，但是由于资源被线程t2抢占了，此时t2页调用getInstance方法。同样的，由于singleton并没有实例化，t2同样可以通过第一个if，然后继续往下执行，同步代码块，第二个if也通过，然后t2线程创建了一个实例singleton。此时t2线程完成任务，资源又回到t1线程，t1此时也进入同步代码块，如果没有这个第二个if，那么，t1就也会创建一个singleton实例，那么，就会出现创建多个实例的情况，但是加上第二个if，就可以完全避免这个多线程导致多次创建实例的问题。</li>
+<li>所以说：两次校验都必不可少。</li>
+</ul></li>
+<li>需要使用volatile的原因：
+<ul>
+<li>防止jvm指令重排优化
+<ul>
+<li>因为 singleton = new Singleton() 这句话可以分为三步：
+<ol type="1">
+<li>为 singleton 分配内存空间；</li>
+<li>初始化 singleton；</li>
+<li>将 singleton 指向分配的内存空间。</li>
+</ol></li>
+<li>但是由于JVM具有指令重排的特性，执行顺序有可能变成
+1-3-2。指令重排在单线程下不会出现问题，但是在多线程下会导致一个线程获得一个未初始化的实例。例如：线程T1执行了1和3，此时T2调用
+getInstance() 后发现 singleton 不为空，因此返回 singleton， 但是此时的
+singleton 还没有被初始化。</li>
+<li>使用 volatile
+会禁止JVM指令重排，从而保证在多线程下也能正常执行。</li>
+</ul></li>
+<li>保证变量在多线程运行时的可见性
+<ul>
+<li>在 JDK1.2
+之前，Java的内存模型实现总是从主存（即共享内存）读取变量，是不需要进行特别的注意的。而在当前
+的 Java
+内存模型下，线程可以把变量保存本地内存（比如机器的寄存器）中，而不是直接在主存中进行读写。</li>
+<li>这就可能造成一个线程在主存中修改了一个变量的值，而另外一个线程还继续使用它在寄存器中的变量值的拷贝，造成数据的不一致。</li>
+<li>要解决这个问题，就需要把变量声明为 volatile，这就指示
+JVM，这个变量是不稳定的，每次使用它都到主存中进行读取。</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="死锁">死锁</h2>
+<ul>
+<li>死锁
+deadlock：不同的线程分别占用对方需要的同步资源不放弃，都在等待对方放弃自己需要的同步资源，就形成了线程的死锁。</li>
+<li>死锁的必要条件：
+<ul>
+<li>互斥</li>
+<li>非抢占</li>
+<li>请求并保持</li>
+<li>循环等待</li>
 </ul></li>
 </ul>
 
