@@ -16,15 +16,15 @@
   <meta name="author" content="bjx">
   <meta name="keywords" content="">
   
-    <meta name="description" content="WSL  Windows Subsystem for Linux 微软自己出的一个系统支持比较好的能在windows环境下打开的linux系统  常用命令   将终端关闭，WSL系统并不会关闭，需要手动进行关闭 每个终端没有权限直接操作内核关机，例如在shutdown命令或是reboot命令是不被允许的    关闭所有版本（分发）的虚拟机  1wsl --shutdo">
+    <meta name="description" content="1 介绍  推荐系统就是根据用户和物品的历史交互数据，学习出用户对物品的偏好模式，进而从大量的用户尚未交互过的物品中自动识别出用户可能感兴趣的物品，形成个性化物品推荐。 常见的推荐系统分类  基于用户反馈的推荐：协同过滤  用户反馈可以分为显式反馈和隐式反馈两类，显示反馈是指用户主动且明确地表达了对物品的偏好程序，最常见的就是评分 ratings。隐式反馈是指用户与物品有一些交互行">
 <meta property="og:type" content="article">
-<meta property="og:title" content="WSL指南">
-<meta property="og:url" content="https://strive-c.github.io/2023/11/07/WSL%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:title" content="推荐算法">
+<meta property="og:url" content="https://strive-c.github.io/2024/07/23/%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="strive-C blog">
-<meta property="og:description" content="WSL  Windows Subsystem for Linux 微软自己出的一个系统支持比较好的能在windows环境下打开的linux系统  常用命令   将终端关闭，WSL系统并不会关闭，需要手动进行关闭 每个终端没有权限直接操作内核关机，例如在shutdown命令或是reboot命令是不被允许的    关闭所有版本（分发）的虚拟机  1wsl --shutdo">
+<meta property="og:description" content="1 介绍  推荐系统就是根据用户和物品的历史交互数据，学习出用户对物品的偏好模式，进而从大量的用户尚未交互过的物品中自动识别出用户可能感兴趣的物品，形成个性化物品推荐。 常见的推荐系统分类  基于用户反馈的推荐：协同过滤  用户反馈可以分为显式反馈和隐式反馈两类，显示反馈是指用户主动且明确地表达了对物品的偏好程序，最常见的就是评分 ratings。隐式反馈是指用户与物品有一些交互行">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-11-07T07:13:12.000Z">
-<meta property="article:modified_time" content="2024-08-02T07:06:09.662Z">
+<meta property="article:published_time" content="2024-07-23T12:21:44.000Z">
+<meta property="article:modified_time" content="2024-07-25T13:08:29.070Z">
 <meta property="article:author" content="bjx">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>WSL指南 - strive-C blog</title>
+  <title>推荐算法 - strive-C blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="WSL指南"></span>
+            <span id="subtitle" data-typed-text="推荐算法"></span>
           
         </div>
 
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-07 15:13" pubdate>
-          2023年11月7日 下午
+        <time datetime="2024-07-23 20:21" pubdate>
+          2024年7月23日 晚上
         </time>
       </span>
     
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          462 字
+          1.1k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          4 分钟
+          10 分钟
         
       </span>
     
@@ -281,77 +281,70 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">WSL指南</h1>
+            <h1 id="seo-header">推荐算法</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="wsl">WSL</h1>
+                <h1 id="介绍">1 介绍</h1>
 <ul>
-<li><strong>Windows Subsystem for Linux</strong></li>
-<li>微软自己出的一个系统支持比较好的能在windows环境下打开的linux系统</li>
-</ul>
-<h2 id="常用命令">常用命令</h2>
-<blockquote>
+<li>推荐系统就是根据用户和物品的历史交互数据，学习出用户对物品的偏好模式，进而从大量的用户尚未交互过的物品中自动识别出用户可能感兴趣的物品，形成个性化物品推荐。</li>
+<li>常见的推荐系统分类
 <ul>
-<li>将终端关闭，WSL系统并不会关闭，需要手动进行关闭</li>
-<li>每个终端没有权限直接操作内核关机，例如在shutdown命令或是reboot命令是不被允许的</li>
-</ul>
-</blockquote>
+<li>基于用户反馈的推荐：协同过滤
 <ul>
-<li>关闭所有版本（分发）的虚拟机</li>
-</ul>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--shutdown</span><br></code></pre></td></tr></table></figure>
-<ul>
-<li>关闭指定版本（分发）的虚拟机</li>
-</ul>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">-t</span> &lt;分发&gt;<br></code></pre></td></tr></table></figure>
-<ul>
-<li>查看当前所有分发虚拟机的状态</li>
-</ul>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">-l</span> <span class="hljs-literal">--all</span> <span class="hljs-literal">-v</span><br></code></pre></td></tr></table></figure>
-<ul>
-<li>设定默认打开的虚拟机</li>
-</ul>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">-s</span> &lt;分发&gt;<br></code></pre></td></tr></table></figure>
-<ul>
-<li>导出虚拟机分发至一个指定路径</li>
-</ul>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--export</span> &lt;分发&gt; &lt;储存包路径&gt;<br></code></pre></td></tr></table></figure>
-<ul>
-<li>导入虚拟机分发至一个指定路径</li>
-</ul>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--import</span> &lt;分发名字&gt; &lt;安装位置&gt; &lt;储存包路径&gt;  <span class="hljs-literal">--version</span> &lt;wsl版本&gt;<br></code></pre></td></tr></table></figure>
-<ul>
-<li>注销分发并删除根文件系统</li>
-</ul>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--unregister</span> &lt;分发&gt;<br></code></pre></td></tr></table></figure>
-<h2 id="迁移">迁移</h2>
-<ul>
-<li>在<code>Microsoft Store</code>中下载的系统，默认存储在C盘中，占用较大内存空间</li>
-<li>步骤如下：
-<ol type="1">
-<li>通过<code>wsl -l --running</code>查看正在运行的子系统</li>
-<li>若有正在运行的子系统，则通过<code>wsl -t &lt;DistributionName&gt;</code>来终止其运行</li>
-<li>利用<code>wsl --export &lt;DistributionName&gt; &lt;FileName&gt;</code>来备份子系统，结果会得到一个<code>tar</code>归档文件。
-<ul>
-<li>假设有名为<code>Ubuntu-20.04</code>的子系统，
-想要将结果文件保存为<code>Ubuntu2004.tar</code>
-（同时指定其路径即为<code>D:\wsl\Ubuntu2004.tar</code>），则调用的命令为
-<code>wsl --export Ubuntu-20.04 D:\wsl\Ubuntu2004.tar</code></li>
+<li>用户反馈可以分为显式反馈和隐式反馈两类，显示反馈是指用户主动且明确地表达了对物品的偏好程序，最常见的就是评分
+ratings。隐式反馈是指用户与物品有一些交互行为，但未明确或主动地表示具体的喜好程度，常见的形式有购买、浏览、播放等。</li>
+<li>协同过滤的基本假设是：过往偏好相似的用户在未知物品上的喜好也是相近的</li>
+<li>优点：不依赖于物品的内容和应用领域</li>
+<li>缺点：用户反馈的数据非常稀疏有限，或者没有反馈数据。<strong>数据稀疏和冷启动</strong></li>
 </ul></li>
-<li>使用<code>wsl --unregister Ubuntu-20.04</code>注销原始子系统。</li>
-<li>然后利用<code>wsl --import &lt;DistributionName&gt; &lt;InstallLocation&gt; &lt;FileName&gt;</code>来恢复子系统。</li>
-<li><code>ubuntu2004.exe config --default-user 用户名</code></li>
-</ol></li>
+<li>基于物品内容的推荐</li>
+<li>基于用户反馈和物品内容的混合推荐</li>
+<li>基于上下文信息的情景感知推荐</li>
+<li>其他推荐模型</li>
+</ul></li>
+<li>推荐模型主要解决两类任务：评分预测和物品推荐</li>
+<li>评分预测主要适用于基于显式反馈的推荐模型</li>
+<li>物品推荐主要适用于基于隐式反馈的推荐模型</li>
+<li>数据稀疏</li>
+<li>冷启动</li>
 </ul>
-<p>配置代理
-https://blog.csdn.net/iftodayhappy/article/details/137236279</p>
-<p>配置cuda
-https://blog.csdn.net/weixin_43971236/article/details/134598022
-https://blog.csdn.net/iwanvan/article/details/122119595</p>
-<p>多版本cuda问题
-https://blog.csdn.net/dhdhhy/article/details/130109501</p>
+<h1 id="推荐算法介绍">2 推荐算法介绍</h1>
+<h2 id="基于用户反馈的推荐-协同过滤">2.1
+基于用户反馈的推荐-协同过滤</h2>
+<p>协同过滤算法主要分为两类：基于内存的推荐算法和基于模型的推荐算法</p>
+<h3 id="基于内存的推荐算法">2.1.1 基于内存的推荐算法</h3>
+<p>基于内存的推荐算法通过采用一些启发式假设来搜寻相似用户或物品，并利用统计方法生成个性化推荐。</p>
+<p>基于内存的推荐算法又可以分为基于用户的协同过滤和基于物品的协同过滤</p>
+<h4 id="基于用户的协同过滤">2.1.1.1 基于用户的协同过滤</h4>
+<p>算法常见步骤：</p>
+<ol type="1">
+<li>计算用户相似度</li>
+<li>搜索相似用户群</li>
+<li>生成个性化推荐</li>
+</ol>
+<p>计算用户间相似度常用公式是PCC和COS，基于用户的协同过滤使用PCC要比COS多，是因为PCC考虑了用户偏好的波动性。</p>
+<p>在计算用户间相似度后，需要选出与用户最相似的用户群体，即相似用户群。选择的方法主要有<strong>阈值法</strong>和<strong>Top-K</strong>法。</p>
+<p>阈值法是相似度大于某个阈值被选择为相似用户，阈值法对于阈值的选取是关键，阈值设置太小会将带有噪声的用户选择为相似用户，降低推荐性能。阈值设置太大，相似用户数过少，可能导致生成的推荐不够准确。</p>
+<p>Top-K法是选择相似度排名前K位的用户作为相似用户，K的选择依赖大量的实际经验，且可能前K的用户相似度都不高，甚至是负值，无法确保所选用户的相似度一定会较高</p>
+<p>因此，在实际中，通常将两种方法相结合。先指定一个必须满足的阈值，再确定一个合适的K值。</p>
+<p>得到相似用户群后，就可以进行个性化推荐。可以使用相似用户对物品的评分均值、以相似度作为权重的评分、</p>
+<h4 id="基于物品的协同过滤">2.1.1.2 基于物品的协同过滤</h4>
+<p>步骤：</p>
+<ol type="1">
+<li>计算物品相似度</li>
+<li>搜索相似物品群</li>
+<li>生成个性化推荐</li>
+</ol>
+<h3 id="基于模型的推荐算法">2.1.2 基于模型的推荐算法</h3>
+<p>基于内存的推荐算法具有逻辑简单、易于实现、可解释性高等优点，但是基于模型的推荐算法才是现代推荐系统的主要发展方向。</p>
+<p>基于模型的推荐算法在推荐准确定、可扩展性等方面有着较为明显的优势。</p>
+<h4 id="基于矩阵分解的模型">2.1.2.1 基于矩阵分解的模型</h4>
+<h1 id="测试评估">3 测试评估</h1>
+<h2 id="评分预测任务的评估指标">3.1 评分预测任务的评估指标</h2>
+<h2 id="物品推荐任务的评估指标">3.2 物品推荐任务的评估指标</h2>
+<p>Top-N物品推荐的评估主要是针对预测的物品列表是否与用户偏好的一致性检测，常见的评估指标包括Precision、Recall、AUC、MAP、MRR、NDCG等</p>
 
                 
               </div>
@@ -369,8 +362,8 @@ https://blog.csdn.net/dhdhhy/article/details/130109501</p>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>WSL指南</div>
-      <div>https://strive-c.github.io/2023/11/07/WSL指南/</div>
+      <div>推荐算法</div>
+      <div>https://strive-c.github.io/2024/07/23/推荐算法/</div>
     </div>
     <div class="license-meta">
       
@@ -382,7 +375,7 @@ https://blog.csdn.net/dhdhhy/article/details/130109501</p>
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年11月7日</div>
+          <div>2024年7月23日</div>
         </div>
       
       
@@ -414,9 +407,9 @@ https://blog.csdn.net/dhdhhy/article/details/130109501</p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/01/23/git/" title="git">
+                      <a href="/2024/07/30/PCL1-14-1-Windows%E9%85%8D%E7%BD%AE/" title="PCL1.14.1-Windows配置">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">git</span>
+                        <span class="hidden-mobile">PCL1.14.1-Windows配置</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -424,8 +417,8 @@ https://blog.csdn.net/dhdhhy/article/details/130109501</p>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/04/ROS%E8%BF%9B%E9%98%B6/" title="ROS进阶">
-                        <span class="hidden-mobile">ROS进阶</span>
+                      <a href="/2024/05/11/CMake/" title="CMake">
+                        <span class="hidden-mobile">CMake</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -445,8 +438,8 @@ https://blog.csdn.net/dhdhhy/article/details/130109501</p>
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://strive-c.github.io/2023/11/07/WSL%E6%8C%87%E5%8D%97/';
-          this.page.identifier = '/2023/11/07/WSL%E6%8C%87%E5%8D%97/';
+          this.page.url = 'https://strive-c.github.io/2024/07/23/%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95/';
+          this.page.identifier = '/2024/07/23/%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
