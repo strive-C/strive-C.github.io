@@ -16,26 +16,23 @@
   <meta name="author" content="bjx">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、更新显卡驱动 (169条消息) 如何在windows上 安装&amp;更新 显卡的驱动_windows安装显卡驱动_chuanauc的博客-CSDN博客 官方驱动 | NVIDIA 更新完成后，在命令行中输入：nvidia-smi，即可查看支持最新的CUDA Version版本 二、安装 CUDA 运行版本 CUDA Toolkit Archive | NVIDIA Deve">
+    <meta name="description" content="Python-测试 在写代码中，测试是确认程序的运行结果是否是期待的结果，在写测试的时候必须要知道正确的值，下面介绍Python中简单的测试如何实现，使用标准库unittest进行测试 流程  创建一个测试包命名为tests，每一个测试文件必须是test_开头 在测试文件中要导入unittest包，导入要测试代码对应的包 写测试类，必须继承unittest.TestCase类，类名通常">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Pytorch-GPU机器学习配置">
-<meta property="og:url" content="https://strive-c.github.io/2023/04/16/Pytorch-GPU%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:title" content="Python-测试">
+<meta property="og:url" content="https://strive-c.github.io/2024/08/07/Python-%E6%B5%8B%E8%AF%95/index.html">
 <meta property="og:site_name" content="strive-C blog">
-<meta property="og:description" content="一、更新显卡驱动 (169条消息) 如何在windows上 安装&amp;更新 显卡的驱动_windows安装显卡驱动_chuanauc的博客-CSDN博客 官方驱动 | NVIDIA 更新完成后，在命令行中输入：nvidia-smi，即可查看支持最新的CUDA Version版本 二、安装 CUDA 运行版本 CUDA Toolkit Archive | NVIDIA Deve">
+<meta property="og:description" content="Python-测试 在写代码中，测试是确认程序的运行结果是否是期待的结果，在写测试的时候必须要知道正确的值，下面介绍Python中简单的测试如何实现，使用标准库unittest进行测试 流程  创建一个测试包命名为tests，每一个测试文件必须是test_开头 在测试文件中要导入unittest包，导入要测试代码对应的包 写测试类，必须继承unittest.TestCase类，类名通常">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-16T11:14:20.000Z">
-<meta property="article:modified_time" content="2024-03-19T11:54:19.046Z">
+<meta property="article:published_time" content="2024-08-07T05:53:25.000Z">
+<meta property="article:modified_time" content="2024-08-07T08:47:08.676Z">
 <meta property="article:author" content="bjx">
-<meta property="article:tag" content="环境搭建">
-<meta property="article:tag" content="Pytorch">
-<meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Pytorch-GPU机器学习配置 - strive-C blog</title>
+  <title>Python-测试 - strive-C blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -205,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Pytorch-GPU机器学习配置"></span>
+            <span id="subtitle" data-typed-text="Python-测试"></span>
           
         </div>
 
@@ -216,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-16 19:14" pubdate>
-          2023年4月16日 晚上
+        <time datetime="2024-08-07 13:53" pubdate>
+          2024年8月7日 下午
         </time>
       </span>
     
@@ -228,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          225 字
+          950 字
         
       </span>
     
@@ -239,7 +236,7 @@
         
         
         
-          2 分钟
+          8 分钟
         
       </span>
     
@@ -284,36 +281,92 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Pytorch-GPU机器学习配置</h1>
+            <h1 id="seo-header">Python-测试</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="一更新显卡驱动">一、更新显卡驱动</h1>
-<p><a
-target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41764621/article/details/126465278?csdn_share_tail=%7B%22type%22%3A%22blog%22%2C%22rType%22%3A%22article%22%2C%22rId%22%3A%22126465278%22%2C%22source%22%3A%22qq_41764621%22%7D">(169条消息)
-如何在windows上 安装&amp;更新
-显卡的驱动_windows安装显卡驱动_chuanauc的博客-CSDN博客</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.nvidia.cn/Download/index.aspx?lang=cn">官方驱动
-| NVIDIA</a></p>
-<p>更新完成后，在命令行中输入：<code>nvidia-smi</code>，即可查看支持最新的<code>CUDA Version</code>版本</p>
-<h1 id="二安装-cuda-运行版本">二、安装 CUDA 运行版本</h1>
-<p><a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-toolkit-archive">CUDA
-Toolkit Archive | NVIDIA Developer</a></p>
-<p>在该网页下载对应版本，自定义安装，选择cuda即可</p>
-<p>下载完成后，在命令行中输入：<code>nvcc --version</code>，有相关信息输出，即代表完成</p>
-<h1 id="三安装-cudnn">三、安装 cuDNN</h1>
-<p><a target="_blank" rel="noopener" href="https://developer.nvidia.com/rdp/cudnn-download">cuDNN
-Download | NVIDIA Developer</a></p>
-<p>解压后，将对应文件夹的文件复制进CUDA对应文件夹中。【注意不是替换文件夹，而是复制文件夹中的文件】</p>
-<h1 id="四安装-pytorch">四、安装 Pytorch</h1>
-<p><a target="_blank" rel="noopener" href="https://pytorch.org/get-started/locally/">Start Locally |
-PyTorch</a></p>
-<p>选择相关配置，执行命令</p>
-<h1 id="五验证是否安装成功">五、验证是否安装成功</h1>
-<p>在命令行进入 Python 代码执行，输入代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br>torch.cuda.is_available()<br></code></pre></td></tr></table></figure>
-<p>输出结果为 True，则配置完成。</p>
+                <h1 id="python-测试">Python-测试</h1>
+<p>在写代码中，测试是确认程序的运行结果是否是期待的结果，在写测试的时候必须要知道正确的值，下面介绍Python中简单的测试如何实现，使用标准库unittest进行测试</p>
+<h2 id="流程">流程</h2>
+<ol type="1">
+<li>创建一个测试包命名为<code>tests</code>，每一个测试文件必须是<code>test_</code>开头</li>
+<li>在测试文件中要导入<code>unittest</code>包，导入要测试代码对应的包</li>
+<li>写测试类，必须继承<code>unittest.TestCase</code>类，类名通常以<code>Test</code>开头或结尾</li>
+<li>写测试方法，每个测试类中可以有若干个测试方法，测试方法必须以<code>test_</code>开头</li>
+<li>在unittest库中，有一组以<code>self.assert</code>开头的方法，用于判断计算值是否等于预期值，详见文档：<a
+target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/unittest.html#assert-methods">unittest
+--- 单元测试框架 — Python 3.12.4 文档</a></li>
+<li>对于每个测试方法，只要其中有一个地方的测试出现失败，就不会继续向下运行</li>
+</ol>
+<blockquote>
+<p>以上流程即对应的文件结构是推荐的文件组织方式，也可以不遵循</p>
+</blockquote>
+<h2 id="示例">示例</h2>
+<ul>
+<li>文件结构：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">.<br>├── example.py<br>├── tests<br>│   ├── __init__.py<br>│   └── test_vector.py<br>└── vector<br>    ├── __init__.py<br>    └── vector.py<br></code></pre></td></tr></table></figure>
+<ul>
+<li>vector/vector.py:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Vector</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, x, y</span>):<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(x, (<span class="hljs-built_in">int</span>, <span class="hljs-built_in">float</span>)) <span class="hljs-keyword">and</span> <span class="hljs-built_in">isinstance</span>(y, (<span class="hljs-built_in">int</span>, <span class="hljs-built_in">float</span>)):<br>            self.x = x<br>            self.y = y<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;not a number&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">self, other</span>):<br>        <span class="hljs-keyword">return</span> Vector(self.x + other.x, self.y + other.y)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">mul</span>(<span class="hljs-params">self, factor</span>):<br>        <span class="hljs-keyword">return</span> Vector(self.x * factor, self.y * factor)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">dot</span>(<span class="hljs-params">self, other</span>):<br>        <span class="hljs-keyword">return</span> self.x * other.x + self.y * other.y<br></code></pre></td></tr></table></figure>
+<ul>
+<li>vector/__init__.py:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> .vector <span class="hljs-keyword">import</span> Vector<br></code></pre></td></tr></table></figure>
+<ul>
+<li>tests/test_vector.py</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> unittest<br><span class="hljs-keyword">from</span> vector <span class="hljs-keyword">import</span> Vector<br><span class="hljs-keyword">import</span> sys<br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TestVector</span>(unittest.TestCase):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_init</span>(<span class="hljs-params">self</span>):<br>        v = Vector(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br>        self.assertEqual(v.x, <span class="hljs-number">1</span>)<br>        self.assertEqual(v.y, <span class="hljs-number">2</span>)<br><br>        <span class="hljs-keyword">with</span> self.assertRaises(ValueError):<br>            v = Vector(<span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;2&quot;</span>)<br><br>    <span class="hljs-comment"># 测试跳过条件</span><br><span class="hljs-meta">    @unittest.skipIf(<span class="hljs-params">sys.platform == <span class="hljs-string">&quot;win32&quot;</span>, <span class="hljs-string">&quot;Do not support Windows.&quot;</span></span>)</span><br><span class="hljs-meta">    @unittest.skipIf(<span class="hljs-params">sys.version_info &lt; (<span class="hljs-params"><span class="hljs-number">3</span>, <span class="hljs-number">7</span></span>), <span class="hljs-string">&quot;only support 3.7+&quot;</span></span>)</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_add</span>(<span class="hljs-params">self</span>):<br>        v1 = Vector(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br>        v2 = Vector(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>)<br>        result = v1.add(v2)<br>        self.assertEqual(result.x, <span class="hljs-number">4</span>)<br>        self.assertEqual(result.y, <span class="hljs-number">6</span>)<br><br>    <span class="hljs-comment"># 每个方法执行前</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">setUp</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;start&quot;</span>)<br><br>    <span class="hljs-comment"># 每个方法执行后</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">tearDown</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;end&quot;</span>)<br><br>    <span class="hljs-comment"># 每个类执行前</span><br><span class="hljs-meta">    @classmethod</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">setUpClass</span>(<span class="hljs-params">cls</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;TestVector start&quot;</span>)<br><br>    <span class="hljs-comment"># 每个类执行后</span><br><span class="hljs-meta">    @classmethod</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">tearDownClass</span>(<span class="hljs-params">cls</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;TestVector end&quot;</span>)<br></code></pre></td></tr></table></figure>
+<h2 id="运行">运行</h2>
+<ul>
+<li>在项目根目录下运行以下命令，将会执行所有测试</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python -m unittest<br></code></pre></td></tr></table></figure>
+<ul>
+<li>运行以下指令，将会执行指定的测试文件夹</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python -m unittest tests.test_vector<br></code></pre></td></tr></table></figure>
+<ul>
+<li>运行以下指令，将会执行指定的测试方法</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python -m unittest tests.test_vector.TestVector.test_add<br></code></pre></td></tr></table></figure>
+<h2 id="测试评价">测试评价</h2>
+<ul>
+<li><p>衡量一个单元测试写的好不好，最简单的方法是计算单元测试的覆盖率，即测试运行了多少待测试代码。</p></li>
+<li><p>覆盖率中最基础的是行覆盖率，即运行的行占待测试代码行的比率</p></li>
+<li><p>使用<code>coverage</code>库可以进行代码的行覆盖率，在执行代码时将<code>python</code>换成<code>coverage run</code>，在此路径下将会得到一个<code>.coverage</code>二进制文件</p></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">coverage run -m unittest tests.test_vector.TestVector.test_add<br></code></pre></td></tr></table></figure>
+<ul>
+<li>运行以下命令即可导出覆盖率数据，-m参数显示哪行没有被覆盖到
+<ul>
+<li>-m参数输出没有被覆盖到的行</li>
+</ul></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">coverage report -m<br></code></pre></td></tr></table></figure>
+<ul>
+<li>运行以下命令会创建一个htmlcov文件夹，运行http服务器即可在网页端查看测试结果，点击对应文件可以查看代码对照</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">coverage html<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python -m http.server --directory htmlcov/<br></code></pre></td></tr></table></figure>
+<ul>
+<li>如果要测试的是一个安装的库，用上面的coverage
+run得到的覆盖率数据是不包含库的，因为在默认情况下是不计算安装库的源代码覆盖率，增加--source
+库名 即可专门测试这个库的覆盖率</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">coverage run --<span class="hljs-built_in">source</span> unittest -m unittest<br></code></pre></td></tr></table></figure>
+<p>--omit=路径</p>
+<p>参数可以忽略一些文件</p>
+<p>要是觉得每次输出的命令太长了，可以创建一个.coveragerc文件</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs abnf">[run]<br><span class="hljs-attribute">omit</span> <span class="hljs-operator">=</span> 路径<br>	文件<br></code></pre></td></tr></table></figure>
+<ul>
+<li><p>可以利用Github actions来帮助进行测试，在Github
+actions上跑这些单元测试，产生一个XML report，最后使用codecov
+action，把report上传到codecov上，该网站即可生成美观的报告</p></li>
+<li><p>如果某行代码不需要测试，在后面加上 # pragma: no cover</p></li>
+</ul>
 
                 
               </div>
@@ -322,38 +375,6 @@ PyTorch</a></p>
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="category-chain-item">环境搭建</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="print-no-link">#环境搭建</a>
-      
-        <a href="/tags/Pytorch/" class="print-no-link">#Pytorch</a>
-      
-        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="print-no-link">#机器学习</a>
-      
-    </div>
   
 </div>
 
@@ -363,8 +384,8 @@ PyTorch</a></p>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Pytorch-GPU机器学习配置</div>
-      <div>https://strive-c.github.io/2023/04/16/Pytorch-GPU机器学习配置/</div>
+      <div>Python-测试</div>
+      <div>https://strive-c.github.io/2024/08/07/Python-测试/</div>
     </div>
     <div class="license-meta">
       
@@ -376,7 +397,7 @@ PyTorch</a></p>
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月16日</div>
+          <div>2024年8月7日</div>
         </div>
       
       
@@ -408,18 +429,12 @@ PyTorch</a></p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/23/%E5%85%A5%E9%97%A8%E6%A1%88%E4%BE%8B-MNIST/" title="MNIST">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MNIST</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/15/%E8%A5%BF%E7%93%9C%E4%B9%A6-%E7%AC%AC6%E7%AB%A0-%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" title="西瓜书-第6章-支持向量机">
-                        <span class="hidden-mobile">西瓜书-第6章-支持向量机</span>
+                      <a href="/2024/07/30/PCL1-14-1-Windows%E9%85%8D%E7%BD%AE/" title="PCL1.14.1-Windows配置">
+                        <span class="hidden-mobile">PCL1.14.1-Windows配置</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -439,8 +454,8 @@ PyTorch</a></p>
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://strive-c.github.io/2023/04/16/Pytorch-GPU%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E9%85%8D%E7%BD%AE/';
-          this.page.identifier = '/2023/04/16/Pytorch-GPU%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E9%85%8D%E7%BD%AE/';
+          this.page.url = 'https://strive-c.github.io/2024/08/07/Python-%E6%B5%8B%E8%AF%95/';
+          this.page.identifier = '/2024/08/07/Python-%E6%B5%8B%E8%AF%95/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
