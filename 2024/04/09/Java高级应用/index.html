@@ -16,18 +16,18 @@
   <meta name="author" content="bjx">
   <meta name="keywords" content="">
   
-    <meta name="description" content="10 异常处理  异常：指程序在执行过程中，出现的非正常情况，如果不处理最终会导致JVM的非正常停止 Java中把不同的异常用不同的类表示，一旦发生某种异常，就创建该异常类型的对象，并且抛出throw。然后后续可以捕获catch这个异常对象，并处理。如果没有catch这个异常对象，那这个异常对象将会导致程序终止。 程序员要编写相应的代码进行异常检测，以及异常处理，保证代码的健壮性。">
+    <meta name="description" content="9 异常处理  异常：指程序在执行过程中，出现的非正常情况，如果不处理最终会导致JVM的非正常停止 Java中把不同的异常用不同的类表示，一旦发生某种异常，就创建该异常类型的对象，并且抛出throw。然后后续可以捕获catch这个异常对象，并处理。如果没有catch这个异常对象，那这个异常对象将会导致程序终止。 程序员要编写相应的代码进行异常检测，以及异常处理，保证代码的健壮性。  J">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java高级应用">
 <meta property="og:url" content="https://strive-c.github.io/2024/04/09/Java%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/index.html">
 <meta property="og:site_name" content="strive-C blog">
-<meta property="og:description" content="10 异常处理  异常：指程序在执行过程中，出现的非正常情况，如果不处理最终会导致JVM的非正常停止 Java中把不同的异常用不同的类表示，一旦发生某种异常，就创建该异常类型的对象，并且抛出throw。然后后续可以捕获catch这个异常对象，并处理。如果没有catch这个异常对象，那这个异常对象将会导致程序终止。 程序员要编写相应的代码进行异常检测，以及异常处理，保证代码的健壮性。">
+<meta property="og:description" content="9 异常处理  异常：指程序在执行过程中，出现的非正常情况，如果不处理最终会导致JVM的非正常停止 Java中把不同的异常用不同的类表示，一旦发生某种异常，就创建该异常类型的对象，并且抛出throw。然后后续可以捕获catch这个异常对象，并处理。如果没有catch这个异常对象，那这个异常对象将会导致程序终止。 程序员要编写相应的代码进行异常检测，以及异常处理，保证代码的健壮性。  J">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://strive-c.github.io/2024/04/09/Java%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/%E8%BF%9B%E7%A8%8B%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4.png">
 <meta property="og:image" content="https://strive-c.github.io/JDK1.5%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE.png">
 <meta property="og:image" content="https://strive-c.github.io/2024/04/09/Java%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8/JDK1.5%E5%90%8E%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE.png">
 <meta property="article:published_time" content="2024-04-09T02:46:39.000Z">
-<meta property="article:modified_time" content="2024-04-11T13:13:25.379Z">
+<meta property="article:modified_time" content="2024-10-04T08:52:53.679Z">
 <meta property="article:author" content="bjx">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="编程语言">
@@ -231,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.5k 字
+          5.8k 字
         
       </span>
     
@@ -242,7 +242,7 @@
         
         
         
-          46 分钟
+          49 分钟
         
       </span>
     
@@ -292,7 +292,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="异常处理">10 异常处理</h1>
+                <h1 id="异常处理">9 异常处理</h1>
 <ul>
 <li>异常：指程序在执行过程中，出现的非正常情况，如果不处理最终会导致JVM的非正常停止</li>
 <li>Java中把不同的异常用不同的类表示，一旦发生某种异常，就<code>创建该异常类型的对象</code>，并且抛出throw。然后后续可以捕获catch这个异常对象，并处理。如果没有catch这个异常对象，那这个异常对象将会导致程序终止。</li>
@@ -372,7 +372,7 @@
 <li>通过异常名称就能直接判断此异常出现的原因，所以自定义异常类是为了可以见名知义</li>
 </ul></li>
 </ul>
-<h1 id="多线程">11 多线程</h1>
+<h1 id="多线程">10 多线程</h1>
 <h2 id="相关概念">相关概念</h2>
 <ul>
 <li><p>程序
@@ -700,6 +700,52 @@ final</li>
 <li>可以设置相关参数，对线程池中的线程的使用进行管理</li>
 </ul></li>
 <li>具体细节要看JUC，java并发编程中查看</li>
+</ul></li>
+</ul>
+<h1 id="常用类和基础api">11 常用类和基础API</h1>
+<h2 id="string">String</h2>
+<ul>
+<li><p>类解析</p>
+<ul>
+<li><p>类声明</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">String</span><br>    <span class="hljs-keyword">implements</span> <span class="hljs-title class_">java</span>.io.Serializable, Comparable&lt;String&gt;, CharSequence<br></code></pre></td></tr></table></figure>
+<ul>
+<li>final：String不可被继承</li>
+<li>java.io.Serializable：可序列化接口，可以序列化的类的对象都可以通过网络、IO流传输</li>
+<li>Comparable：实现此接口的类，其对象都可以比较大小</li>
+</ul></li>
+<li><p>属性</p>
+<ul>
+<li>JDK8
+<ul>
+<li>private final char value[]：存储字符串数据的容器
+<ul>
+<li>final：一旦初始化，其地址不可更改</li>
+</ul></li>
+</ul></li>
+<li>JDK9：为了节省内存空间，做了优化
+<ul>
+<li>private final byte[] value：存储字符串数据的容器</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p>字符串常量的存储位置</p>
+<ul>
+<li><p>字符串常量存储在字符串常量池中</p></li>
+<li><p>字符串常量池不允许存放两个相同的字符串常量</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">s1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;hello&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">s2</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;hello&quot;</span>;<br></code></pre></td></tr></table></figure></li>
+<li><p>以上s1和s2的地址是相同的</p></li>
+<li><p>字符串常量池在不同的jdk版本中，存放位置不同。</p>
+<ul>
+<li>jdk7之前，存放在方法去；</li>
+<li>jdk7及之后，存放在堆空间</li>
+</ul></li>
+</ul></li>
+<li><p>String类型的对象具有不可变性，一旦进行修改，就是重新创建一个对象，地址发生改变。</p></li>
+<li><p>实例化方式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">s1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;hello&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">s2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;hello&quot;</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li></li>
 </ul></li>
 </ul>
 
