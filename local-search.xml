@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>PCL库提取脚本</title>
+    <link href="/2024/11/26/PCL%E5%BA%93%E6%8F%90%E5%8F%96%E8%84%9A%E6%9C%AC/"/>
+    <url>/2024/11/26/PCL%E5%BA%93%E6%8F%90%E5%8F%96%E8%84%9A%E6%9C%AC/</url>
+    
+    <content type="html"><![CDATA[<p>配置PCL库时，用于提取release和debug版本的库的脚本 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">Extract_lib</span>(<span class="hljs-params">path</span>):<br>    release = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;release_lib.txt&quot;</span>, <span class="hljs-string">&#x27;w&#x27;</span>)<br>    debug = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;debug_lib.txt&quot;</span>, <span class="hljs-string">&#x27;w&#x27;</span>)<br>    <span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> os.listdir(path):<br>        <span class="hljs-keyword">if</span> file[-<span class="hljs-number">5</span>:] == <span class="hljs-string">&#x27;d.lib&#x27;</span>:<br>            debug.write(file)<br>            debug.write(<span class="hljs-string">&#x27;\n&#x27;</span>)<br>        <span class="hljs-keyword">elif</span> file[-<span class="hljs-number">4</span>:] == <span class="hljs-string">&#x27;.lib&#x27;</span>:<br>            release.write(file)<br>            release.write(<span class="hljs-string">&#x27;\n&#x27;</span>)<br>    debug.close()<br>    release.close()<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    path = <span class="hljs-string">r&quot;D:\Projects\cpp_lib\PCL 1.14.1\lib&quot;</span><br>    Extract_lib(path)<br></code></pre></td></tr></table></figure></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Spring6</title>
     <link href="/2024/11/24/spring6/"/>
     <url>/2024/11/24/spring6/</url>
